@@ -146,7 +146,7 @@ A workflow execution includes data management, monitoring, and failure handling.
 To conduct the experimental evaluation, we use the WICUS framework, which comprises the semantic models described in Section~\ref{sec:semantic} and a set of tools for annotating and consuming data, and the PRECIP~\cite{Azarnoosh-CRC-2013} experiment management tool to manage the experiment. Below, we describe each of these tools in detail.
 
 
-\subsubsection{WICUS.}
+\subsubsection{WICUS}
 We introduce here the Workflow Infrastructure Conservation Using Semantics ontology (WICUS), an OWL2~\cite{OWL2} (Web Ontology Language) ontology network that implements the semantic models introduced in Section~\ref{sec:semantic}. This ontology network is available online\footnote{\url{http://purl.org/net/wicus}} and it is a continuous effort to discover and define the relevant and required properties for describing scientific computational infrastructures. 
 
 Besides the ontology network, WICUS has a set of modules that facilitates the annotation of the resources involved on the execution of a scientific workflow. These tools are not fully automated yet, but represent a first step on helping users to define the requirements of their experiments. Figure~\ref{fig:wicusflow} shows the main modules, their flow and intermediate results involved in the process for achieving reproducibility, and describes the process of data generation and consumption.
@@ -158,29 +158,39 @@ Besides the ontology network, WICUS has a set of modules that facilitates the an
 	\label{fig:wicusflow}
 \end{figure}
 
-\noindent \textbf{1. DAX Annotator.} This tool parses a DAX (Pegasus' workflow description) and generates a set of annotations, using the terms of the WICUS vocabulary, representing workflow transformations and the workflow infrastructure requirements.
+\begin{enumerate}
+	\item \textbf{DAX Annotator.} This tool parses a DAX (Pegasus' workflow description) and generates a set of annotations, using the terms of the WICUS vocabulary, representing workflow transformations and the workflow infrastructure requirements.
 
-\noindent \textbf{2. Workflow annotations.} An RDF file containing the description of the workflow and its infrastructure requirements.
+	\item \textbf{Workflow annotations.} An RDF file containing the description of the workflow and its infrastructure requirements.
 
-\noindent \textbf{3. WMS annotations.} An RDF file containing the information of the WMS component and its dependencies. This information will be added to the Software Components Catalog.
+	\item \textbf{WMS annotations.} An RDF file containing the information of the WMS component and its dependencies. This information will be added to the Software Components Catalog.
 
-\noindent \textbf{4. Transformation Catalog Annotator.} This tool parses the Pegasus Transformation Catalog (which describes the binaries involved on the workflow execution and their locations) and the WMS annotations file, to generate two set of annotations: the \emph{Software Components Catalog} and the \emph{Workflow \& Configuration Annotation} files.
+	\item \textbf{Transformation Catalog Annotator.} This tool parses the Pegasus Transformation Catalog (which describes the binaries involved on the workflow execution and their locations) and the WMS annotations file, to generate two set of annotations: the \emph{Software Components Catalog} and the \emph{Workflow \& Configuration Annotation} files.
 
-\noindent \textbf{5. Software Components Catalog.} An RDF file containing the set of annotations about the binaries, dependencies, deployment plans and scripts, and configuration information of the software involved in the experiment.
+	\item \textbf{Software Components Catalog.} An RDF file containing the set of annotations about the binaries, dependencies, deployment plans and scripts, and configuration information of the software involved in the experiment.
 
-\noindent \textbf{6. Workflow \& Configuration Annotation File.} An RDF file containing the same information as in 2, but enriched with the configuration information for each workflow execution step, as specified in the transformation catalog.
+	\item \textbf{Workflow \& Configuration Annotation File.} An RDF file containing the same information as in 2, but enriched with the configuration information for each workflow execution step, as specified in the transformation catalog.
 
-\noindent \textbf{7. Scientific Virtual Appliances Catalog.} An RDF file describing available VM appliances. Information about the related infrastructure providers and the VM images that compose an appliance are included in this dataset.
+	\item \textbf{Scientific Virtual Appliances Catalog.} An RDF file describing available VM appliances. Information about the related infrastructure providers and the VM images that compose an appliance are included in this dataset.
 
-\noindent \textbf{8. Infrastructure Specification Algorithm.} This process reads files 5, 6, and 7, and generates a configuration file (e.g. a PRECIP script), which describes VMs and software components to be created and deployed.
+	\item \textbf{Infrastructure Specification Algorithm.} This process reads files 5, 6, and 7, and generates a configuration file (e.g. a PRECIP script), which describes VMs and software components to be created and deployed.
 
-\noindent \textbf{9. PRECIP script.} This script creates a PRECIP experiment, which runs a VM, copies the required binaries, and executes deployment scripts to set the environment for the workflow execution. It also contains the PRECIP commands from the original experiment in order to re-execute it.
+	\item \textbf{PRECIP script.} This script creates a PRECIP experiment, which runs a VM, copies the required binaries, and executes deployment scripts to set the environment for the workflow execution. It also contains the PRECIP commands from the original experiment in order to re-execute it.
+
+\end{enumerate}
 
 
-\subsubsection{PRECIP.}
+% PRECIP
+\subsubsection{PRECIP}
 The Pegasus Repeatable Experiments for the Cloud in Python (PRECIP)~\cite{Azarnoosh-CRC-2013} is a flexible experiment management control API for running experiments on all types of Clouds, including academic Clouds such as FutureGrid~\cite{futuregrid}, and commercial Clouds such as Amazon EC2~\cite{aws}. In PRECIP, interactions with the provisioned instances are done by tagging. When an instance is provisioned, the scientist can add arbitrary tags to that instance in order to identify and group the instances in the experiment. API methods such as running remote commands, or copying files, all use tags to specify which instances to target. PRECIP does not force the scientist to use a special VM image, and no PRECIP components need to be pre-installed in the image. Scientists can use any basic Linux image and PRECIP will bootstrap instances using SCP and SSH commands. PRECIP provides functionality to run user-defined scripts on the instances to install/configure software and run experiments, and also manages SSH keys and security groups automatically.
 
 In this work, PRECIP usage is twofold. First, the tool is used to describe and perform a workflow execution using the Pegasus WMS on a predefined VM image. Second, the WICUS annotation modules use PRECIP to generate a script able to reproduce the execution environment of the former experiment, and run it on different Cloud platforms.
+
+
+% Vagrant
+\subsubsection{Vagrant}
+
+\note{Idafen to add some text about Vagrant.}
 
 
 

@@ -189,8 +189,72 @@ In this work, PRECIP usage is twofold. First, the tool is used to describe and p
 The goal of this experiment is to reproduce an original workflow execution in two different Cloud infrastructures: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws}. FutureGrid is an academic Cloud test-bed facility that includes a number of computational resources at distributed locations. Amazon Web Services EC2 is a public infrastructure provider and the \emph{de facto} standard for IaaS Cloud platforms.
 
 
+\subsubsection{Scientific Workflows}
 
-\subsubsection{Generating Semantic Annotations.}
+\paragraph{\textbf{Montage}}
+The Montage workflow~\cite{Montage} was created by the NASA Infrared Processing and Analysis
+Center (IPAC) as an open source toolkit that can be used to generate custom mosaics of
+astronomical images in the Flexible Image Transport System (FITS) format. In a Montage workflow,
+the geometry of the output mosaic is calculated from the 
+input images. The inputs are then re-projected to have the same spatial scale and rotation, 
+the background emissions in the images are corrected to have a uniform level, and the 
+re-projected, corrected images are co-added to form the output mosaic.
+Figure~\ref{fig:workflow-montage} illustrates a small (20 node) Montage workflow. 
+The size of the workflow depends on the number of images required to construct the 
+desired mosaic. The workflow instances used in this paper generate 2, 4, or 8 degree square
+mosaics using 275, 840, and 2640 input images from the 2 Micron All Sky Survey (2MASS).
+
+\begin{figure}[!htt]
+	\centering
+	\includegraphics[width=0.9\linewidth]{figures/workflow-montage}
+	\caption{A small (20 node) Montage workflow.}
+	\label{fig:workflow-montage}
+\end{figure}
+
+
+\paragraph{\textbf{Epigenomics}}
+The USC Epigenome Center~\cite{genome} is currently involved in mapping the epigenetic 
+state of human cells on a genome-wide scale. The Epigenomics workflow 
+(Figure~\ref{fig:workflow-genome}) processes multiple sets of genome sequences in
+parallel. These sequences are split into subsets, the subsets are filtered to remove
+contaminants, reformatted, then mapped to a reference genome. The mapped sequences are
+finally merged and indexed for later analysis. In this paper, the Epigenome
+workflow was used to align 13 million genome sequence reads to a reference genome
+for human chromosome 21. The size of the workflow depends on the 
+chunking factor used on the input data (\texttt{binsize}), which determines
+the number of sequence reads in each chunk.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/workflow-genome}
+	\caption{Epigenomics workflow.}
+	\label{fig:workflow-genome}
+\end{figure}
+
+\paragraph{\textbf{SoyKB}}
+The SoyKB workflow~\cite{soybean, Joshi01012014} is a genomics pipeline 
+that re-sequences soybean germplasm lines selected for desirable traits such 
+as oil, protein, soybean cyst nematode resistance, stress resistance, and root 
+system architecture. The workflow (Figure~\ref{fig:workflow-soykb}) 
+implements a SNP and injection/deletion (indel) identification and analysis 
+pipeline using the GATK haplotype caller~\cite{gatk} and a soybean reference 
+genome. The workflow analyzes samples in parallel to align them to the reference 
+genome, to de-duplicate the data, to identify indels and SNPs, and to merge and 
+filter the results. The results are then used for genome-wide association studies 
+(GWAS) and genotype to phenotype analysis. The workflow instance used in this 
+paper is based on a sample dataset of 50 sequence reads that requires less 
+memory than a full-scale production workflow.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.95\linewidth]{figures/workflow-soybean}
+	\caption{SoyKB workflow.}
+	\label{fig:workflow-soykb}
+\end{figure}
+
+
+% Generating Semantic Annotations
+\subsubsection{Generating Semantic Annotations}
 Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated for the Montage workflow using the WICUS ontology network.
 
 \begin{figure}[!htb]

@@ -20,8 +20,8 @@ the background emissions in the images are corrected to have a uniform level, an
 re-projected, corrected images are co-added to form the output mosaic. 
 Figure~\ref{fig:workflow-montage} illustrates a small (20 node) Montage workflow. The 
 size of the workflow depends on the number of images required to construct the desired 
-mosaic. The workflow instance used in this paper generate a 1 degree square mosaics 
-using 84 input images from the 2 Micron All Sky Survey (2MASS).
+mosaic. The workflow instance used in this paper generate a 0.1 degree square mosaics 
+using 15 input images from the 2 Micron All Sky Survey (2MASS).
 
 \begin{figure}[!htt]
 	\centering
@@ -84,7 +84,7 @@ Figure~\ref{fig:annotations} shows a simplified overview of the annotations gene
 	\label{fig:annotations}
 \end{figure}
 
- As shown in Figure~\ref{fig:wicusflow}, the first step in the process of documenting a workflow is the annotation of the workflow DAX file. We use the \texttt{Workflow} domain ontology to describe the Montage workflow as 1) an individual that represents the top level workflow, and 2) another 9 individuals representing its sub-workflows, one for each transformation. We also generate 10 requirements, one for the top level workflow, which specifies the WMS requirements, and the remaining for defining the software components required by each transformation. At this point, these requirements are empty, as they are not yet related to their software components.
+As shown in Figure~\ref{fig:wicusflow}, the first step in the process of documenting a workflow is the annotation of the workflow DAX file. We use the \texttt{Workflow} domain ontology to describe the Montage workflow as 1) an individual that represents the top level workflow, and 2) another 9 individuals representing its sub-workflows, one for each transformation. We also generate 10 requirements, one for the top level workflow, which specifies the WMS requirements, and the remaining for defining the software components required by each transformation. At this point, these requirements are empty, as they are not yet related to their software components.
  
 In this experiment, we address two types of components: the WMS and the application related components. The WMS components include the workflow engine, in our case the Pegasus WMS, and its dependencies. Pegasus uses HTCondor as task manager, and also depends on Java. We use the \texttt{Software} domain ontology to describe these components as individuals, and to represent their dependencies. The 3 components also depend on the operating system, which in our case is CentOS.
 

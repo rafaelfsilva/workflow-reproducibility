@@ -1,21 +1,27 @@
+\section{Experimental Evaluation}
+\label{sec:experiment}
 
-The goal of this experiment is to reproduce an original workflow execution in two different Cloud infrastructures: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws}. FutureGrid is an academic Cloud test-bed facility that includes a number of computational resources at distributed locations. Amazon Web Services EC2 is a public infrastructure provider and the \emph{de facto} standard for IaaS Cloud platforms.
+The goal of this experiment is to reproduce original workflow executions in two different 
+Cloud infrastructures: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws}. 
+FutureGrid is an academic Cloud test-bed facility that includes a number of computational 
+resources at distributed locations. Amazon Web Services EC2 is a public infrastructure 
+provider and the \emph{de facto} standard for IaaS Cloud platforms.
 
 
 \subsection{Scientific Workflows}
 
 \paragraph{\textbf{Montage}}
-The Montage workflow~\cite{Montage} was created by the NASA Infrared Processing and Analysis
-Center (IPAC) as an open source toolkit that can be used to generate custom mosaics of
-astronomical images in the Flexible Image Transport System (FITS) format. In a Montage workflow,
-the geometry of the output mosaic is calculated from the 
+The Montage workflow~\cite{Montage} was created by the NASA Infrared Processing 
+and Analysis Center (IPAC) as an open source toolkit that can be used to generate 
+custom mosaics of astronomical images in the Flexible Image Transport System (FITS) 
+format. In a Montage workflow, the geometry of the output mosaic is calculated from the 
 input images. The inputs are then re-projected to have the same spatial scale and rotation, 
 the background emissions in the images are corrected to have a uniform level, and the 
-re-projected, corrected images are co-added to form the output mosaic.
-Figure~\ref{fig:workflow-montage} illustrates a small (20 node) Montage workflow. 
-The size of the workflow depends on the number of images required to construct the 
-desired mosaic. The workflow instances used in this paper generate 2, 4, or 8 degree square
-mosaics using 275, 840, and 2640 input images from the 2 Micron All Sky Survey (2MASS).
+re-projected, corrected images are co-added to form the output mosaic. 
+Figure~\ref{fig:workflow-montage} illustrates a small (20 node) Montage workflow. The 
+size of the workflow depends on the number of images required to construct the desired 
+mosaic. The workflow instance used in this paper generate a 1 degree square mosaics 
+using 84 input images from the 2 Micron All Sky Survey (2MASS).
 
 \begin{figure}[!htt]
 	\centering
@@ -31,11 +37,10 @@ state of human cells on a genome-wide scale. The Epigenomics workflow
 (Figure~\ref{fig:workflow-genome}) processes multiple sets of genome sequences in
 parallel. These sequences are split into subsets, the subsets are filtered to remove
 contaminants, reformatted, then mapped to a reference genome. The mapped sequences are
-finally merged and indexed for later analysis. In this paper, the Epigenome
-workflow was used to align 13 million genome sequence reads to a reference genome
-for human chromosome 21. The size of the workflow depends on the 
-chunking factor used on the input data (\texttt{binsize}), which determines
-the number of sequence reads in each chunk.
+finally merged and indexed for later analysis. In this work, the Epigenome workflow was 
+used to align 13 million genome sequence reads to a reference genome for human 
+chromosome 21. The size of the workflow depends on the chunking factor used on the input 
+data (\texttt{binsize}), which determines the number of sequence reads in each chunk.
 
 \begin{figure}[!htb]
 	\centering
@@ -67,7 +72,9 @@ memory than a full-scale production workflow.
 
 
 % Generating Semantic Annotations
-\subsubsection{Generating Semantic Annotations}
+\subsection{Generating Semantic Annotations}
+
+\paragraph{\textbf{Montage}}
 Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated for the Montage workflow using the WICUS ontology network.
 
 \begin{figure}[!htb]

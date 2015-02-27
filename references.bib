@@ -1,3 +1,13 @@
+@article{wicus,
+	author = {Santana-Perez, Idafen and P\'erez-Hern\'andez, Mar\'ia S.},
+	title = {Towards Reproducibility in Scientific Workflows: An Infrastructure-Based Approach},
+	journal = {Scientific Programming},
+	volume = {2015},
+	number = {},
+	year = {2015},
+	doi = {10.1155/2015/243180}
+}
+
 @article{Pegasus,
 	author={Deelman, Ewa and Singh, Gurmeet and Su, Mei-Hui and Blythe, James and Gil, Yolanda and Kesselman, Carl and Mehta, Gaurang and Vahi, Karan and Berriman, G Bruce and Good, John and others},
 	title = {Pegasus: A framework for mapping complex scientific workflows onto distributed systems},
@@ -10,10 +20,10 @@
 @article{Deelman-FGCS-2014,
         title = {Pegasus, a Workflow Management System for Science Automation},
         journal = {Future Generation Computer Systems},
-        volume = {},
+        volume = {46},
         number = {},
-        pages = {},
-        year = {2014},
+        pages = {17--35},
+        year = {2015},
         doi = {10.1016/j.future.2014.10.008},
         author = {Deelman, Ewa and Vahi, Karan and Juve, Gideon and Rynge, Mats and Callaghan, Scott and Maechling, Phil J. and Mayani, Rajiv and Chen, Weiwei and Ferreira da Silva, Rafael and Livny, Miron and Wenger, Kent}
 }
@@ -24,7 +34,7 @@
 	title = {Introducing {PRECIP}: an {API} for Managing Repeatable Experiments in the Cloud},
 	year = {2013},
 	booktitle = {2013 IEEE 5th International Conference on Cloud Computing Technology and Science}, 
-	series = {CloudCom}
+	series = {CloudCom},
 	volume = {2},
 	pages = {19-26},
 	doi = {10.1109/CloudCom.2013.98},
@@ -320,7 +330,7 @@ tasks executed by the workflow system itself, are very popular and cover 57% of 
 
 @misc{aws,
 	title = {{A}mazon {E}lastic {C}ompute {C}loud: {A}mazon {EC2}},
-	url = {http://aws.amazon.com/ec2},
+	howpublished = {\url{http://aws.amazon.com/ec2}},
 	key = {{A}mazon {E}lastic {C}ompute {C}loud: {A}mazon {EC2}},
 }
 
@@ -369,4 +379,70 @@ tasks executed by the workflow system itself, are very popular and cover 57% of 
     priority = {2},
     title = {{Replicability is not reproducibility: Nor is it good science}},
     year = {2009}
+}
+
+@misc{genome,
+	title = {{USC} Epigenome Center},
+	howpublished = {http://epigenome.usc.edu/}
+}
+
+@inproceedings{soybean,
+    title={Next Generation Resequencing of Soybean Germplasm for Trait Discovery on XSEDE using Pegasus Workflows and iPlant Infrastructure},
+    author={Trupti Joshi and Babu Valliyodan and Saad M. Khan and Yang Liu and  Maldonado dos Santos, Joao V. and Yongqing Jiao and Dong Xu and Henry T. Nguyen and Nicole Hopkins and Mats Rynge and Nirav Merchant},
+    booktitle={XSEDE 2014},
+    note={poster},
+    year={2014}
+}
+
+@article{Joshi01012014,
+	author = {Joshi, Trupti and Fitzpatrick, Michael R. and Chen, Shiyuan and Liu, Yang and Zhang, Hongxin and Endacott, Ryan Z. and Gaudiello, Eric C. and Stacey, Gary and Nguyen, Henry T. and Xu, Dong}, 
+	title = {Soybean knowledge base (SoyKB): a web resource for integration of soybean translational genomics and molecular breeding},
+	volume = {42}, 
+	number = {D1}, 
+	pages = {D1245-D1252}, 
+	year = {2014}, 
+	doi = {10.1093/nar/gkt905}, 
+	journal = {Nucleic Acids Research} 
+}
+
+@article{palat2012introducing,
+	title={Introducing vagrant},
+	author={Palat, Jay},
+	journal={Linux Journal},
+	volume={2012},
+	number={220},
+	pages={2},
+	year={2012},
+	publisher={Belltown Media}
+}
+
+@misc{wicus-online,
+	key = {wicus},
+	title = {The Workflow Infrastructure Conservation Using Semantics ontology},
+	howpublished = {\url{http://purl.org/net/wicus}}
+}
+
+@misc{gce,
+  key = {google compute engine},
+  title = {{Google Compute Engine (GCE)}},
+  howpublished = {\url{https://cloud.google.com/compute}}
+}
+
+@misc{chameleon,
+	key = {Chameleon},
+	title = {Chameleon Cloud},
+	howpublished = {\url{http://www.chameleoncloud.org}}
+}
+
+@misc{cloudlab,
+	key = {{CloudLab}},
+	title = {CloudLab},
+	howpublished = {\url{http://cloudlab.us}}
+}
+
+@misc{James-XSEDE-2014,
+	title = {Standing Together for Reproducibility in Large-Scale Computing: Report on reproducibility@{XSEDE}},
+	year = {2014},
+	url = {http://arxiv.org/abs/1412.5557},
+	author = {James, Doug and Wilkins-Diehr, Nancy and Stodden, Victoria and Colbry, Dirk and Rosales, Carlos and Fahey, Mark and Shi, Justin and Ferreira da Silva, Rafael and Lee, Kyo and Roskies, Ralph and Loewe, Laurence and Lindsey, Susan and Kooper, Rob and Barba, Lorena and Bailey, David and Borwein, Jonathan and Corcho, Oscar and Deelman, Ewa and Dietze, Michael and Gilbert, Benjamin and Harkes, Jan and Keele, Seth and Kumar, Praveen and Lee, Jong and Linke, Erika and Marciano, Richard and Marini, Luigi and Mattman, Chris and Mattson, Dave and {McHenry}, Kenton and {McLay}, Robert and Miguez, Sheila and Minsker, Barbara and Perez-Hernandez, Maria and Ryan, Dan and Rynge, Mats and Santana-Perez, Idafen and Satyanarayanan, Mahadev and Clair, Gloriana St and Webster, Keith and Hovig, Elvind and Katz, Dan and Kay, Sophie and Sandve, Geir and Skinner, David and Allen, Gabrielle and Cazes, John and Cho, Kym Won and Fonseca, Jim and Hwang, Lorraine and Koesterke, Lars and Patel, Pragnesh and Pouchard, Line and Seidel, Ed and Suriarachchi, Isuru},
 }

@@ -1,0 +1,8 @@
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+In this work, we proposed a semantic modeling approach to conserve computational environments in scientific workflow executions, where  the resources involved in the execution of the experiment are described using a set of semantic vocabularies. We defined and implemented 4 domain ontologies, aggregated in the the WICUS ontology network. From these models, we defined a process for documenting a workflow application (Montage), a workflow management system (the Pegasus WMS), and their dependencies. We then used the PRECIP experiment management tool to describe and execute the experiment. Experimental results show that our approach can reproduce an equivalent execution environment of a predefined VM image on an academic and a public Cloud platforms.
+
+The semantic annotations of the computational environment combined with the scripting functionality provided by PRECIP is a powerful approach for achieving reproducibility of computational environments in future experiments, and at the same time addresses the challenges of high storage demand of VM images. The drawback of our approach is that it assumes the application and the workflow management system binaries are publicly available.
+
+In the future we plan to apply our approach in a larger set of scientific workflows and involve users from different scientific areas, aiming to automate the generation process of the semantic annotations to describe both the workflow application and the workflow management system. We also plan to extend the WICUS ontology network to include new concepts and relations such as software variants, incompatibilities, and user policies for resource consumption.

@@ -35,7 +35,8 @@ To conduct the evaluation of the semantic models when executing scientific workf
 use the WICUS framework~\cite{wicus}, which comprises the semantic models described 
 in Section~\ref{sec:semantic} and a set of tools for annotating and consuming data; and 
 the PRECIP~\cite{Azarnoosh-CRC-2013} experiment management tool to manage the 
-experiment. In addition, we use Vagrant~\cite{palat2012introducing} to \note{add vagrant description}. 
+experiment. In addition, we use Vagrant~\cite{palat2012introducing}, a tool for deploying virtual
+deployment environments,  to achieve local reproducibility of the experiments. 
 Below, we describe each of these tools in detail.
 
 
@@ -125,9 +126,25 @@ execution using the Pegasus WMS on a predefined VM image. Second, the WICUS anno
 modules use PRECIP to generate a script able to reproduce the execution environment of the 
 former experiment, and run it on different Cloud platforms.
 
+\note{Should we add something about OpenStack@NSFCloud?}
 
 % Vagrant
 \subsubsection{Vagrant}
 
-\note{Idafen to add some text about Vagrant.}
+Vagrant~\cite{palat2012introducing} is an open-source and multi-platform solution for deploying 
+development environments locally using virtualization. It relies on virtualization solutions such as 
+Oracle VirtualBox~\cite{Watson2008} (also open-source) or  VMWare~\cite{vmware}, and support 
+Amazon EC2-like server configurations. Since version 1.6 it also supports Docker~\cite{Merkel2014} containers.
+
+Vagrant provides a set of commands and configuration files to enact and customize virtual machines
+ (also referred as boxes). It allows to define the set of commands and/or scripts to be executed during 
+ the different stages of the booting process. Several base images are publicly available for users to 
+ download and customize them~\footnote{http://www.vagrantbox.es/}. 
+ 
+ I this work we introduce how Vagrant can be used for achieving reproducibility at local environment, usually 
+ on a scientist's laptop/desktop computer This brings access to users making it possible to repeat and modify 
+ the original experiment, repurposing and/or improving it, which is a highly desirable goal of any reproducibility
+ process.
+
+%\note{Idafen to add some text about Vagrant.}
 

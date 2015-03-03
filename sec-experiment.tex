@@ -2,14 +2,15 @@
 \label{sec:experiment}
 
 In this section, we conduct a practical evaluation through experimentation in 
-which we instantiate the semantic models (Figure~\ref{fig:wicusrels}) for the
-three real scientific workflow applications. We study and document the Montage~\cite{Montage},
+which we instantiate the semantic models (Figure~\ref{fig:wicusrels}) for three real 
+scientific workflow applications. We study and document the Montage~\cite{Montage},
 Epigenomics~\cite{genome}, and SoyKB~\cite{soybean, Joshi01012014} workflows 
 and their execution environments, which include the application software components 
 and the workflow management system.
 
 The goal of this experiment is to reproduce original workflow executions in two different 
-Cloud infrastructures: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws}. 
+Cloud infrastructures, FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws}, and a
+local execution environment by using Vagrant. 
 FutureGrid is an academic Cloud test-bed facility that includes a number of computational 
 resources at distributed locations. Amazon Web Services EC2 is a public infrastructure 
 provider and the \emph{de facto} standard for IaaS Cloud platforms.
@@ -27,8 +28,7 @@ the background emissions in the images are corrected to have a uniform level, an
 re-projected, corrected images are co-added to form the output mosaic. 
 Figure~\ref{fig:workflow-montage} illustrates a small (20 node) Montage workflow. The 
 size of the workflow depends on the number of images required to construct the desired 
-mosaic. The workflow instance used in this paper generate a 0.1 degree square mosaics 
-using 15 input images from the 2 Micron All Sky Survey (2MASS).
+mosaic.
 
 \begin{figure}[!htt]
 	\centering
@@ -45,9 +45,9 @@ state of human cells on a genome-wide scale. The Epigenomics workflow
 parallel. These sequences are split into subsets, the subsets are filtered to remove
 contaminants, reformatted, then mapped to a reference genome. The mapped sequences are
 finally merged and indexed for later analysis. In this work, the Epigenome workflow was 
-used to align 13 million genome sequence reads to a reference genome for human 
-chromosome 21. The size of the workflow depends on the chunking factor used on the input 
-data (\texttt{binsize}), which determines the number of sequence reads in each chunk.
+used to align genome sequence reads to a reference genome for human chromosome 
+21. The size of the workflow depends on the chunking factor used on the input data, 
+which determines the number of sequence reads in each chunk.
 
 \begin{figure}[!htb]
 	\centering
@@ -67,8 +67,8 @@ genome. The workflow analyzes samples in parallel to align them to the reference
 genome, to de-duplicate the data, to identify indels and SNPs, and to merge and 
 filter the results. The results are then used for genome-wide association studies 
 (GWAS) and genotype to phenotype analysis. The workflow instance used in this 
-paper is based on a sample dataset of 50 sequence reads that requires less 
-memory than a full-scale production workflow.
+paper is based on a sample dataset that requires less memory than a full-scale 
+production workflow, however it requires the same software components.
 
 \begin{figure}[!htb]
 	\centering
@@ -78,11 +78,18 @@ memory than a full-scale production workflow.
 \end{figure}
 
 
-% Generating Semantic Annotations
+
+%%%
 \subsection{Generating Semantic Annotations}
 
+In this subsection, we present the annotations generated for each of the aforementioned
+workflows using the WICUS ontology network.
+
+\note{Restructure this section.}
+
 \paragraph{\textbf{Montage}}
-Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated for the Montage workflow using the WICUS ontology network.
+Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated 
+for the Montage workflow using the WICUS ontology network.
 
 \begin{figure}[!htb]
 	\centering
@@ -90,6 +97,8 @@ Figure~\ref{fig:annotations} shows a simplified overview of the annotations gene
 	\caption{Annotations for the Montage workflow using the WICUS ontology network.}
 	\label{fig:annotations}
 \end{figure}
+
+\note{Idafen, are the Harware and C. Resources the same across all workflows? If yes, we should move the text to the beginning of the section, and just describe into paragraphs the differences for each workflow.}
 
 As shown in Figure~\ref{fig:wicusflow}, the first step in the process of documenting a workflow is the annotation of the workflow DAX file. We use the \texttt{Workflow} domain ontology to describe the Montage workflow as 1) an individual that represents the top level workflow, and 2) another 9 individuals representing its sub-workflows, one for each transformation. We also generate 10 requirements, one for the top level workflow, which specifies the WMS requirements, and the remaining for defining the software components required by each transformation. At this point, these requirements are empty, as they are not yet related to their software components.
  
@@ -104,7 +113,13 @@ In this experiment, we define 9 Montage components that are linked to the requir
 To describe computational resources we use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies. The Scientific Virtual Appliances Catalog includes the description of two virtual machine images, one for FutureGrid and another for Amazon EC2. These two images are conceptually equivalent, as they both provide CentOS 6 operating system.
 Therefore, we generate two Image Appliances (FG CentOS 6 and AWS CentOS 6) that are grouped into one single Scientific Virtual Appliance (CentOS 6 SVA). Depending on which providers are available, one or the other will be selected.
 
+\paragraph{\textbf{Epigenomics}}
 
+\paragraph{\textbf{SoyKB}}
+
+
+
+%%%
 \subsection{Reproducing Workflow Executions.}
 
 The last step on the process for achieving reproducibility in scientific workflows (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm (ISA). The ISA combines the annotated data based on the 4 domain ontologies in order to find a suitable infrastructure specification that is able to run the workflow. The algorithm retrieves and propagates the WMS requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its related sub-workflows. Requirements and software components are matched, and a dependency graph is built based on the relation between the requirements and the component dependencies. This graph is then used to compute the intersection between the set of software components from the SVA and the dependency graph of each sub-workflow. ISA selects the intersection where the value is maximized for each sub-workflow. Software components already available in the SVA are then removed from the chosen graph. To reduce the number of SVAs, the algorithm attempts to merge sub-workflows requirements into a single SVA. Requirements can be merged if all their software components are compatible. Finally, ISA generates a PRECIP script with the set of required instructions to instantiate, configure, and deploy the computational resources and software components.

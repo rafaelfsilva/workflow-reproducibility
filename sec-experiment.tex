@@ -83,13 +83,31 @@ production workflow, however it requires the same software components.
 \subsection{Generating Semantic Annotations}
 
 In this subsection, we present the annotations generated for each of the aforementioned
-workflows using the WICUS ontology network.
+workflows and the Pegasus WMS using the WICUS ontology network.
 
 \note{Restructure this section.}
 
+As shown in Figure~\ref{fig:wicusflow}, the first step in the process of documenting a workflow is the annotation of the workflow DAX file. We use the \texttt{Workflow} domain ontology to describe the Montage workflow as 1) an individual that represents the top level workflow, and 2) a set of individuals representing its sub-workflows, one for each transformation. We then generate the necessary requirements, one for the top level workflow, which specifies the WMS requirements, and one for each subworkflow for defining the software components required by each transformation. 
+
+In this experiment, we address two types of components: the WMS and the application related components. Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated using the WICUS ontology network for the WMS and the three workflows studied in this work.
+
+
+\paragraph{\textbf{WMS}}
+
+ The WMS components include the workflow engine, in our case the Pegasus WMS, and its dependencies. Pegasus uses HTCondor as task manager, and both depend on Java and \texttt{wget} for running. We use the \texttt{Software} domain ontology to describe these components as individuals, and to represent their dependencies. The 3 components also depend on the operating system, which in our case is CentOS.
+
+To describe the deployment of the WMS components, we studied their installation processes according to their documentation. We then defined a set of installation bash scripts for each of them. These scripts are included on the deployment plans of the components along with their configuration information.  
+ 
 \paragraph{\textbf{Montage}}
-Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated 
-for the Montage workflow using the WICUS ontology network.
+ 
+Application components are described in the the Montage workflow's Transformation Catalog, where the binary file, version, and destination path are defined. These components are also described as individuals using the \texttt{Software} domain ontology. We use this information to generate the configuration parameters of the deployment script, which in this case is the same for all components. 
+
+The script downloads the binary files from an online repository and copies them to the specified destination path. This process identified 59 software components for the Montage workflow that are annotated and included in the Software Components Catalog.
+
+Then, the Transformation Catalog Annotator module relates each transformation requirement, defined using the \texttt{Workflow} domain ontology, to the application component, and therefore to the deployment information.
+In this experiment, we define 9 Montage components that are linked to the requirements, and another two sub-components that are defined as dependencies in the software catalog (\emph{mDiffFit} depends on the \emph{mDiff} and \emph{mFitPlane} components).
+
+
 
 \begin{figure*}[!htb]
 	\centering
@@ -97,36 +115,112 @@ for the Montage workflow using the WICUS ontology network.
 	\vspace{-20pt}
 	\caption{Annotations for the Montage, Epigenomics, and SoyKB workflows using the WICUS ontology network (yellow rectangles represent the workflow component; blue squashed rectangles represent the Montage workflow; green bevelled rectangles represent the Epigenomics workflows; and red hexagons represent the SoyKB workflow).}
 	\label{fig:annotations}
+	\note{Rafael, missing dependency arrow between Gatk and SW bundle}
+
 \end{figure*}
 
-\note{Idafen, are the Harware and C. Resources the same across all workflows? If yes, we should move the text to the beginning of the section, and just describe into paragraphs the differences for each workflow.}
+\note{Idafen, are the Hardware and C. Resources the same across all workflows? If yes, we should move the text to the beginning of the section, and just describe into paragraphs the differences for each workflow.}
 
-As shown in Figure~\ref{fig:wicusflow}, the first step in the process of documenting a workflow is the annotation of the workflow DAX file. We use the \texttt{Workflow} domain ontology to describe the Montage workflow as 1) an individual that represents the top level workflow, and 2) another 9 individuals representing its sub-workflows, one for each transformation. We also generate 10 requirements, one for the top level workflow, which specifies the WMS requirements, and the remaining for defining the software components required by each transformation. At this point, these requirements are empty, as they are not yet related to their software components.
- 
-In this experiment, we address two types of components: the WMS and the application related components. The WMS components include the workflow engine, in our case the Pegasus WMS, and its dependencies. Pegasus uses HTCondor as task manager, and also depends on Java. We use the \texttt{Software} domain ontology to describe these components as individuals, and to represent their dependencies. The 3 components also depend on the operating system, which in our case is CentOS.
-
-To describe the deployment of the WMS components, we studied their installation processes according to their documentation. We then defined a set of installation bash scripts for each of them. These scripts are included on the deployment plans of the components along with their configuration information.  
- 
-Application components are described from the Montage workflow's Transformation Catalog, where the binary file, version, and destination path are defined. These components are also described as individuals using the \texttt{Software} domain ontology. We use this information to generate the configuration parameters of the deployment script, which in this case is the same for all components. The script downloads the binary files from an online repository and copies them to the specified destination path. This process identified 59 software components for the Montage workflow that are annotated and included in the Software Components Catalog.
-Then, the Transformation Catalog Annotator module relates each transformation requirement, defined using the \texttt{Workflow} domain ontology, to the application component, and therefore to the deployment information.
-In this experiment, we define 9 Montage components that are linked to the requirements, and another two sub-components that are defined as dependencies in the software catalog (\emph{mDiffFit} depends on the \emph{mDiff} and \emph{mFitPlane} components).
-
-To describe computational resources we use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies. The Scientific Virtual Appliances Catalog includes the description of two virtual machine images, one for FutureGrid and another for Amazon EC2. These two images are conceptually equivalent, as they both provide CentOS 6 operating system.
-Therefore, we generate two Image Appliances (FG CentOS 6 and AWS CentOS 6) that are grouped into one single Scientific Virtual Appliance (CentOS 6 SVA). Depending on which providers are available, one or the other will be selected.
 
 \paragraph{\textbf{Epigenomics}}
 
+Following the same approach as in the previous case we have annotated the 8 components specified in the Epigenomics' Transformation Catalog. By analyzing the workflow dependencies we have also identified and annotated 6 software dependencies, which include software components and system libraries. 
+
+These 8 main software components have been related to the 8 different types of steps depicted in figure \ref{fig:workflow-genome}.  Their dependencies include the Perl \cite{perl} interpreter, the GNU libc \footnote{http://www.gnu.org/software/libc/} and Libstdc++ \footnote{https://gcc.gnu.org/libstdc++/} libraries, and two other binaries from the Epigenomics  distribution, \emph{maq} and \emph{maqindex}.
+
+
 \paragraph{\textbf{SoyKB}}
 
+Even though SoyKB is the largest workflow in terms of its number of steps (around 670), of the three ones included in this work, it defines only four software components as dependencies. 
+
+These components (\emph{bwa-wrapper}, \emph{bwa-wrapper},  \emph{gatk-wrapper}, and \emph{picard-wrapper}, \emph{software-wrapper},  \emph{gatk-wrapper}, \emph{picard-wrapper}) are software wrappers that call different libraries and binaries depending on the parameters used through the execution of the workflow. Those components are included on a software bundle that has to be deployed on the corresponding locations for the wrappers to be able to invoke it. Thus, a dependency for this bundle has been included in the Software Components Catalog.
+
+
+\paragraph{\textbf{Computational resources}}
+
+To describe computational resources we use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies. The Scientific Virtual Appliances Catalog includes the description of five virtual machine images, two for FutureGrid and other two for Amazon EC2. In both cases we generated conceptually equivalent machines, as they both provide CentOS 6 operating system, being the only difference their hardware configuration. 
+
+Therefore, we generate five Image Appliances that are grouped into one single Scientific Virtual Appliance (CentOS 6 SVA). Depending on which providers are available, one or the other will be selected. Table \ref{tab:imgapps} summarizes the main characteristics of the five appliances we have annotated.
+
+
+\begin{table}[h]
+\begin{tabular}{l|lllll}
+\multicolumn{1}{c|}{} 
+Img. App. & AWS1 & AWS2 & FG1 & FG2 & Vagrant \\ \hline
+RAM (GB) & 7 &  7 & 8 & 8 &  ?? \\ \hline
+DISK (GB) &  40 &  5 &  40 & 5 & 50 \\ \hline
+CPU freq (GHz) & 2.4  & 2.4 & 2.9 & 2.9  &  2.7 \\ \hline
+CPU arch & \multicolumn{5}{c}{64 bits} \\ \hline
+OS & \multicolumn{5}{c}{CentOS 6} \\ \hline
+\end{tabular}
+\caption{CentOS 6 Virtual Image Appliances}
+\label{tab:imgapps}
+\note{Idafen, improve the format of the table and complete vagrant info}
+\end{table}
 
 
 %%%
 \subsection{Reproducing Workflow Executions.}
 
-The last step on the process for achieving reproducibility in scientific workflows (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm (ISA). The ISA combines the annotated data based on the 4 domain ontologies in order to find a suitable infrastructure specification that is able to run the workflow. The algorithm retrieves and propagates the WMS requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its related sub-workflows. Requirements and software components are matched, and a dependency graph is built based on the relation between the requirements and the component dependencies. This graph is then used to compute the intersection between the set of software components from the SVA and the dependency graph of each sub-workflow. ISA selects the intersection where the value is maximized for each sub-workflow. Software components already available in the SVA are then removed from the chosen graph. To reduce the number of SVAs, the algorithm attempts to merge sub-workflows requirements into a single SVA. Requirements can be merged if all their software components are compatible. Finally, ISA generates a PRECIP script with the set of required instructions to instantiate, configure, and deploy the computational resources and software components.
+The last step on the process for achieving reproducibility in scientific workflows (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm (ISA). The ISA combines the annotated data based on the 4 domain ontologies in order to find a suitable infrastructure specification that is able to run the workflow. The algorithm retrieves and propagates the WMS requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its related sub-workflows. Requirements and software components are matched, and a dependency graph is built based on the relation between the requirements and the component dependencies. This graph is then used to compute the intersection between the set of software components from the SVA and the dependency graph of each sub-workflow. ISA selects the intersection where the value is maximized for each sub-workflow. Software components already available in the SVA are then removed from the chosen graph. To reduce the number of SVAs, the algorithm attempts to merge sub-workflows requirements into a single SVA. Requirements can be merged if all their software components are compatible. ISA also filters all those Image Appliances, belonging to the selected SVAs, that do not meet the hardware requirements specified for the workflow. Finally, ISA generates a PRECIP script with the set of required instructions to instantiate, configure, and deploy the computational resources and software components.
 
 
-In this experiment, we execute ISA over the annotated data in a scenario where FutureGrid is the only available platform for resource provisioning, and in a scenario where the available platform is Amazon EC2. In both cases, the algorithm is able to obtain a PRECIP script for each infrastructure. Each generated script is composed by the following main sections:
+\note{Idafen, summarize the following text, citing the Sc.Prog. paper and focus on the new features}
+The ISA first loads the datasets (lines 1-5), and query the {\it Workflow Requirements Dataset} to load the requirements of each step of the workflow and their related Software Stacks (line 7). Then we query the {\it Software Stacks Dataset} to recursively calculate the Requirement Dependency Graph, a directed graph that relates each Software Stacks with their dependent ones (lines 10-15).
+
+This graph may contain circular dependencies. Even though these dependencies are a bad practice in software design and development, they usually occur in functional programming and among non-expert developers, which may be the case of a scientist developing a computational experiment without sufficient skills on programming. In our datasets there are no circular dependencies, however our algorithm is able to deal with them avoiding infinite loops by keeping track of the visited nodes and avoiding them over the recursive iterations.
+
+Once we have generated the Requirement Dependency Graph, we retrieve the information of all the available Scientific Virtual Appliances (line 17). We then calculate the compatibility between each requirement and appliance (line 19). To do that we calculate the intersection of the set of Software Stacks of the graph with the set of stacks of the appliance. We require the intersection to be greater than a certain threshold. Appliances below this threshold are removed from the candidates list. In this work we have used a threshold parameter with value 0, requiring that at least both sets have 1 stack in common. 
+
+We then sort the resultant appliances for obtaining the one with the greater intersection for each requirement, arguing that the more components they have in common, the less deployment effort would be needed, making the appliance more suitable.
+
+Finally, we use this intersection to remove the unnecessary stacks from the Requirement Dependency Graph, as they are already deployed in the appliance. We remove each stack included in the intersection and its derived dependencies recursively (line 21). That is, the dependencies that have no other stack depending on them and therefore get isolated once the stack from the intersection has been removed. 
+
+We finally merge subworkflows that share common requirements (line 23). This version implements a simple policy that aims to reduce the deployment effort. This is a policy among many others that may be implemented considering many other aspects, such as performance (favoring local cloud providers) or economic aspects (encouraging the system to select the cheapest available SVA).
+
+A pseudo-code overview of the main steps of the ISA is listed in Listing \ref{lst:pseudo}.
+
+\note{Idafen, add HW filtering process to the pseudo code}
+\lstset{language=C++,
+	  numbers=left,
+	   numberstyle=\tiny\color{mygray},
+           basicstyle=\ttfamily\scriptsize,
+          breaklines=true,
+          }
+          
+\begin{lstlisting}[caption={Pseudo-code overview of the ISA},label={lst:pseudo}]
+WorkflowRequirementsDataset.load();
+
+SVADataset.load();
+
+SoftwareCatalogDataset.load();
+
+Map<Workflow,List<Requirements>> wfReqs = 
+  retrieveRequirements(WorkflowRequirementsDataset, WorkflowID);
+
+Map<Workflow,List<Requirements>> propagatedWfReqs = 
+  propagateReqs(wfReqs);
+
+List<List<List<SWComponents>>> softwareComponents = getSoftwareComponents(propagatedWfReqs);
+
+Map<Requirement,D-Graph<SWComponents>> softwareComponentsDependencyGraph = getSoftwareDependencies(softwareComponents);
+
+List<SVA> availableSvas = getAvailableSvas(providersList);
+
+Map<Requirements,SVA> maxCompatibilities = getCompatibilityIntersection(softwareComponentsDependencyGraph,availableSvas);
+
+Map<Requirement,D-Graph<SWComponents>> substractedSwComponentsDepGraph = substractSoftwareComponents(softwareComponentsDependencyGraph, maxCompatibilities);
+
+Map<SVA, List<Requirments>>mergedSvas= mergeSubworkflows(propagatedWfReqs, maxCompatibilities);
+
+generatePrecipScript(mergeSubworkflows,substractedSweComponentsDepGraph);
+
+\end{lstlisting}
+
+In the last step we generate a PRECIP experiment which creates the necessary computational resources based on the SVAs (line 23). We traverse the Software Components that must be deployed to generate a set of PRECIP commands for executing the deployment plans of each component.
+
+
+In this experiment, we execute ISA over the annotated data specifying the three different providers we work with. In all cases, the algorithm is able to obtain either a PRECIP or Vagrant script (depending on the provider). Each generated script is composed by the following main sections:
 
 \begin{itemize}
 
@@ -141,6 +235,8 @@ In this experiment, we execute ISA over the annotated data in a scenario where F
 \end{itemize}
 
 \noindent Note that all the configuration and deployment commands (first 3 sections) require superuser privileges on the VM. The workflow execution, however, is performed under the user account created in the third section.
+
+
 
 We executed the scripts on their corresponding platforms. Both executions succeeded on deploying and running the Montage workflow, the Pegasus WMS, and their dependencies. We also performed the same execution of the Montage workflow in a predefined VM image, where the execution environment is already in place. Results show that the VM execution environments deployed by both scripts are equivalent to the former one. In addition, we used a perceptual hash tool\footnote{pHash - \url{http://www.phash.org}} to compare the resulting image (0.1 degree image of the sky) generated by both executions against the one generated by the baseline execution. We obtained a similarity factor of 1.0 (over 1.0) with a threshold of 0.85, which means the images are identical. Therefore we are obtaining the same results as the original workflow. In this work we do not aim to reproduce either the performance or the execution time of the original experiment.
 

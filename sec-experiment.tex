@@ -13,7 +13,7 @@ Cloud infrastructures, FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws}, a
 local execution environment by using Vagrant. 
 FutureGrid is an academic Cloud test-bed facility that includes a number of computational 
 resources at distributed locations. Amazon Web Services EC2 is a public infrastructure 
-provider and the \emph{de facto} standard for IaaS Cloud platforms.
+provider and the \emph{de facto} standard for IaaS Cloud platforms. 
 
 
 \subsection{Scientific Workflows}
@@ -119,7 +119,7 @@ In this experiment, we define 9 Montage components that are linked to the requir
 
 \end{figure*}
 
-\note{Idafen, are the Hardware and C. Resources the same across all workflows? If yes, we should move the text to the beginning of the section, and just describe into paragraphs the differences for each workflow.}
+\note{Idafen, add decription of HW requirements of each workflow}
 
 
 \paragraph{\textbf{Epigenomics}}
@@ -158,29 +158,36 @@ OS & \multicolumn{5}{c}{CentOS 6} \\ \hline
 \note{Idafen, improve the format of the table and complete vagrant info}
 \end{table}
 
+\paragraph{\textbf{Hardware requirements}}
+
+For each of the workflows we have also analyzed which were hardware specifications required for executed them. Table \ref{tab:hwreqs} displays those requirements, describing the minimum threshold for each one of them. During the computational resource selection process we will consider that any machine with equal or higher hardware features than the ones specified will be a valid candidate for running the workflow. In cases such as the CPU frequency, in which we have not identified any specific capacity, we set this value to 0.
+
+
+
+\begin{table}[h]
+\begin{tabular}{l|llll}
+\multicolumn{1}{c|}{} 
+ & CPU (GHz) & CPU arch & RAM (GB) & DISK (GB) \\ \hline
+Montage &  0 &  64 & 4 & 10 \\ \hline
+Epigenomics &  0 &  64 &  4 & 4  \\ \hline
+SoyKB & 0  & 64 & 4 & 4  \\ \hline
+\end{tabular}
+\caption{Workflow hardware requirements}
+\label{tab:hwreqs}
+\note{Idafen, improve the format of the table}
+\end{table}
 
 %%%
 \subsection{Reproducing Workflow Executions.}
 
-The last step on the process for achieving reproducibility in scientific workflows (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm (ISA). The ISA combines the annotated data based on the 4 domain ontologies in order to find a suitable infrastructure specification that is able to run the workflow. The algorithm retrieves and propagates the WMS requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its related sub-workflows. Requirements and software components are matched, and a dependency graph is built based on the relation between the requirements and the component dependencies. This graph is then used to compute the intersection between the set of software components from the SVA and the dependency graph of each sub-workflow. ISA selects the intersection where the value is maximized for each sub-workflow. Software components already available in the SVA are then removed from the chosen graph. To reduce the number of SVAs, the algorithm attempts to merge sub-workflows requirements into a single SVA. Requirements can be merged if all their software components are compatible. ISA also filters all those Image Appliances, belonging to the selected SVAs, that do not meet the hardware requirements specified for the workflow. Finally, ISA generates a PRECIP script with the set of required instructions to instantiate, configure, and deploy the computational resources and software components.
+The last step on the process for achieving reproducibility in scientific workflows (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm (ISA). The ISA combines the annotated data based on the 4 domain ontologies in order to find a suitable infrastructure specification that is able to run the workflow. The algorithm retrieves and propagates the WMS requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its related sub-workflows. Requirements and software components are matched, and a dependency graph is built based on the relation between the requirements and the component dependencies. This graph is then used to compute the intersection between the set of software components from the SVA and the dependency graph of each sub-workflow. ISA selects the intersection where the value is maximized for each sub-workflow. Software components already available in the SVA are then removed from the chosen graph. To reduce the number of SVAs, the algorithm attempts to merge sub-workflows requirements into a single SVA. Requirements can be merged if all their software components are compatible. ISA also filters all those Image Appliances, belonging to the selected SVAs, that do not meet the hardware requirements specified for the workflow. Finally, ISA generates a script (either using PRECIP or Vagrant) with the set of required instructions to instantiate, configure, and deploy the computational resources and software components on the corresponding provider.
 
+As introduced in~\cite{wicus} the ISA retrieves the corresponding information for the workflow and its dependencies from the annotations datasets. It calculates the dependencies and the compatibility between requirements and the available computational resources. It also takes into account the already installed software to avoid the unnecessary installation of components.
 
-\note{Idafen, summarize the following text, citing the Sc.Prog. paper and focus on the new features}
-The ISA first loads the datasets (lines 1-5), and query the {\it Workflow Requirements Dataset} to load the requirements of each step of the workflow and their related Software Stacks (line 7). Then we query the {\it Software Stacks Dataset} to recursively calculate the Requirement Dependency Graph, a directed graph that relates each Software Stacks with their dependent ones (lines 10-15).
-
-This graph may contain circular dependencies. Even though these dependencies are a bad practice in software design and development, they usually occur in functional programming and among non-expert developers, which may be the case of a scientist developing a computational experiment without sufficient skills on programming. In our datasets there are no circular dependencies, however our algorithm is able to deal with them avoiding infinite loops by keeping track of the visited nodes and avoiding them over the recursive iterations.
-
-Once we have generated the Requirement Dependency Graph, we retrieve the information of all the available Scientific Virtual Appliances (line 17). We then calculate the compatibility between each requirement and appliance (line 19). To do that we calculate the intersection of the set of Software Stacks of the graph with the set of stacks of the appliance. We require the intersection to be greater than a certain threshold. Appliances below this threshold are removed from the candidates list. In this work we have used a threshold parameter with value 0, requiring that at least both sets have 1 stack in common. 
-
-We then sort the resultant appliances for obtaining the one with the greater intersection for each requirement, arguing that the more components they have in common, the less deployment effort would be needed, making the appliance more suitable.
-
-Finally, we use this intersection to remove the unnecessary stacks from the Requirement Dependency Graph, as they are already deployed in the appliance. We remove each stack included in the intersection and its derived dependencies recursively (line 21). That is, the dependencies that have no other stack depending on them and therefore get isolated once the stack from the intersection has been removed. 
-
-We finally merge subworkflows that share common requirements (line 23). This version implements a simple policy that aims to reduce the deployment effort. This is a policy among many others that may be implemented considering many other aspects, such as performance (favoring local cloud providers) or economic aspects (encouraging the system to select the cheapest available SVA).
+For this work we have added two main new features to the ISA. First of all we are now able to filter those Image Appliances that do not meet the hardware requirements specified for the target workflow (lines 25-27). Secondly have improved the script generation process, so we are now able to also generate Vagrant scripts. For this process we first generate an abstract deployment plan, defining the steps and scripts to be executed, along with their configuration parameters. The ISA then concretizes this plan into a PRECIP or Vagrant script depending on the resultant target provider (line 29).
 
 A pseudo-code overview of the main steps of the ISA is listed in Listing \ref{lst:pseudo}.
 
-\note{Idafen, add HW filtering process to the pseudo code}
 \lstset{language=C++,
 	  numbers=left,
 	   numberstyle=\tiny\color{mygray},
@@ -195,13 +202,13 @@ SVADataset.load();
 
 SoftwareCatalogDataset.load();
 
-Map<Workflow,List<Requirements>> wfReqs = 
-  retrieveRequirements(WorkflowRequirementsDataset, WorkflowID);
+Map<Workflow,List<Requirements>> wfSwReqs = 
+  retrieveSwRequirements(WorkflowRequirementsDataset, WorkflowID);
 
-Map<Workflow,List<Requirements>> propagatedWfReqs = 
-  propagateReqs(wfReqs);
+Map<Workflow,List<Requirements>> propagatedWfSwReqs = 
+  propagateSwReqs(wfSwReqs);
 
-List<List<List<SWComponents>>> softwareComponents = getSoftwareComponents(propagatedWfReqs);
+List<List<List<SWComponents>>> softwareComponents = getSoftwareComponents(propagatedWfSwReqs);
 
 Map<Requirement,D-Graph<SWComponents>> softwareComponentsDependencyGraph = getSoftwareDependencies(softwareComponents);
 
@@ -211,16 +218,79 @@ Map<Requirements,SVA> maxCompatibilities = getCompatibilityIntersection(software
 
 Map<Requirement,D-Graph<SWComponents>> substractedSwComponentsDepGraph = substractSoftwareComponents(softwareComponentsDependencyGraph, maxCompatibilities);
 
-Map<SVA, List<Requirments>>mergedSvas= mergeSubworkflows(propagatedWfReqs, maxCompatibilities);
+Map<SVA, List<Requirments>>mergedSvas= mergeSubworkflows(propagatedWfSwReqs, maxCompatibilities);
 
-generatePrecipScript(mergeSubworkflows,substractedSweComponentsDepGraph);
+Map<Workflow,List<Requirements>> wfHwReqs =   retrieveHwRequirements(WorkflowRequirementsDataset, WorkflowID);
+
+Map<SVA, List<Requirments>>filteredSvas= getCompatibleHwImageAppliances(mergedSvas,wfHwReqs);
+
+generateScript(filteredSvas ,substractedSwComponentsDepGraph);
 
 \end{lstlisting}
 
-In the last step we generate a PRECIP experiment which creates the necessary computational resources based on the SVAs (line 23). We traverse the Software Components that must be deployed to generate a set of PRECIP commands for executing the deployment plans of each component.
+
+In this experiment, we execute ISA over the annotated data specifying the three different providers we work with. As result we obtain the abstract plans listed in listings \ref{lst:plan-montge}, \ref{lst:plan-epigenomics}, and \ref{lst:plan-soykb}. 
 
 
-In this experiment, we execute ISA over the annotated data specifying the three different providers we work with. In all cases, the algorithm is able to obtain either a PRECIP or Vagrant script (depending on the provider). Each generated script is composed by the following main sections:
+\begin{lstlisting}[caption={Abstract deployment plan of the Montage WF},label={lst:plan-montge}]
+add...
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={Abstract deployment plan of the Epigenomics WF},label={lst:plan-epigenomics}]
+add...
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={Abstract deployment plan of the SoyKB WF},label={lst:plan-soykb}]
+  OPEN_SSH_CLIENTS_SOFT_STACK stack
+   OPEN_SSH_CLIENTS_SOFT_COMP component
+    OPEN_SSH_CLIENTS_DEP_STEP step
+  OPEN_SSH_SERVER_SOFT_STACK stack
+   OPEN_SSH_SERVER_SOFT_COMP component
+    OPEN_SSH_SERVER_DEP_STEP step
+  WGET_SOFT_STACK stack
+   WGET_SOFT_COMP component
+    WGET_DEP_STEP step
+  CONDOR_CENTOS_6_5_SOFT_STACK stack
+   CONDOR_CENTOS_6_5_SOFT_COMP component
+    STOP_CONDOR_DEP_STEP step
+    ADD_CONDOR_REPO_DEP_STEP step
+    CONDOR_YUM_INSTALL_DEP_STEP step
+    CLEAN_AND_SET_CONDOR_DEP_STEP step
+    RESTART_DAEMONS_DEP_STEP step
+  JAVA-1.7.0-OPENJDK.X86_64_SOFT_STACK stack
+   JAVA-1.7.0-OPENJDK.X86_64_SOFT_COMP component
+    JAVA-1.7.0-OPENJDK.X86_64_DEP_STEP step
+  JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_STACK stack
+   JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_COMP component
+    JAVA-1.7.0-OPENJDK-DEVEL.X86_64_DEP_STEP step
+  PEGASUS_WMS_CENTOS_6_5_SOFT_STACK stack
+   PEGASUS_WMS_CENTOS_6_5_SOFT_COMP component
+    ADD_PEGASUS_REPO_DEP_STEP step
+    PEGASUS_YUM_INSTALL_DEP_STEP step
+  SOFTWARE_TAR_GZ_SOFT_STACK stack
+   SOFTWARE_TAR_GZ_SOFT_COMP component
+    SOFTWARE_TAR_GZ_DEP_STEP step
+  PICARD-WRAPPER_SOFT_STACK stack
+   PICARD-WRAPPER_SOFT_COMP component
+    PICARD-WRAPPER_DEP_STEP step
+    PICARD-WRAPPER_2_DEP_STEP step
+  SOFTWARE-WRAPPER_SOFT_STACK stack
+   SOFTWARE-WRAPPER_SOFT_COMP component
+    SOFTWARE-WRAPPER_DEP_STEP step
+    SOFTWARE-WRAPPER_2_DEP_STEP step
+  GATK-WRAPPER_SOFT_STACK stack
+   GATK-WRAPPER_SOFT_COMP component
+    GATK-WRAPPER_DEP_STEP step
+    GATK-WRAPPER_2_DEP_STEP step
+  BWA-WRAPPER_SOFT_STACK stack
+   BWA-WRAPPER_SOFT_COMP component
+    BWA-WRAPPER_DEP_STEP step
+    BWA-WRAPPER_2_DEP_STEP step
+\end{lstlisting}
+
+In all cases, the algorithm is able to concretize the abstract plan either to a PRECIP or a Vagrant script (depending on the specified provider). Each generated script is composed by the following main sections:
 
 \begin{itemize}
 
@@ -237,8 +307,10 @@ In this experiment, we execute ISA over the annotated data specifying the three 
 \noindent Note that all the configuration and deployment commands (first 3 sections) require superuser privileges on the VM. The workflow execution, however, is performed under the user account created in the third section.
 
 
+\note{Idafen, modify this including the results of the 3 WFs, and how we check results are correct}.
 
 We executed the scripts on their corresponding platforms. Both executions succeeded on deploying and running the Montage workflow, the Pegasus WMS, and their dependencies. We also performed the same execution of the Montage workflow in a predefined VM image, where the execution environment is already in place. Results show that the VM execution environments deployed by both scripts are equivalent to the former one. In addition, we used a perceptual hash tool\footnote{pHash - \url{http://www.phash.org}} to compare the resulting image (0.1 degree image of the sky) generated by both executions against the one generated by the baseline execution. We obtained a similarity factor of 1.0 (over 1.0) with a threshold of 0.85, which means the images are identical. Therefore we are obtaining the same results as the original workflow. In this work we do not aim to reproduce either the performance or the execution time of the original experiment.
 
 
-All the original and generated scripts are available as part of the experimental material included in the Research Object (RO)~\cite{researchObjects} associated with this paper\footnote{\url{http://pegasus.isi.edu/publications/reppar}}. This RO also contains pointers to the software and resources used in this experiment.
+
+All the original and generated scripts are available as part of the experimental material included in the Research Object (RO)~\cite{researchObjects} associated with this paper\footnote{\url{http://pegasus.isi.edu/publications/FGCS(CREATE-RO!)}}. This RO also contains pointers to the software and resources used in this experiment.

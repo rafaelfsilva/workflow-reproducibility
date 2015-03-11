@@ -94,16 +94,16 @@ data generation and consumption. Below, we provide an overview of each of these 
 		generates a configuration file, which describes VMs and software 
 		components to be created and deployed.
 
-	\item \textbf{Abstract deployment plan.} This plan contains information about the set of components 
-		and their associated deployment steps for generating the execution infrastructure. This plan must
-		be later enacted using a concrete language.
+	\item \textbf{Abstract Deployment Plan.} This plan contains information about the set of components 
+		and their associated deployment steps for configuring the execution infrastructure. This plan 
+		will be later enacted using a concrete language.
 		
-	\item \textbf{Script generator} This module concretizes the abstract deployment plan using the selected
+	\item \textbf{Script Generator.} This module concretizes the abstract deployment plan using the selected
 		language (either PRECIP or Vagrant in this case) to generate an executable script.
 
-	\item \textbf{PRECIP/Vagrant script.} This script creates a PRECIP/Vagrant experiment, which runs a VM, copies 
-		the required binaries, and executes deployment scripts to set the environment for the workflow 
-		execution. It also contains the original experiment commands in order to 
+	\item \textbf{Executable Script.} This script creates a PRECIP/Vagrant experiment, which runs a VM, 
+		copies the required binaries, and executes deployment scripts to set the environment for the 
+		workflow execution. It also contains the original experiment commands in order to 
 		re-execute it.
 
 \end{enumerate}
@@ -117,23 +117,23 @@ and the applicability of each module for the studied scientific workflows.
 \subsubsection{PRECIP}
 The Pegasus Repeatable Experiments for the Cloud in Python (PRECIP)~\cite{Azarnoosh-CRC-2013} 
 is a flexible experiment management control API for running experiments on all types of Clouds, 
-including academic Clouds such as FutureGrid~\cite{futuregrid} and the NSFCloud~\cite{chameleon,cloudlab}, 
-and commercial Clouds such as Amazon EC2~\cite{aws} and Google Compute Engine~\cite{gce}. 
-In PRECIP, interactions with the provisioned instances are done by tagging. When an instance is 
-provisioned, the scientist can add arbitrary tags to that instance in order to identify and group the 
-instances in the experiment. API methods such as running remote commands, or copying files, all 
-use tags to specify which instances to target. PRECIP does not force the scientist to use a special 
-VM image, and no PRECIP components need to be pre-installed in the image. Scientists can use 
-any basic Linux image and PRECIP will bootstrap instances using SCP and SSH commands. 
-PRECIP provides functionality to run user-defined scripts on the instances to install/configure 
-software and run experiments, and also manages SSH keys and security groups automatically.
+including academic Clouds such as FutureGrid~\cite{futuregrid} and the NSFCloud~\cite{chameleon,cloudlab}
+(through OpenStack), and commercial Clouds such as Amazon EC2~\cite{aws} and Google 
+Compute Engine~\cite{gce}. In PRECIP, interactions with the provisioned instances are done by 
+tagging. When an instance is provisioned, the scientist can add arbitrary tags to that instance in 
+order to identify and group the instances in the experiment. API methods such as running remote 
+commands, or copying files, all use tags to specify which instances to target. PRECIP does not 
+force the scientist to use a special VM image, and no PRECIP components need to be pre-installed 
+in the image. Scientists can use any basic Linux image and PRECIP will bootstrap instances using 
+SCP and SSH commands. PRECIP provides functionality to run user-defined scripts on the instances 
+to install/configure software and run experiments, and also manages SSH keys and security groups 
+automatically.
 
 In this work, PRECIP usage is twofold. First, the tool is used to describe and perform a workflow 
 execution using the Pegasus WMS on a predefined VM image. Second, the WICUS annotation 
 modules use PRECIP to generate a script able to reproduce the execution environment of the 
 former experiment, and run it on different Cloud platforms.
 
-\note{Should we add something about OpenStack@NSFCloud?}
 
 % Vagrant
 \subsubsection{Vagrant}
@@ -143,11 +143,10 @@ development environments locally using virtualization. It relies on virtualizati
 Oracle VirtualBox~\cite{Watson2008} (also open-source) or  VMWare~\cite{vmware}, and support 
 Amazon EC2-like server configurations. Since version 1.6 it also supports Docker~\cite{Merkel2014} 
 containers.
-
 Vagrant provides a set of commands and configuration files to enact and customize virtual machines
- (also referred as boxes). It allows to define the set of commands and/or scripts to be executed during 
- the different stages of the booting process. Several base images are publicly available for users to 
- download and customize them~\cite{vagrantbox}. 
+(also referred as boxes). It allows to define the set of commands and/or scripts to be executed during 
+the different stages of the booting process. Several base images are publicly available for users to 
+download and customize them~\cite{vagrantbox}. 
  
 In this work, we introduce how Vagrant can be used for achieving reproducibility at a local execution
 environment---usually a scientist's laptop/desktop computer. As a result, users are able to repeat and 

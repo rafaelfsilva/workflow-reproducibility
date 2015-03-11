@@ -5541,7 +5541,7 @@ Requirements}</string>
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{59, 12}, {1371, 979}}</string>
+		<string>{{59, 48}, {1371, 979}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -5555,7 +5555,7 @@ Requirements}</string>
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{138.75, 13.5}, {618, 418.5}}</string>
+		<string>{{0, 13.5}, {618, 418.5}}</string>
 		<key>Zoom</key>
 		<real>2</real>
 		<key>ZoomValues</key>

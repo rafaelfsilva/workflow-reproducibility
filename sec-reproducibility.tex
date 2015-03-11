@@ -91,12 +91,19 @@ data generation and consumption. Below, we provide an overview of each of these 
 		appliance are included in this dataset.
 
 	\item \textbf{Infrastructure Specification Algorithm.} This process reads files 5, 6, and 7, and 
-		generates a configuration file (e.g., a PRECIP script), which describes VMs and software 
+		generates a configuration file, which describes VMs and software 
 		components to be created and deployed.
 
-	\item \textbf{PRECIP script.} This script creates a PRECIP experiment, which runs a VM, copies 
+	\item \textbf{Abstract deployment plan.} This plan contains information about the set of components 
+		and their associated deployment steps for generating the execution infrastructure. This plan must
+		be later enacted using a concrete language.
+		
+	\item \textbf{Script generator} This module concretizes the abstract deployment plan using the selected
+		language (either PRECIP or Vagrant in this case) to generate an executable script.
+
+	\item \textbf{PRECIP/Vagrant script.} This script creates a PRECIP/Vagrant experiment, which runs a VM, copies 
 		the required binaries, and executes deployment scripts to set the environment for the workflow 
-		execution. It also contains the PRECIP commands from the original experiment in order to 
+		execution. It also contains the original experiment commands in order to 
 		re-execute it.
 
 \end{enumerate}

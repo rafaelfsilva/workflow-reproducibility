@@ -101,10 +101,11 @@ semantic annotations in details:
 	\centering
 	\includegraphics[width=\linewidth]{figures/annotations}
 	\vspace{-20pt}
-	\caption{Annotations for the Montage, Epigenomics, and SoyKB workflows using 
-	  the WICUS ontology network (yellow rectangles represent the workflow component; 
-	  blue squashed rectangles represent the Montage workflow; green bevelled rectangles 
-	  represent the Epigenomics workflows; and red hexagons represent the SoyKB workflow).}
+	\caption{Overview of the generated annotations for the Montage, Epigenomics, and 
+  	  SoyKB workflows using the WICUS ontology network (yellow rectangles represent the 
+	  workflow component; blue squashed rectangles represent the Montage workflow; green 
+	  bevelled rectangles represent the Epigenomics workflows; and red hexagons represent 
+	  the SoyKB workflow).}
 	\label{fig:annotations}
 \end{figure*}
 
@@ -124,7 +125,7 @@ included as part of the deployment plan along with their configuration informati
 
 \paragraph{\textbf{Montage Workflow}}
 We use the \texttt{Workflow} domain ontology to describe the Montage workflow 
-as 1)~an individual that represents the top level workflow, and 2)~another 9 individuals 
+as an individual that represents the top level workflow, and another 9 individuals 
 representing its sub-workflows, one for each transformation. We also generate 9 
 requirements, which define the software components required by each transformation. 
 At this point, these requirements are empty, as they are not yet related to their software 
@@ -156,17 +157,30 @@ sub-components that are defined as dependencies in the software catalog
 
 
 \paragraph{\textbf{Epigenomics Workflow}}
+Following the same approach as in the previous case, we use the \texttt{Workflow} 
+domain ontology to describe the Epigenomics workflow as an individual that represents 
+the top level workflow, and another 8 individuals representing its sub-workflows, one 
+for each transformation (Figure~\ref{fig:annotations-genome}). We have then annotated 
+the components described in the Epigenomics' Transformation Catalog as individuals 
+using the \texttt{Software} domain ontology. We have also identified and annotated 6 
+software dependencies related to the workflow, which include the Perl~\cite{perl} interpreter, 
+the GNU libc~\cite{libc} and Libstdc++~\cite{libstdc} libraries, and two other binaries from 
+the Epigenomics  distribution, \texttt{maq} and \texttt{maqindex}.
 
-Following the same approach as in the previous case we have annotated the 8 components specified in the Epigenomics' Transformation Catalog. By analyzing the workflow dependencies we have also identified and annotated 6 software dependencies, which include software components and system libraries. 
-
-These 8 main software components have been related to the 8 different types of steps depicted in figure \ref{fig:workflow-genome}.  Their dependencies include the Perl \cite{perl} interpreter, the GNU libc \footnote{http://www.gnu.org/software/libc/} and Libstdc++ \footnote{https://gcc.gnu.org/libstdc++/} libraries, and two other binaries from the Epigenomics  distribution, \emph{maq} and \emph{maqindex}.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=.7\linewidth]{figures/annotations-genome}
+	\vspace{-10pt}
+	\caption{Annotations for the Epigenomics workflows using the \texttt{Workflow} domain ontology.}
+	\label{fig:annotations-genome}
+\end{figure}
 
 
 \paragraph{\textbf{SoyKB Workflow}}
 
 Even though SoyKB is the largest workflow in terms of its number of steps (around 670), of the three ones included in this work, it defines only four software components as dependencies. 
 
-These components (\emph{bwa-wrapper}, \emph{bwa-wrapper},  \emph{gatk-wrapper}, and \emph{picard-wrapper}, \emph{software-wrapper},  \emph{gatk-wrapper}, \emph{picard-wrapper}) are software wrappers that call different libraries and binaries depending on the parameters used through the execution of the workflow. Those components are included on a software bundle that has to be deployed on the corresponding locations for the wrappers to be able to invoke it. Thus, a dependency for this bundle has been included in the Software Components Catalog.
+These components (\emph{bwa-wrapper}, \emph{gatk-wrapper}, and \emph{picard-wrapper}, \emph{software-wrapper}) are software wrappers that call different libraries and binaries depending on the parameters used through the execution of the workflow. Those components are included on a software bundle that has to be deployed on the corresponding locations for the wrappers to be able to invoke it. Thus, a dependency for this bundle has been included in the Software Components Catalog.
 
 
 \paragraph{\textbf{Computational Resources}}

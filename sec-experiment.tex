@@ -119,32 +119,57 @@ to describe the deployment of the WMS components is based on the installation
 and configuration processes as specified in their documentation. As a result, we 
 defined a set of installation scripts for each of the components. These scripts are 
 included as part of the deployment plan along with their configuration information.
+\note{Idafen: talk about the WMS requirements.}
 
 
-\paragraph{\textbf{Montage}}
-Application components are described in the the Montage workflow's Transformation Catalog, where the binary file, version, and destination path are defined. These components are also described as individuals using the \texttt{Software} domain ontology. We use this information to generate the configuration parameters of the deployment script, which in this case is the same for all components. 
+\paragraph{\textbf{Montage Workflow}}
+We use the \texttt{Workflow} domain ontology to describe the Montage workflow 
+as 1)~an individual that represents the top level workflow, and 2)~another 9 individuals 
+representing its sub-workflows, one for each transformation. We also generate 9 
+requirements, which define the software components required by each transformation. 
+At this point, these requirements are empty, as they are not yet related to their software 
+components. Figure~\ref{fig:annotations-montage} shows the set of generated individuals
+for the Montage workflow.
 
-The script downloads the binary files from an online repository and copies them to the specified destination path. This process identified 59 software components for the Montage workflow that are annotated and included in the Software Components Catalog.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=.7\linewidth]{figures/annotations-montage}
+	\vspace{-10pt}
+	\caption{Annotations for the Montage workflows using the \texttt{Workflow} domain ontology.}
+	\label{fig:annotations-montage}
+\end{figure}
 
-Then, the Transformation Catalog Annotator module relates each transformation requirement, defined using the \texttt{Workflow} domain ontology, to the application component, and therefore to the deployment information.
-In this experiment, we define 9 Montage components that are linked to the requirements, and another two sub-components that are defined as dependencies in the software catalog (\emph{mDiffFit} depends on the \emph{mDiff} and \emph{mFitPlane} components).
+Application components are described in the Montage workflow's Transformation 
+Catalog, where the binary file, version, and destination path are defined. These 
+components are also described as individuals using the \texttt{Software} domain 
+ontology. We use this information to generate the configuration parameters of the 
+deployment script, which in this case is the same for all components. The script 
+downloads the binary files from an online repository and copies them to the specified 
+destination path. This process identified 59 software components for the Montage 
+workflow that are annotated and included in the Software Components Catalog.
+Then, the Transformation Catalog Annotator module relates each transformation 
+requirement, defined using the \texttt{Workflow} domain ontology, to the application 
+component, and therefore to the deployment information. In this experiment, we 
+define 9 Montage components that are linked to the requirements, and another two 
+sub-components that are defined as dependencies in the software catalog 
+(\emph{mDiffFit} depends on the \emph{mDiff} and \emph{mFitPlane} components).
 
 
-\paragraph{\textbf{Epigenomics}}
+\paragraph{\textbf{Epigenomics Workflow}}
 
 Following the same approach as in the previous case we have annotated the 8 components specified in the Epigenomics' Transformation Catalog. By analyzing the workflow dependencies we have also identified and annotated 6 software dependencies, which include software components and system libraries. 
 
 These 8 main software components have been related to the 8 different types of steps depicted in figure \ref{fig:workflow-genome}.  Their dependencies include the Perl \cite{perl} interpreter, the GNU libc \footnote{http://www.gnu.org/software/libc/} and Libstdc++ \footnote{https://gcc.gnu.org/libstdc++/} libraries, and two other binaries from the Epigenomics  distribution, \emph{maq} and \emph{maqindex}.
 
 
-\paragraph{\textbf{SoyKB}}
+\paragraph{\textbf{SoyKB Workflow}}
 
 Even though SoyKB is the largest workflow in terms of its number of steps (around 670), of the three ones included in this work, it defines only four software components as dependencies. 
 
 These components (\emph{bwa-wrapper}, \emph{bwa-wrapper},  \emph{gatk-wrapper}, and \emph{picard-wrapper}, \emph{software-wrapper},  \emph{gatk-wrapper}, \emph{picard-wrapper}) are software wrappers that call different libraries and binaries depending on the parameters used through the execution of the workflow. Those components are included on a software bundle that has to be deployed on the corresponding locations for the wrappers to be able to invoke it. Thus, a dependency for this bundle has been included in the Software Components Catalog.
 
 
-\paragraph{\textbf{Computational resources}}
+\paragraph{\textbf{Computational Resources}}
 
 To describe computational resources we use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies. The Scientific Virtual Appliances Catalog includes the description of five virtual machine images, two for FutureGrid and other two for Amazon EC2. In both cases we generated conceptually equivalent machines, as they both provide CentOS 6 operating system, being the only difference their hardware configuration. 
 
@@ -166,7 +191,7 @@ OS & \multicolumn{5}{c}{CentOS 6} \\ \hline
 \note{Idafen, improve the format of the table and complete vagrant info}
 \end{table}
 
-\paragraph{\textbf{Hardware requirements}}
+\paragraph{\textbf{Hardware Requirements}}
 
 For each of the workflows we have also analyzed which were hardware specifications required for executed them. Table \ref{tab:hwreqs} displays those requirements, describing the minimum threshold for each one of them. During the computational resource selection process we will consider that any machine with equal or higher hardware features than the ones specified will be a valid candidate for running the workflow. In cases such as the CPU frequency, in which we have not identified any specific capacity, we set this value to 0.
 
@@ -184,6 +209,7 @@ SoyKB & 0  & 64 & 4 & 4  \\ \hline
 \label{tab:hwreqs}
 \note{Idafen, improve the format of the table}
 \end{table}
+
 
 %%%
 \subsection{Reproducing Workflow Executions.}

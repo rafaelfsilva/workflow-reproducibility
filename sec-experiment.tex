@@ -101,15 +101,24 @@ semantic annotations in details:
 	\centering
 	\includegraphics[width=\linewidth]{figures/annotations}
 	\vspace{-20pt}
-	\caption{Annotations for the Montage, Epigenomics, and SoyKB workflows using the WICUS ontology network (yellow rectangles represent the workflow component; blue squashed rectangles represent the Montage workflow; green bevelled rectangles represent the Epigenomics workflows; and red hexagons represent the SoyKB workflow).}
+	\caption{Annotations for the Montage, Epigenomics, and SoyKB workflows using 
+	  the WICUS ontology network (yellow rectangles represent the workflow component; 
+	  blue squashed rectangles represent the Montage workflow; green bevelled rectangles 
+	  represent the Epigenomics workflows; and red hexagons represent the SoyKB workflow).}
 	\label{fig:annotations}
 \end{figure*}
 
 
 \paragraph{\textbf{Workflow Management System}}
- The WMS components include the workflow engine, in our case the Pegasus WMS, and its dependencies. Pegasus uses HTCondor as task manager, and both depend on Java and \texttt{wget} for running. We use the \texttt{Software} domain ontology to describe these components as individuals, and to represent their dependencies. The 3 components also depend on the operating system, which in our case is CentOS.
-
-To describe the deployment of the WMS components, we studied their installation processes according to their documentation. We then defined a set of installation bash scripts for each of them. These scripts are included on the deployment plans of the components along with their configuration information.  
+We use the \texttt{Software} domain ontology to describe the components that
+compose the workflow engine (in this case Pegasus) as individuals, and to 
+represent its dependencies. Pegasus relies on HTCondor as task manager, and 
+both depend on \texttt{Java} and \texttt{wget}. In addition, all components also
+depend on the operating system, which in our case is \texttt{CentOS}. The process
+to describe the deployment of the WMS components is based on the installation 
+and configuration processes as specified in their documentation. As a result, we 
+defined a set of installation scripts for each of the components. These scripts are 
+included as part of the deployment plan along with their configuration information.
 
 
 \paragraph{\textbf{Montage}}

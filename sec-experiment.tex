@@ -82,32 +82,20 @@ production workflow, however it requires the same software components.
 %%%
 \subsection{Generating Semantic Annotations}
 
-In this subsection, we present the annotations generated for each of the aforementioned
-workflows and the Pegasus WMS using the WICUS ontology network.
-
-\note{Restructure this section.}
-
-As shown in Figure~\ref{fig:wicusflow}, the first step in the process of documenting a workflow is the annotation of the workflow DAX file. We use the \texttt{Workflow} domain ontology to describe the Montage workflow as 1) an individual that represents the top level workflow, and 2) a set of individuals representing its sub-workflows, one for each transformation. We then generate the necessary requirements, one for the top level workflow, which specifies the WMS requirements, and one for each subworkflow for defining the software components required by each transformation. 
-
-In this experiment, we address two types of components: the WMS and the application related components. Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated using the WICUS ontology network for the WMS and the three workflows studied in this work.
-
-
-\paragraph{\textbf{WMS}}
-
- The WMS components include the workflow engine, in our case the Pegasus WMS, and its dependencies. Pegasus uses HTCondor as task manager, and both depend on Java and \texttt{wget} for running. We use the \texttt{Software} domain ontology to describe these components as individuals, and to represent their dependencies. The 3 components also depend on the operating system, which in our case is CentOS.
-
-To describe the deployment of the WMS components, we studied their installation processes according to their documentation. We then defined a set of installation bash scripts for each of them. These scripts are included on the deployment plans of the components along with their configuration information.  
- 
-\paragraph{\textbf{Montage}}
- 
-Application components are described in the the Montage workflow's Transformation Catalog, where the binary file, version, and destination path are defined. These components are also described as individuals using the \texttt{Software} domain ontology. We use this information to generate the configuration parameters of the deployment script, which in this case is the same for all components. 
-
-The script downloads the binary files from an online repository and copies them to the specified destination path. This process identified 59 software components for the Montage workflow that are annotated and included in the Software Components Catalog.
-
-Then, the Transformation Catalog Annotator module relates each transformation requirement, defined using the \texttt{Workflow} domain ontology, to the application component, and therefore to the deployment information.
-In this experiment, we define 9 Montage components that are linked to the requirements, and another two sub-components that are defined as dependencies in the software catalog (\emph{mDiffFit} depends on the \emph{mDiff} and \emph{mFitPlane} components).
-
-
+In this subsection, we present the annotations generated for each of the scientific 
+workflows presented above and the Pegasus WMS using the WICUS ontology
+network. As described in Figure~\ref{fig:wicusflow}, the first step in the process of 
+documenting a workflow is the annotation of the workflow DAX file. We use the 
+\texttt{Workflow} domain ontology to describe a workflow as 1) an individual that 
+represents the top level workflow, and 2) a set of individuals representing its 
+sub-workflows, one for each transformation. We then generate the necessary 
+requirements, one for the top level workflow, which specifies the WMS requirements, 
+and one for each sub-workflow, which defines the software components required 
+by each transformation. 
+Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated 
+using the WICUS ontology network for the Montage, Epigenomics, and SoyKB 
+workflows as well as for the Pegasus WMS. Below, we describe each of these
+semantic annotations in details:
 
 \begin{figure*}[!htb]
 	\centering
@@ -115,10 +103,22 @@ In this experiment, we define 9 Montage components that are linked to the requir
 	\vspace{-20pt}
 	\caption{Annotations for the Montage, Epigenomics, and SoyKB workflows using the WICUS ontology network (yellow rectangles represent the workflow component; blue squashed rectangles represent the Montage workflow; green bevelled rectangles represent the Epigenomics workflows; and red hexagons represent the SoyKB workflow).}
 	\label{fig:annotations}
-	\note{Rafael, missing dependency arrow between Gatk and SW bundle}
-
 \end{figure*}
 
+
+\paragraph{\textbf{Workflow Management System}}
+ The WMS components include the workflow engine, in our case the Pegasus WMS, and its dependencies. Pegasus uses HTCondor as task manager, and both depend on Java and \texttt{wget} for running. We use the \texttt{Software} domain ontology to describe these components as individuals, and to represent their dependencies. The 3 components also depend on the operating system, which in our case is CentOS.
+
+To describe the deployment of the WMS components, we studied their installation processes according to their documentation. We then defined a set of installation bash scripts for each of them. These scripts are included on the deployment plans of the components along with their configuration information.  
+
+
+\paragraph{\textbf{Montage}}
+Application components are described in the the Montage workflow's Transformation Catalog, where the binary file, version, and destination path are defined. These components are also described as individuals using the \texttt{Software} domain ontology. We use this information to generate the configuration parameters of the deployment script, which in this case is the same for all components. 
+
+The script downloads the binary files from an online repository and copies them to the specified destination path. This process identified 59 software components for the Montage workflow that are annotated and included in the Software Components Catalog.
+
+Then, the Transformation Catalog Annotator module relates each transformation requirement, defined using the \texttt{Workflow} domain ontology, to the application component, and therefore to the deployment information.
+In this experiment, we define 9 Montage components that are linked to the requirements, and another two sub-components that are defined as dependencies in the software catalog (\emph{mDiffFit} depends on the \emph{mDiff} and \emph{mFitPlane} components).
 
 
 \paragraph{\textbf{Epigenomics}}

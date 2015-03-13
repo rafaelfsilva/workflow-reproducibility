@@ -96,10 +96,12 @@ data generation and consumption. Below, we provide an overview of each of these 
 
 	\item \textbf{Abstract Deployment Plan.} This plan contains information about the set of components 
 		and their associated deployment steps for configuring the execution infrastructure. This plan 
-		will be later enacted using a concrete language.
+		will be later enacted using a concrete language. This decoupled approach allows the integrations of
+		new enactment  systems easily.
 		
 	\item \textbf{Script Generator.} This module concretizes the abstract deployment plan using the selected
-		language (either PRECIP or Vagrant in this case) to generate an executable script.
+		language (either PRECIP or Vagrant in this case) to generate an executable script. New script syntaxes 
+		may be added in the future.
 
 	\item \textbf{Executable Script.} This script creates a PRECIP/Vagrant experiment, which runs a VM, 
 		copies the required binaries, and executes deployment scripts to set the environment for the 

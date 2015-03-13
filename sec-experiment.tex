@@ -113,7 +113,7 @@ semantic annotations in details:
 \paragraph{\textbf{Workflow Management System}}
 We use the \texttt{Software} domain ontology to describe the components that
 compose the workflow engine (in this case Pegasus) as individuals, and to 
-represent its dependencies. Pegasus relies on HTCondor as task manager, and 
+represent its dependencies. Pegasus relies on \texttt{HTCondor} as task manager, and 
 both depend on \texttt{Java} and \texttt{wget}. In addition, all components also
 depend on the operating system, which in our case is \texttt{CentOS}. The process
 to describe the deployment of the WMS components is based on the installation 
@@ -121,6 +121,11 @@ and configuration processes as specified in their documentation. As a result, we
 defined a set of installation scripts for each of the components. These scripts are 
 included as part of the deployment plan along with their configuration information.
 \note{Idafen: talk about the WMS requirements.}
+
+As depicted on figure~\ref{fig:annotations} the three workflows included on this
+work are linked to the WMS requirements, meaning that for executing them
+\texttt{Java}, \texttt{wget}, \texttt{HTCondor}, and \texttt{Pegasus} must be
+installed on the target computational resource.
 
 
 \paragraph{\textbf{Montage Workflow}}
@@ -196,12 +201,13 @@ To describe computational resources we use the \texttt{Computing Resources} and 
 
 Therefore, we generate five Image Appliances that are grouped into one single Scientific Virtual Appliance (CentOS 6 SVA). Depending on which providers are available, one or the other will be selected. Table \ref{tab:imgapps} summarizes the main characteristics of the five appliances we have annotated.
 
+\note{Idafen, explain why we have images with larger disks, justifying it by saying that we try to reduce resource consumption}
 
 \begin{table}[h]
 \begin{tabular}{l|lllll}
 \multicolumn{1}{c|}{} 
 Img. App. & AWS1 & AWS2 & FG1 & FG2 & Vagrant \\ \hline
-RAM (GB) & 7 &  7 & 8 & 8 &  ?? \\ \hline
+RAM (GB) & 7 &  7 & 8 & 8 &  4 \\ \hline
 DISK (GB) &  40 &  5 &  40 & 5 & 50 \\ \hline
 CPU freq (GHz) & 2.4  & 2.4 & 2.9 & 2.9  &  2.7 \\ \hline
 CPU arch & \multicolumn{5}{c}{64 bits} \\ \hline
@@ -222,9 +228,9 @@ For each of the workflows we have also analyzed which were hardware specificatio
 \begin{tabular}{l|llll}
 \multicolumn{1}{c|}{} 
  & CPU (GHz) & CPU arch & RAM (GB) & DISK (GB) \\ \hline
-Montage &  0 &  64 & 4 & 10 \\ \hline
+Montage &  0 &  64 & 4 & 4 \\ \hline
 Epigenomics &  0 &  64 &  4 & 4  \\ \hline
-SoyKB & 0  & 64 & 4 & 4  \\ \hline
+SoyKB & 0  & 64 & 4 & 10  \\ \hline
 \end{tabular}
 \caption{Workflow hardware requirements}
 \label{tab:hwreqs}
@@ -287,7 +293,9 @@ generateScript(filteredSvas ,substractedSwComponentsDepGraph);
 In this experiment, we execute ISA over the annotated data specifying the three different providers we work with. As result we obtain the abstract plans listed in listings \ref{lst:plan-montge}, \ref{lst:plan-epigenomics}, and \ref{lst:plan-soykb}. 
 
 
-\note{Rafael, Idafen, find a better syntax for abstract deployment plans}
+\note{Idafen, add diagram defining how STACK, COMP, PLAN, and STEP are related}
+\note{Idafen, use only one listing (soykb) and explain it main parts}
+
 
 \begin{lstlisting}[caption={Abstract deployment plan of the Montage WF},label={lst:plan-montge}]
 OPEN_SSH_CLIENTS_SOFT_STACK stack

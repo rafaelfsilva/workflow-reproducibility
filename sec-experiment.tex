@@ -177,10 +177,17 @@ the Epigenomics  distribution, \texttt{maq} and \texttt{maqindex}.
 
 
 \paragraph{\textbf{SoyKB Workflow}}
-
-Even though SoyKB is the largest workflow in terms of its number of steps (around 670), of the three ones included in this work, it defines only four software components as dependencies. 
-
-These components (\emph{bwa-wrapper}, \emph{gatk-wrapper}, and \emph{picard-wrapper}, \emph{software-wrapper}) are software wrappers that call different libraries and binaries depending on the parameters used through the execution of the workflow. Those components are included on a software bundle that has to be deployed on the corresponding locations for the wrappers to be able to invoke it. Thus, a dependency for this bundle has been included in the Software Components Catalog.
+We describe the SoyKB workflow as an individual that represents the top level workflow,
+and another 14 individuals representing each transformations. For the sake of simplicity,
+we do not show the annotations for this workflow. Although SoyKB is the largest workflow 
+in terms of its number of steps (around 670) among the other workflows included in this 
+work, it defines only four software components as dependencies (\texttt{bwa-wrapper}, 
+\texttt{gatk-wrapper}, \texttt{picard-wrapper}, and \texttt{software-wrapper}). These 
+components  are software wrappers that invoke different libraries and binaries depending 
+on the parameters used for the execution of the workflow. The components are included 
+on a software bundle that is deployed on the computational nodes to be invoked by the 
+wrappers. Hence, a dependency for this bundle has been included in the Software 
+Components Catalog.
 
 
 \paragraph{\textbf{Computational Resources}}

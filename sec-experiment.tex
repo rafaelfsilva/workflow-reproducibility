@@ -219,33 +219,39 @@ we have annotated.
 	\begin{tabular}{l | r r | r r | r}
 		& \multicolumn{2}{c |}{Amazon EC2} & \multicolumn{2}{c |}{FutureGrid} & \multirow{2}{*}{Vagrant} \\
 					& Small & Large & Small & Large \\ \hline
-		RAM (GB) 	& 7 &  7 & 8 & 8 &  4 \\
-		Disk (GB) 		&  40 &  5 &  40 & 5 & 50 \\
-		CPU Freq. (GHz) & 2.4  & 2.4 & 2.9 & 2.9  &  2.7 \\
-		CPU Arch. 	& \multicolumn{2}{c|}{64 bits} & \multicolumn{2}{c|}{64 bits} & \multicolumn{1}{c}{64 bits} \\
-		OS 			& \multicolumn{2}{c|}{CentOS 6} & \multicolumn{2}{c|}{CentoOS 6} & \multicolumn{1}{c}{CentOS 6} \\
+		RAM (GB) & 7 &  7 & 8 & 8 &  4 \\
+		Disk (GB) 	&  40 &  5 &  40 & 5 & 50 \\
+		CPU (GHz) & 2.4  & 2.4 & 2.9 & 2.9  &  2.7 \\
+		CPU Arch. & \multicolumn{2}{c|}{64 bits} & \multicolumn{2}{c|}{64 bits} & \multicolumn{1}{c}{64 bits} \\
+		OS & \multicolumn{2}{c|}{CentOS 6} & \multicolumn{2}{c|}{CentoOS 6} & \multicolumn{1}{c}{CentOS 6} \\
 	\end{tabular}
 	\caption{CentOS 6 Virtual Image Appliances.}
 	\label{tab:imgapps}
 \end{table}
 
+
 \paragraph{\textbf{Hardware Requirements}}
+For each scientific workflow, we have also analyzed the hardware specifications
+required for their execution. Table~\ref{tab:hwreqs} shows the minimum threshold 
+per workflow for each requirement. During the computational resource selection 
+process (described in the following section), we will consider that any resource that
+meets the requirements specified by a workflow will be a valid candidate for running 
+the workflow. Since we do not target workflow execution performance, but a correct 
+execution of the workflow, we have not identified any specific capacity regarding CPU
+frequency.
 
-For each of the workflows we have also analyzed which were hardware specifications required for executed them. Table \ref{tab:hwreqs} displays those requirements, describing the minimum threshold for each one of them. During the computational resource selection process we will consider that any machine with equal or higher hardware features than the ones specified will be a valid candidate for running the workflow. In cases such as the CPU frequency, in which we have not identified any specific capacity, we set this value to 0.
-
-
-
-\begin{table}[h]
-\begin{tabular}{l|llll}
-\multicolumn{1}{c|}{} 
- & CPU (GHz) & CPU arch & RAM (GB) & DISK (GB) \\ \hline
-Montage &  0 &  64 & 4 & 4 \\ \hline
-Epigenomics &  0 &  64 &  4 & 4  \\ \hline
-SoyKB & 0  & 64 & 4 & 10  \\ \hline
-\end{tabular}
-\caption{Workflow hardware requirements}
-\label{tab:hwreqs}
-\note{Idafen, improve the format of the table}
+\begin{table}[!htb]
+	\centering
+	\scriptsize
+	\setlength{\tabcolsep}{7pt}
+	\begin{tabular}{l | c c r r}
+ 					& CPU (GHz) 	& CPU Arch. 	& RAM (GB)	& Disk (GB) \\ \hline
+		Montage 		& -		 	& 64 bits 		& 4 			& 4 \\
+		Epigenomics 	& - 			& 64 bits 		& 4 			& 4  \\
+		SoyKB 		& -  			& 64 bits 		& 4 			& 10  \\
+	\end{tabular}
+	\caption{Workflow hardware requirements.}
+	\label{tab:hwreqs}
 \end{table}
 
 

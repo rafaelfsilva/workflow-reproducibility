@@ -105,7 +105,7 @@ semantic annotations in details:
   	  SoyKB workflows using the WICUS ontology network (yellow rectangles represent the 
 	  workflow component; blue squashed rectangles represent the Montage workflow; green 
 	  bevelled rectangles represent the Epigenomics workflows; and red hexagons represent 
-	  the SoyKB workflow).}
+	  the SoyKB workflow). \note{The figure does not take into account Vagrant.}}
 	\label{fig:annotations}
 \end{figure*}
 
@@ -120,11 +120,11 @@ to describe the deployment of the WMS components is based on the installation
 and configuration processes as specified in their documentation. As a result, we 
 defined a set of installation scripts for each of the components. These scripts are 
 included as part of the deployment plan along with their configuration information.
-
-As depicted on figure~\ref{fig:annotations} the three workflows included on this
-work are linked to the WMS requirements, meaning that for executing them
-\texttt{Java}, \texttt{wget}, \texttt{HTCondor}, and \texttt{Pegasus} must be
-installed on the target computational resource.
+The WMS components are defined as a requirement (WMS Requirements) using
+the \texttt{Workflow} domain ontology. This requirement is then linked to each
+of the workflows included in this work. As a result, \texttt{Java}, \texttt{wget}, 
+\texttt{HTCondor}, and \texttt{Pegasus WMS} should be installed on the targeted
+computational resource.
 
 
 \paragraph{\textbf{Montage Workflow}}
@@ -132,9 +132,9 @@ We use the \texttt{Workflow} domain ontology to describe the Montage workflow
 as an individual that represents the top level workflow, and another 9 individuals 
 representing its sub-workflows, one for each transformation. We also generate 9 
 requirements, which define the software components required by each transformation. 
-At this point, these requirements are empty, as they are not yet related to their software 
-components. Figure~\ref{fig:annotations-montage} shows the set of generated individuals
-for the Montage workflow.
+At this point, these requirements are empty, as they are not yet related to their 
+software components. Figure~\ref{fig:annotations-montage} shows the set of 
+generated individuals for the Montage workflow.
 
 \begin{figure}[!htb]
 	\centering
@@ -195,26 +195,38 @@ Components Catalog.
 
 
 \paragraph{\textbf{Computational Resources}}
+We use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies 
+to describe computational resources. For each Cloud resource (Amazon EC2 and 
+FutureGrid), we defined two virtual machines: one that meets the requirements for the 
+Montage and Epigenomics workflows (requires smaller disk space); and one for the 
+SoyKB workflow (requires larger disk space). In both cases, we generated conceptually 
+equivalent VMs appliances, as they both provide CentOS 6 operating system, but differed 
+in the hardware configuration. We attempt to reduce the resource consumption of
+Cloud resources due to the cost for storing/transferring VM images. Since Vagrant
+execution is performed locally, we generated a single VM appliance that meets the 
+requirements of all workflows. 
 
-To describe computational resources we use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies. The Scientific Virtual Appliances Catalog includes the description of five virtual machine images, two for FutureGrid and other two for Amazon EC2. In both cases we generated conceptually equivalent machines, as they both provide CentOS 6 operating system, being the only difference their hardware configuration. 
+The description of the appliances is then included in the Scientific Virtual Appliances 
+Catalog (step 7 in Figure~\ref{fig:wicusflow}). We define  an Image Appliance that groups 
+all VMs appliances into one single Scientific Virtual Appliance (\texttt{CentOS 6 SVA}). 
+Table~\ref{tab:imgapps} summarizes the main characteristics of the five appliances 
+we have annotated.
 
-Therefore, we generate five Image Appliances that are grouped into one single Scientific Virtual Appliance (CentOS 6 SVA). Depending on which providers are available, one or the other will be selected. Table \ref{tab:imgapps} summarizes the main characteristics of the five appliances we have annotated.
-
-\note{Idafen, explain why we have images with larger disks, justifying it by saying that we try to reduce resource consumption}
-
-\begin{table}[h]
-\begin{tabular}{l|lllll}
-\multicolumn{1}{c|}{} 
-Img. App. & AWS1 & AWS2 & FG1 & FG2 & Vagrant \\ \hline
-RAM (GB) & 7 &  7 & 8 & 8 &  4 \\ \hline
-DISK (GB) &  40 &  5 &  40 & 5 & 50 \\ \hline
-CPU freq (GHz) & 2.4  & 2.4 & 2.9 & 2.9  &  2.7 \\ \hline
-CPU arch & \multicolumn{5}{c}{64 bits} \\ \hline
-OS & \multicolumn{5}{c}{CentOS 6} \\ \hline
-\end{tabular}
-\caption{CentOS 6 Virtual Image Appliances}
-\label{tab:imgapps}
-\note{Idafen, improve the format of the table and complete vagrant info}
+\begin{table}[!htb]
+	\centering
+	\scriptsize
+	\setlength{\tabcolsep}{8pt}
+	\begin{tabular}{l | r r | r r | r}
+		& \multicolumn{2}{c |}{Amazon EC2} & \multicolumn{2}{c |}{FutureGrid} & \multirow{2}{*}{Vagrant} \\
+					& Small & Large & Small & Large \\ \hline
+		RAM (GB) 	& 7 &  7 & 8 & 8 &  4 \\
+		Disk (GB) 		&  40 &  5 &  40 & 5 & 50 \\
+		CPU Freq. (GHz) & 2.4  & 2.4 & 2.9 & 2.9  &  2.7 \\
+		CPU Arch. 	& \multicolumn{2}{c|}{64 bits} & \multicolumn{2}{c|}{64 bits} & \multicolumn{1}{c}{64 bits} \\
+		OS 			& \multicolumn{2}{c|}{CentOS 6} & \multicolumn{2}{c|}{CentoOS 6} & \multicolumn{1}{c}{CentOS 6} \\
+	\end{tabular}
+	\caption{CentOS 6 Virtual Image Appliances.}
+	\label{tab:imgapps}
 \end{table}
 
 \paragraph{\textbf{Hardware Requirements}}

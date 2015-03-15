@@ -258,54 +258,75 @@ frequency.
 %%%
 \subsection{Reproducing Workflow Executions.}
 
-The last step on the process for achieving reproducibility in scientific workflows (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm (ISA). The ISA combines the annotated data based on the 4 domain ontologies in order to find a suitable infrastructure specification that is able to run the workflow. The algorithm retrieves and propagates the WMS requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its related sub-workflows. Requirements and software components are matched, and a dependency graph is built based on the relation between the requirements and the component dependencies. This graph is then used to compute the intersection between the set of software components from the SVA and the dependency graph of each sub-workflow. ISA selects the intersection where the value is maximized for each sub-workflow. Software components already available in the SVA are then removed from the chosen graph. To reduce the number of SVAs, the algorithm attempts to merge sub-workflows requirements into a single SVA. Requirements can be merged if all their software components are compatible. ISA also filters all those Image Appliances, belonging to the selected SVAs, that do not meet the hardware requirements specified for the workflow. Finally, ISA generates a script (either using PRECIP or Vagrant) with the set of required instructions to instantiate, configure, and deploy the computational resources and software components on the corresponding provider.
+The last step on the process for achieving reproducibility in scientific workflows 
+(Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm 
+(ISA)~\cite{wicus}. The algorithm retrieves the corresponding information for the 
+workflow and its dependencies from the annotations datasets, and calculates the 
+dependencies and compatibility between requirements and the available 
+computational resources. It also considers the software already installed on the
+resources to avoid unnecessary installation steps.
 
-As introduced in~\cite{wicus} the ISA retrieves the corresponding information for the workflow and its dependencies from the annotations datasets. It calculates the dependencies and the compatibility between requirements and the available computational resources. It also takes into account the already installed software to avoid the unnecessary installation of components.
-
-For this work we have added two main new features to the ISA. First of all we are now able to filter those Image Appliances that do not meet the hardware requirements specified for the target workflow (lines 25-27). Secondly have improved the script generation process, so we are now able to also generate Vagrant scripts. For this process we first generate an abstract deployment plan, defining the steps and scripts to be executed, along with their configuration parameters. The ISA then concretizes this plan into a PRECIP or Vagrant script depending on the resultant target provider (line 29).
-
-A pseudo-code overview of the main steps of the ISA is listed in Listing \ref{lst:pseudo}.
-
-\lstset{language=C++,
-	  numbers=left,
-	   numberstyle=\tiny\color{mygray},
-           basicstyle=\ttfamily\scriptsize,
-          breaklines=true,
-          }
+\paragraph{\textbf{Infrastructure Specification Algorithm}}
+ISA combines the annotated data based on the 4 
+domain ontologies in order to find a suitable infrastructure specification that meets 
+the requirements of the workflow. The algorithm retrieves and propagates the WMS 
+requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its 
+related sub-workflows (as defined in Figure~\ref{fig:annotations}). Requirements 
+and software components are matched, and a dependency graph is built based 
+on the relation between the requirements and the component dependencies. This 
+graph is then used to compute the intersection between the set of software components 
+from the SVA and the dependency graph of each sub-workflow. ISA selects the 
+intersection where the value is maximized for each sub-workflow. Software components 
+already available in the SVA are then removed from the chosen graph. To reduce 
+the number of SVAs, the algorithm attempts to merge sub-workflows requirements 
+into a single SVA. Requirements can be merged if all their software components are 
+compatible. Finally, ISA generates a script (either using PRECIP or Vagrant) with 
+the set of required instructions to instantiate, configure, and deploy the computational 
+resources and software components on the corresponding provider. Listing~\ref{lst:pseudo}
+shows a pseudo-code of the algorithm.
           
-\begin{lstlisting}[caption={Pseudo-code overview of the ISA},label={lst:pseudo}]
+\begin{lstlisting}[caption={Pseudo-code overview of the Infrastructure Specification Algorithm (ISA).},label={lst:pseudo}]
 WorkflowRequirementsDataset.load();
 
 SVADataset.load();
 
 SoftwareCatalogDataset.load();
 
-Map<Workflow,List<Requirements>> wfSwReqs = 
-  retrieveSwRequirements(WorkflowRequirementsDataset, WorkflowID);
+Map<Workflow,List<Requirements>> wfSwReqs = retrieveSwRequirements( WorkflowRequirementsDataset, WorkflowID );
 
-Map<Workflow,List<Requirements>> propagatedWfSwReqs = 
-  propagateSwReqs(wfSwReqs);
+Map<Workflow,List<Requirements>> propagatedWfSwReqs = propagateSwReqs( wfSwReqs );
 
-List<List<List<SWComponents>>> softwareComponents = getSoftwareComponents(propagatedWfSwReqs);
+List<List<List<SWComponents>>> softwareComponents = getSoftwareComponents( propagatedWfSwReqs );
 
-Map<Requirement,D-Graph<SWComponents>> softwareComponentsDependencyGraph = getSoftwareDependencies(softwareComponents);
+Map<Requirement,D-Graph<SWComponents>> softwareComponentsDependencyGraph =    getSoftwareDependencies(softwareComponents );
 
 List<SVA> availableSvas = getAvailableSvas(providersList);
 
-Map<Requirements,SVA> maxCompatibilities = getCompatibilityIntersection(softwareComponentsDependencyGraph,availableSvas);
+Map<Requirements,SVA> maxCompatibilities = getCompatibilityIntersection( softwareComponentsDependencyGraph, availableSvas );
 
-Map<Requirement,D-Graph<SWComponents>> substractedSwComponentsDepGraph = substractSoftwareComponents(softwareComponentsDependencyGraph, maxCompatibilities);
+Map<Requirement,D-Graph<SWComponents>> substractedSwComponentsDepGraph =  substractSoftwareComponents( softwareComponentsDependencyGraph, maxCompatibilities );
 
-Map<SVA, List<Requirments>>mergedSvas= mergeSubworkflows(propagatedWfSwReqs, maxCompatibilities);
+Map<SVA, List<Requirments>>mergedSvas= mergeSubworkflows( propagatedWfSwReqs, maxCompatibilities );
 
-Map<Workflow,List<Requirements>> wfHwReqs =   retrieveHwRequirements(WorkflowRequirementsDataset, WorkflowID);
+Map<Workflow,List<Requirements>> wfHwReqs =  retrieveHwRequirements( WorkflowRequirementsDataset, WorkflowID );
 
-Map<SVA, List<Requirments>>filteredSvas= getCompatibleHwImageAppliances(mergedSvas,wfHwReqs);
+Map<SVA, List<Requirments>>filteredSvas= getCompatibleHwImageAppliances( mergedSvas, wfHwReqs );
 
-generateScript(filteredSvas ,substractedSwComponentsDepGraph);
-
+generateScript( filteredSvas, substractedSwComponentsDepGraph );
 \end{lstlisting}
 
+In this work, we have extended ISA to support 1)~Image Appliance filtering, and 
+2) generation of Vagrant scripts. The algorithm filters Image Appliances from the 
+selected SVAs that do not meet the hardware requirements specified for the workflow
+(lines 23--25). To enact Vagrant support, we created an intermediate phase (\emph{Abstract 
+Deployment Plan}, step 9 in Figure~\ref{fig:wicusflow}), which defines the steps and 
+scripts to be executed, along with their configuration parameters. ISA then concretizes 
+this plan into a PRECIP or Vagrant script depending on the resultant targeted provider 
+(line 27).
+
+
+\paragraph{\textbf{Abstract Deployment Plan}}
+\note{Rafael: Continue to edit this section.}
 
 In this experiment, we execute ISA over the annotated data specifying the three different providers we work with. As result we obtain the abstract plans listed in listings \ref{lst:plan-montge}, \ref{lst:plan-epigenomics}, and \ref{lst:plan-soykb}. 
 
@@ -313,153 +334,8 @@ In this experiment, we execute ISA over the annotated data specifying the three 
 \note{Idafen, add diagram defining how STACK, COMP, PLAN, and STEP are related}
 \note{Idafen, use only one listing (soykb) and explain it main parts}
 
+\begin{lstlisting}[caption={Abstract deployment plan of the SoyKB WF.}, label={lst:plan-soykb}]
 
-\begin{lstlisting}[caption={Abstract deployment plan of the Montage WF},label={lst:plan-montge}]
-OPEN_SSH_CLIENTS_SOFT_STACK stack
- OPEN_SSH_CLIENTS_SOFT_COMP component
-  OPEN_SSH_CLIENTS_DEP_STEP step
-OPEN_SSH_SERVER_SOFT_STACK stack
- OPEN_SSH_SERVER_SOFT_COMP component
-  OPEN_SSH_SERVER_DEP_STEP step
-WGET_SOFT_STACK stack
- WGET_SOFT_COMP component
-  WGET_DEP_STEP step
-CONDOR_CENTOS_6_5_SOFT_STACK stack
- CONDOR_CENTOS_6_5_SOFT_COMP component
-  STOP_CONDOR_DEP_STEP step
-  ADD_CONDOR_REPO_DEP_STEP step
-  CONDOR_YUM_INSTALL_DEP_STEP step
-  CLEAN_AND_SET_CONDOR_DEP_STEP step
-  RESTART_DAEMONS_DEP_STEP step
-JAVA-1.7.0-OPENJDK.X86_64_SOFT_STACK stack
- JAVA-1.7.0-OPENJDK.X86_64_SOFT_COMP component
-  JAVA-1.7.0-OPENJDK.X86_64_DEP_STEP step
-JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_STACK stack
- JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_COMP component
-  JAVA-1.7.0-OPENJDK-DEVEL.X86_64_DEP_STEP step
-PEGASUS_WMS_CENTOS_6_5_SOFT_STACK stack
- PEGASUS_WMS_CENTOS_6_5_SOFT_COMP component
-  ADD_PEGASUS_REPO_DEP_STEP step
-  PEGASUS_YUM_INSTALL_DEP_STEP step
-MFITPLANE_SOFT_STACK stack
- MFITPLANE_SOFT_COMP component
-  MFITPLANE_DEP_STEP step
-MDIFF_SOFT_STACK stack
- MDIFF_SOFT_COMP component
-  MDIFF_DEP_STEP step
-MDIFFFIT_SOFT_STACK stack
- MDIFFFIT_SOFT_COMP component
-  MDIFFFIT_DEP_STEP step
-MCONCATFIT_SOFT_STACK stack
- MCONCATFIT_SOFT_COMP component
-  MCONCATFIT_DEP_STEP step
-MIMGTBL_SOFT_STACK stack
- MIMGTBL_SOFT_COMP component
-  MIMGTBL_DEP_STEP step
-MSHRINK_SOFT_STACK stack
- MSHRINK_SOFT_COMP component
-  MSHRINK_DEP_STEP step
-MPROJECTPP_SOFT_STACK stack
- MPROJECTPP_SOFT_COMP component
-  MPROJECTPP_DEP_STEP step
-MADD_SOFT_STACK stack
- MADD_SOFT_COMP component
-  MADD_DEP_STEP step
-MBACKGROUND_SOFT_STACK stack
- MBACKGROUND_SOFT_COMP component
-  MBACKGROUND_DEP_STEP step
-MBGMODEL_SOFT_STACK stack
- MBGMODEL_SOFT_COMP component
-  MBGMODEL_DEP_STEP step
-MJPEG_SOFT_STACK stack
- MJPEG_SOFT_COMP component
-  MJPEG_DEP_STEP step
-\end{lstlisting}
-
-
-\begin{lstlisting}[caption={Abstract deployment plan of the Epigenomics WF},label={lst:plan-epigenomics}]
-OPEN_SSH_CLIENTS_SOFT_STACK stack
- OPEN_SSH_CLIENTS_SOFT_COMP component
-  OPEN_SSH_CLIENTS_DEP_STEP step
-OPEN_SSH_SERVER_SOFT_STACK stack
- OPEN_SSH_SERVER_SOFT_COMP component
-  OPEN_SSH_SERVER_DEP_STEP step
-WGET_SOFT_STACK stack
- WGET_SOFT_COMP component
-  WGET_DEP_STEP step
-CONDOR_CENTOS_6_5_SOFT_STACK stack
- CONDOR_CENTOS_6_5_SOFT_COMP component
-  STOP_CONDOR_DEP_STEP step
-  ADD_CONDOR_REPO_DEP_STEP step
-  CONDOR_YUM_INSTALL_DEP_STEP step
-  CLEAN_AND_SET_CONDOR_DEP_STEP step
-  RESTART_DAEMONS_DEP_STEP step
-JAVA-1.7.0-OPENJDK.X86_64_SOFT_STACK stack
- JAVA-1.7.0-OPENJDK.X86_64_SOFT_COMP component
-  JAVA-1.7.0-OPENJDK.X86_64_DEP_STEP step
-JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_STACK stack
- JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_COMP component
-  JAVA-1.7.0-OPENJDK-DEVEL.X86_64_DEP_STEP step
-PEGASUS_WMS_CENTOS_6_5_SOFT_STACK stack
- PEGASUS_WMS_CENTOS_6_5_SOFT_COMP component
-  ADD_PEGASUS_REPO_DEP_STEP step
-  PEGASUS_YUM_INSTALL_DEP_STEP step
-MAQ_INDEX_X86_64_SOFT_STACK stack
- MAQ_INDEX_X86_64_SOFT_COMP component (version: 1.0)
-  MAQ_INDEX_X86_64_DEP_STEP step
-  MAQ_INDEX_X86_64_2_DEP_STEP step
-MAQ_X86_64_SOFT_STACK stack
- MAQ_X86_64_SOFT_COMP component (version: 1.0)
-  MAQ_X86_64_DEP_STEP step
-  MAQ_X86_64_2_DEP_STEP step
-RPM_GLIBCi686_SOFT_STACK stack
- RPM_GLIBCi686_SOFT_COMP component
-  RPM_GLIBCi686_DEP_STEP step
-RPM_GLIBC_X86_64_SOFT_STACK stack
- RPM_GLIBC_X86_64_SOFT_COMP component
-  RPM_GLIBC_X86_64_DEP_STEP step
-RPM_COMPAT_LIBSTDCPP_33_X86_64_SOFT_STACK stack
- RPM_COMPAT_LIBSTDCPP_33_X86_64_SOFT_COMP component
-  RPM_COMPAT_LIBSTDCPP_33_X86_64_DEP_STEP step
-RPM_PERL_V5_14_4_X86_64_SOFT_STACK stack
- RPM_PERL_V5_14_4_X86_64_SOFT_COMP component
-  RPM_PERL_V5_14_4_X86_64_DEP_STEP step
-FASTQSPLIT_SOFT_STACK stack
- FASTQSPLIT_SOFT_COMP component (version: 1.0)
-  FASTQSPLIT_DEP_STEP step
-  FASTQSPLIT_2_DEP_STEP step
-SOL2SANGER_SOFT_STACK stack
- SOL2SANGER_SOFT_COMP component (version: 1.0)
-  SOL2SANGER_DEP_STEP step
-  SOL2SANGER_2_DEP_STEP step
-MAP_SOFT_STACK stack
- MAP_SOFT_COMP component (version: 1.0)
-  MAP_DEP_STEP step
-  MAP_2_DEP_STEP step
-CHR21_SOFT_STACK stack
- CHR21_SOFT_COMP component (version: 1.0)
-  CHR21_DEP_STEP step
-  CHR21_2_DEP_STEP step
-PILEUP_SOFT_STACK stack
- PILEUP_SOFT_COMP component (version: 1.0)
-  PILEUP_DEP_STEP step
-  PILEUP_2_DEP_STEP step
-FAST2BFQ_SOFT_STACK stack
- FAST2BFQ_SOFT_COMP component (version: 1.0)
-  FAST2BFQ_DEP_STEP step
-  FAST2BFQ_2_DEP_STEP step
-MAPMERGE_SOFT_STACK stack
- MAPMERGE_SOFT_COMP component (version: 1.0)
-  MAPMERGE_DEP_STEP step
-  MAPMERGE_2_DEP_STEP step
-FILTERCONTAMS_SOFT_STACK stack
- FILTERCONTAMS_SOFT_COMP component (version: 1.0)
-  FILTERCONTAMS_DEP_STEP step
-  FILTERCONTAMS_2_DEP_STEP step
-\end{lstlisting}
-
-
-\begin{lstlisting}[caption={Abstract deployment plan of the SoyKB WF},label={lst:plan-soykb}]
   OPEN_SSH_CLIENTS_SOFT_STACK stack
    OPEN_SSH_CLIENTS_SOFT_COMP component
     OPEN_SSH_CLIENTS_DEP_STEP step
@@ -531,3 +407,163 @@ We executed the scripts on their corresponding platforms. Both executions succee
 
 
 All the original and generated scripts are available as part of the experimental material included in the Research Object (RO)~\cite{researchObjects} associated with this paper\footnote{\url{http://pegasus.isi.edu/publications/FGCS(CREATE-RO!)}}. This RO also contains pointers to the software and resources used in this experiment.
+
+
+
+
+
+%\begin{listing}[!htb]
+%\begin{minted}[linenos=true,fontsize=\scriptsize]{cpp}
+%
+%OPEN_SSH_CLIENTS_SOFT_STACK stack
+% OPEN_SSH_CLIENTS_SOFT_COMP component
+%  OPEN_SSH_CLIENTS_DEP_STEP step
+%OPEN_SSH_SERVER_SOFT_STACK stack
+% OPEN_SSH_SERVER_SOFT_COMP component
+%  OPEN_SSH_SERVER_DEP_STEP step
+%WGET_SOFT_STACK stack
+% WGET_SOFT_COMP component
+%  WGET_DEP_STEP step
+%CONDOR_CENTOS_6_5_SOFT_STACK stack
+% CONDOR_CENTOS_6_5_SOFT_COMP component
+%  STOP_CONDOR_DEP_STEP step
+%  ADD_CONDOR_REPO_DEP_STEP step
+%  CONDOR_YUM_INSTALL_DEP_STEP step
+%  CLEAN_AND_SET_CONDOR_DEP_STEP step
+%  RESTART_DAEMONS_DEP_STEP step
+%JAVA-1.7.0-OPENJDK.X86_64_SOFT_STACK stack
+% JAVA-1.7.0-OPENJDK.X86_64_SOFT_COMP component
+%  JAVA-1.7.0-OPENJDK.X86_64_DEP_STEP step
+%JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_STACK stack
+% JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_COMP component
+%  JAVA-1.7.0-OPENJDK-DEVEL.X86_64_DEP_STEP step
+%PEGASUS_WMS_CENTOS_6_5_SOFT_STACK stack
+% PEGASUS_WMS_CENTOS_6_5_SOFT_COMP component
+%  ADD_PEGASUS_REPO_DEP_STEP step
+%  PEGASUS_YUM_INSTALL_DEP_STEP step
+%MFITPLANE_SOFT_STACK stack
+% MFITPLANE_SOFT_COMP component
+%  MFITPLANE_DEP_STEP step
+%MDIFF_SOFT_STACK stack
+% MDIFF_SOFT_COMP component
+%  MDIFF_DEP_STEP step
+%MDIFFFIT_SOFT_STACK stack
+% MDIFFFIT_SOFT_COMP component
+%  MDIFFFIT_DEP_STEP step
+%MCONCATFIT_SOFT_STACK stack
+% MCONCATFIT_SOFT_COMP component
+%  MCONCATFIT_DEP_STEP step
+%MIMGTBL_SOFT_STACK stack
+% MIMGTBL_SOFT_COMP component
+%  MIMGTBL_DEP_STEP step
+%MSHRINK_SOFT_STACK stack
+% MSHRINK_SOFT_COMP component
+%  MSHRINK_DEP_STEP step
+%MPROJECTPP_SOFT_STACK stack
+% MPROJECTPP_SOFT_COMP component
+%  MPROJECTPP_DEP_STEP step
+%MADD_SOFT_STACK stack
+% MADD_SOFT_COMP component
+%  MADD_DEP_STEP step
+%MBACKGROUND_SOFT_STACK stack
+% MBACKGROUND_SOFT_COMP component
+%  MBACKGROUND_DEP_STEP step
+%MBGMODEL_SOFT_STACK stack
+% MBGMODEL_SOFT_COMP component
+%  MBGMODEL_DEP_STEP step
+%MJPEG_SOFT_STACK stack
+% MJPEG_SOFT_COMP component
+%  MJPEG_DEP_STEP step
+%
+%\end{minted}
+%\caption{Abstract deployment plan of the Montage WF}
+%\label{lst:plan-montge}
+%\end{listing}
+%
+%
+%\begin{listing}[!htb]
+%\begin{minted}[linenos=true,fontsize=\scriptsize]{cpp}
+%
+%OPEN_SSH_CLIENTS_SOFT_STACK stack
+% OPEN_SSH_CLIENTS_SOFT_COMP component
+%  OPEN_SSH_CLIENTS_DEP_STEP step
+%OPEN_SSH_SERVER_SOFT_STACK stack
+% OPEN_SSH_SERVER_SOFT_COMP component
+%  OPEN_SSH_SERVER_DEP_STEP step
+%WGET_SOFT_STACK stack
+% WGET_SOFT_COMP component
+%  WGET_DEP_STEP step
+%CONDOR_CENTOS_6_5_SOFT_STACK stack
+% CONDOR_CENTOS_6_5_SOFT_COMP component
+%  STOP_CONDOR_DEP_STEP step
+%  ADD_CONDOR_REPO_DEP_STEP step
+%  CONDOR_YUM_INSTALL_DEP_STEP step
+%  CLEAN_AND_SET_CONDOR_DEP_STEP step
+%  RESTART_DAEMONS_DEP_STEP step
+%JAVA-1.7.0-OPENJDK.X86_64_SOFT_STACK stack
+% JAVA-1.7.0-OPENJDK.X86_64_SOFT_COMP component
+%  JAVA-1.7.0-OPENJDK.X86_64_DEP_STEP step
+%JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_STACK stack
+% JAVA-1.7.0-OPENJDK-DEVEL.X86_64_SOFT_COMP component
+%  JAVA-1.7.0-OPENJDK-DEVEL.X86_64_DEP_STEP step
+%PEGASUS_WMS_CENTOS_6_5_SOFT_STACK stack
+% PEGASUS_WMS_CENTOS_6_5_SOFT_COMP component
+%  ADD_PEGASUS_REPO_DEP_STEP step
+%  PEGASUS_YUM_INSTALL_DEP_STEP step
+%MAQ_INDEX_X86_64_SOFT_STACK stack
+% MAQ_INDEX_X86_64_SOFT_COMP component (version: 1.0)
+%  MAQ_INDEX_X86_64_DEP_STEP step
+%  MAQ_INDEX_X86_64_2_DEP_STEP step
+%MAQ_X86_64_SOFT_STACK stack
+% MAQ_X86_64_SOFT_COMP component (version: 1.0)
+%  MAQ_X86_64_DEP_STEP step
+%  MAQ_X86_64_2_DEP_STEP step
+%RPM_GLIBCi686_SOFT_STACK stack
+% RPM_GLIBCi686_SOFT_COMP component
+%  RPM_GLIBCi686_DEP_STEP step
+%RPM_GLIBC_X86_64_SOFT_STACK stack
+% RPM_GLIBC_X86_64_SOFT_COMP component
+%  RPM_GLIBC_X86_64_DEP_STEP step
+%RPM_COMPAT_LIBSTDCPP_33_X86_64_SOFT_STACK stack
+% RPM_COMPAT_LIBSTDCPP_33_X86_64_SOFT_COMP component
+%  RPM_COMPAT_LIBSTDCPP_33_X86_64_DEP_STEP step
+%RPM_PERL_V5_14_4_X86_64_SOFT_STACK stack
+% RPM_PERL_V5_14_4_X86_64_SOFT_COMP component
+%  RPM_PERL_V5_14_4_X86_64_DEP_STEP step
+%FASTQSPLIT_SOFT_STACK stack
+% FASTQSPLIT_SOFT_COMP component (version: 1.0)
+%  FASTQSPLIT_DEP_STEP step
+%  FASTQSPLIT_2_DEP_STEP step
+%SOL2SANGER_SOFT_STACK stack
+% SOL2SANGER_SOFT_COMP component (version: 1.0)
+%  SOL2SANGER_DEP_STEP step
+%  SOL2SANGER_2_DEP_STEP step
+%MAP_SOFT_STACK stack
+% MAP_SOFT_COMP component (version: 1.0)
+%  MAP_DEP_STEP step
+%  MAP_2_DEP_STEP step
+%CHR21_SOFT_STACK stack
+% CHR21_SOFT_COMP component (version: 1.0)
+%  CHR21_DEP_STEP step
+%  CHR21_2_DEP_STEP step
+%PILEUP_SOFT_STACK stack
+% PILEUP_SOFT_COMP component (version: 1.0)
+%  PILEUP_DEP_STEP step
+%  PILEUP_2_DEP_STEP step
+%FAST2BFQ_SOFT_STACK stack
+% FAST2BFQ_SOFT_COMP component (version: 1.0)
+%  FAST2BFQ_DEP_STEP step
+%  FAST2BFQ_2_DEP_STEP step
+%MAPMERGE_SOFT_STACK stack
+% MAPMERGE_SOFT_COMP component (version: 1.0)
+%  MAPMERGE_DEP_STEP step
+%  MAPMERGE_2_DEP_STEP step
+%FILTERCONTAMS_SOFT_STACK stack
+% FILTERCONTAMS_SOFT_COMP component (version: 1.0)
+%  FILTERCONTAMS_DEP_STEP step
+%  FILTERCONTAMS_2_DEP_STEP step
+%
+%\end{minted}
+%\caption{Abstract deployment plan of the Epigenomics WF}
+%\label{lst:plan-epigenomics}
+%\end{listing}

@@ -318,25 +318,31 @@ generateScript( filteredSvas, substractedSwComponentsDepGraph );
 In this work, we have extended ISA to support 1)~Image Appliance filtering, and 
 2) generation of Vagrant scripts. The algorithm filters Image Appliances from the 
 selected SVAs that do not meet the hardware requirements specified for the workflow
-(lines 23--25). To enact Vagrant support, we created an intermediate phase (\emph{Abstract 
-Deployment Plan}, step 9 in Figure~\ref{fig:wicusflow}), which defines the steps and 
-scripts to be executed, along with their configuration parameters. ISA then concretizes 
-this plan into a PRECIP or Vagrant script depending on the resultant targeted provider 
-(line 27).
+(lines 23--25). To enact support to different execution scripts, we created an intermediate 
+phase (\emph{Abstract Deployment Plan}, step 9 in Figure~\ref{fig:wicusflow}), which 
+defines the steps and scripts to be executed, along with their configuration parameters. 
+ISA then concretizes this plan into a PRECIP or Vagrant script depending on the resultant 
+targeted provider (line 27).
 
 
 \paragraph{\textbf{Abstract Deployment Plan}}
-\note{Rafael: Continue to edit this section.}
+This layer allows WICUS to generate abstract deployment plans regardless of the
+underlying execution tool. The abstract plan is based on the WICUS \texttt{Stack}~\cite{wicus-stack} 
+domain ontology, which defines the software stacks that should be deployed in the 
+execution platform. Figure~\ref{fig:stack-rel} shows the relations between the different
+elements that compose the \texttt{Stack} domain ontology. A \texttt{Software Stack} may
+be composed by one or more \texttt{Software Components}. Each of them has an associated 
+\texttt{Deployment Plan} according to the targeted execution platform, which is composed by 
+one or more \texttt{Deployment Steps}.
 
-In this experiment, we execute ISA over the annotated data specifying the three different providers we work with. As result we obtain an abstract plan which, based on the \texttt{WICUS Stack}\footnote{http://purl.org/net/wicus-stack} domain ontology, defines the stacks must be deployed. As depicted in figure~\ref{fig:stack-rel}, a \texttt{Software Stack} contains one or more \texttt{Software Components}. Each of them has an associated \texttt{Deployment Plan}, composed by one or more \texttt{Deployment Steps}.
-
-\begin{figure}[!htt]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\linewidth]{figures/stack-rel}
-	\caption{WICUS software stack relation diagram overview.}
+	\caption{Overview of the WICUS software stack relation diagram.}
 	\label{fig:stack-rel}
 \end{figure}
 
+\note{Rafael: Continue to edit this section.}
 Listing \ref{lst:plan-soykb} describes the abstract plan of the SoyKB workflow. The first section of the plan (lines 1-27) describe the deployment of the \texttt{Pegasus WMS} and its related dependencies, and is common to the three workflows covered in this work. The following lines depict how the SoyKB software is deployed. The \texttt{SOFTWARE.TAR.GZ} stack, which a dependency of all the SoyKB wrappers, is deployed before them (lines 28-30). The last section of the plan (lines 31-46) describes how the four SoyKB wrappers are deployed. Each one of them requires two deployment steps, one for copying the binary itself and another for granting proper execution permission. 
 
 %\note{Idafen, add diagram defining how STACK, COMP, PLAN, and STEP are related}
@@ -391,6 +397,8 @@ Listing \ref{lst:plan-soykb} describes the abstract plan of the SoyKB workflow. 
     BWA-WRAPPER_2_DEP_STEP step
 \end{lstlisting}
 
+
+\paragraph{\textbf{Execution Script}}
 In all cases, the algorithm is able to concretize the abstract plan either to a PRECIP or a Vagrant script (depending on the specified provider). Each generated script is composed by the following main sections:
 
 \begin{itemize}

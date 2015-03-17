@@ -3,14 +3,16 @@
 
 In this section, we conduct a practical evaluation through experimentation in 
 which we instantiate the semantic models (Figure~\ref{fig:wicusrels}) for three real 
-scientific workflow applications. We study and document the Montage~\cite{Montage},
-Epigenomics~\cite{genome}, and SoyKB~\cite{soybean, Joshi01012014} workflows 
-and their execution environments, which include the application software components 
+scientific workflow applications. This process is an extension of the one introduced
+ in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate the the improvements on our
+ approach to the Montage~\cite{Montage} workflow, and also evaluate the
+ Epigenomics~\cite{genome}, and SoyKB~\cite{soybean, Joshi01012014} workflows.
+We study and document these workflows and their execution environments, which include the application software components 
 and the workflow management system.
 
-The goal of this experiment is to reproduce original workflow executions in two different 
-Cloud infrastructures, FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws}, and a
-local execution environment by using Vagrant. 
+The goal of this experiment is to reproduce original workflow executions into the three different 
+Cloud scenarios introduces in this work: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws} 
+using PRECIP, and a local execution environment by using Vagrant. 
 FutureGrid is an academic Cloud test-bed facility that includes a number of computational 
 resources at distributed locations. Amazon Web Services EC2 is a public infrastructure 
 provider and the \emph{de facto} standard for IaaS Cloud platforms. 
@@ -209,6 +211,11 @@ requirements of all workflows.
 The description of the appliances is then included in the Scientific Virtual Appliances 
 Catalog (step 7 in Figure~\ref{fig:wicusflow}). We define  an Image Appliance that groups 
 all VMs appliances into one single Scientific Virtual Appliance (\texttt{CentOS 6 SVA}). 
+As described in the Software domain ontology~\cite{wicus} a Scientific Virtual Appliance
+is defined by the set of software elements associated to it, while Image Appliances 
+describe the combination of hardware characteristics and infrastructure provider. Thus, 
+we will have five different Image Appliances grouped into one single Scientific Virtual Appliance,
+defined by the Centos 6 software stack.
 Table~\ref{tab:imgapps} summarizes the main characteristics of the five appliances 
 we have annotated.
 
@@ -327,7 +334,7 @@ targeted provider (line 27).
 
 \paragraph{\textbf{Abstract Deployment Plan}}
 This layer allows WICUS to generate abstract deployment plans regardless of the
-underlying execution tool. The abstract plan is based on the WICUS \texttt{Stack}~\cite{wicus-stack} 
+underlying execution tool. The abstract plan is based on the WICUS Software~\cite{wicus} 
 domain ontology, which defines the software stacks that should be deployed in the 
 execution platform. Figure~\ref{fig:stack-rel} shows the relations between the different
 elements that compose the \texttt{Stack} domain ontology. A \texttt{Software Stack} may
@@ -414,7 +421,7 @@ In all cases, the algorithm is able to concretize the abstract plan either to a 
 
 	\item \emph{User Setup}: creates a user account on the VM (if it does not exist) and configures the necessary SSH keys to enable file transfers and execution. This account will be used to run the workflow;
 	   
-	\item \emph{Data Stage and Workflow Execution}: stages all the input data of the Montage workflow on the VM, and launches the workflow execution. Since our work is focused on infrastructure reproducibility, data and workflow management are not covered in our approach.
+	\item \emph{Data Stage and Workflow Execution}: stages all the input data of the Montage workflow on the VM, and launches the workflow execution. Since our work is focused on infrastructure reproducibility, data and workflow management are not covered in our approach. This part of the script is generated ad-hoc for each workflow.
 
 \end{itemize}
 

@@ -136,11 +136,14 @@ SCP and SSH commands. PRECIP provides functionality to run user-defined scripts 
 to install/configure software and run experiments, and also manages SSH keys and security groups 
 automatically.
 
-In this work, PRECIP usage is twofold. First, the tool is used to describe and perform a workflow 
-execution using the Pegasus WMS on a predefined VM image. Second, the WICUS annotation 
-modules use PRECIP to generate a script able to reproduce the execution environment of the 
-former experiment, and run it on different Cloud platforms.
+%In this work, PRECIP usage is twofold. First, the tool is used to describe and perform a workflow 
+%execution using the Pegasus WMS on a predefined VM image. Second, the WICUS annotation 
+%modules use PRECIP to generate a script able to reproduce the execution environment of the 
+%former experiment, and run it on different Cloud platforms.
 
+
+In this work we use PRECIP to define a script able to reproduce the execution environment of the 
+former experiment, and run it on a Cloud platform.
 
 % Vagrant
 \subsubsection{Vagrant}
@@ -158,5 +161,5 @@ download and customize them~\cite{vagrantbox}.
 In this work, we introduce how Vagrant can be used for achieving reproducibility at a local execution
 environment---usually a scientist's laptop/desktop computer. As a result, users are able to repeat and 
 modify their original experiment, repurposing or improving it, which is a highly desirable goal of any 
-reproducibility process.
+reproducibility process. 
 

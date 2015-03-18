@@ -125,7 +125,7 @@ included as part of the deployment plan along with their configuration informati
 The WMS components are defined as a requirement (WMS Requirements) using
 the \texttt{Workflow} domain ontology. This requirement is then linked to each
 of the workflows included in this work. As a result, \texttt{Java}, \texttt{wget}, 
-\texttt{HTCondor}, and \texttt{Pegasus WMS} should be installed on the targeted
+\texttt{HTCondor}, and \texttt{Pegasus WMS} should be installed on the target
 computational resource.
 
 
@@ -331,7 +331,7 @@ selected SVAs that do not meet the hardware requirements specified for the workf
 phase (\emph{Abstract Deployment Plan}, step 9 in Figure~\ref{fig:wicusflow}), which 
 defines the steps and scripts to be executed, along with their configuration parameters. 
 ISA then concretizes this plan into a PRECIP or Vagrant script depending on the resultant 
-targeted provider (line 27).
+target provider (line 27).
 
 
 \paragraph{\textbf{Abstract Deployment Plan}}
@@ -341,7 +341,7 @@ domain ontology, which defines the software stacks that should be deployed in th
 execution platform. Figure~\ref{fig:stack-rel} shows the relations between the different
 elements that compose the \texttt{Stack} domain ontology. A \texttt{Software Stack} may
 be composed by one or more \texttt{Software Components}. Each of them has an associated 
-\texttt{Deployment Plan} according to the targeted execution platform, which is composed by 
+\texttt{Deployment Plan} according to the target execution platform, which is composed by 
 one or more \texttt{Deployment Steps}.
 
 \begin{figure}[!htb]
@@ -411,24 +411,37 @@ BWA-WRAPPER_SOFT_STACK stack
 
 
 \paragraph{\textbf{Execution Script}}
-\note{Rafael: Continue to edit this section.}
-
-In all cases, the algorithm is able to concretize the abstract plan either to a PRECIP or a Vagrant script (depending on the specified provider). Each generated script is composed by the following main sections:
+In all cases, ISA is able to concretize the abstract plan either as a PRECIP or 
+a Vagrant script (depending on the specified provider). Each generated script 
+is composed by the following main sections:
 
 \begin{itemize}
-
-	\item \emph{Experiment Creation}: generates a new experiment using the given VM image ID and the user credentials for the selected infrastructure provider;
+	\item \emph{Experiment Creation}: generates a new experiment using the 
+		given VM image ID and the user credentials for the selected infrastructure 
+		provider;
     	    
-	\item \emph{Software Deployment}: executes the set of instructions defined on the deployment plan of each software component to install and configure the required software to execute the workflow. In this section, both the workflow management system and the application are deployed with their dependencies;
+	\item \emph{Software Deployment}: executes the set of instructions defined on 
+		the deployment plan of each software component to install and configure 
+		the required software to execute the workflow. In this section, both the 
+		workflow management system and the application are deployed with their 
+		dependencies;
 
-	\item \emph{User Setup}: creates a user account on the VM (if it does not exist) and configures the necessary SSH keys to enable file transfers and execution. This account will be used to run the workflow;
+	\item \emph{User Setup}: creates a user account on the VM (if it does not exist) 
+		and configures the necessary pair of SSH keys to enable file transfers and 
+		execution. This account will be used to run the workflow;
 	   
-	\item \emph{Data Stage and Workflow Execution}: stages all the input data of the Montage workflow on the VM, and launches the workflow execution. Since our work is focused on infrastructure reproducibility, data and workflow management are not covered in our approach. This part of the script is generated ad-hoc for each workflow.
-
+	\item \emph{Data Stage and Workflow Execution}: stages all the input data required 
+		for the workflow execution on the VM, and launches the workflow execution. 
+		Since our work is focused on infrastructure reproducibility, data and workflow 
+		management are not covered in our approach. This part of the script is 
+		generated ad-hoc for each workflow.
 \end{itemize}
 
-\noindent Note that all the configuration and deployment commands (first 3 sections) require superuser privileges on the VM. The workflow execution, however, is performed under the user account created in the third section.
+\noindent Note that all the configuration and deployment commands (first 3 sections) 
+require superuser privileges on the VM. The workflow execution, however, is performed 
+under the user account created in the third section.
 
+\note{Rafael: continue to edit this section.}
 
 \note{Idafen, modify this including the results of the 3 WFs, and how we check results are correct}.
 \note{I've added some text explaining it, but we still have to agree on how results are checked for soykb and epigenomics}.

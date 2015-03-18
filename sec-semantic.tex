@@ -21,31 +21,31 @@ infrastructures~\cite{wicus}. We have developed a set of models, one for each do
 and an ontology network that defines the inter-domain relations between these models 
 (Figure~\ref{fig:wicusrels}):
 
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=.9\linewidth]{figures/wicusrels}
+	\caption{Overview of the ontology network ($\rightarrow$ denotes inter-domain relation).}
+	\label{fig:wicusrels}
+\end{figure}
+
 \begin{itemize}
 	\setlength{\itemsep}{1pt}
-    \setlength{\parskip}{0pt}
-    \setlength{\parsep}{0pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
 
 	\item{\emph{Hardware domain}}: identifies the most common hardware information, 
 		including CPU, Storage and RAM memory, and their capacities.
 	
-    \item{\emph{Software domain}}: defines the software components involved on the execution. 
-    	It includes the pieces of executable software (e.g., scripts, binaries, and libraries) used in 
-	the experiment. In addition, dependencies between those components and configuration 
-	information are also defined, as well as the required steps for deploying them.
+	\item{\emph{Software domain}}: defines the software components involved on the execution. 
+    		It includes the pieces of executable software (e.g., scripts, binaries, and libraries) used in 
+		the experiment. In addition, dependencies between those components and configuration 
+		information are also defined, as well as the required steps for deploying them.
 	
-    \item{\emph{Workflow domain}}: describes and relates workflow fragments (a.k.a transformations) 
-    	to their dependencies. Therefore, scientists can understand what are the relevant infrastructure 
-	components for each part of the workflow.
+	\item{\emph{Workflow domain}}: describes and relates workflow fragments (a.k.a transformations) 
+    		to their dependencies. Therefore, scientists can understand what are the relevant infrastructure 
+		components for each part of the workflow.
 	
-    \item{\emph{Computing Resources domain}}: expresses the information about the available 
-    	computing resources. In this domain, only virtualized resources are currently considered 
-	(i.e., virtual machine). It includes the description of the VM image, its provider, and specifications.
+	\item{\emph{Computing Resources domain}}: expresses the information about the available 
+    		computing resources. In this domain, only virtualized resources are currently considered 
+		(i.e., virtual machine). It includes the description of the VM image, its provider, and specifications.
 \end{itemize}
-
-\begin{figure}[!htb]
-	\centering
-    \includegraphics[width=.9\linewidth]{figures/wicusrels}
-    \caption{Overview of the ontology network ($\rightarrow$ denotes inter-domain relation).}
-    \label{fig:wicusrels}
-\end{figure}

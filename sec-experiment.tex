@@ -84,6 +84,18 @@ production workflow, however it requires the same software components.
 %%%
 \subsection{Generating Semantic Annotations}
 
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{figures/annotations}
+	\vspace{-20pt}
+	\caption{Overview of the generated annotations for the Montage, Epigenomics, and 
+  	  SoyKB workflows using the WICUS ontology network (yellow rectangles represent the 
+	  workflow component; blue squashed rectangles represent the Montage workflow; green 
+	  bevelled rectangles represent the Epigenomics workflows; and red hexagons represent 
+	  the SoyKB workflow).}
+	\label{fig:annotations}
+\end{figure*}
+
 In this subsection, we present the annotations generated for each of the scientific 
 workflows presented above and the Pegasus WMS using the WICUS ontology
 network. As described in Figure~\ref{fig:wicusflow}, the first step in the process of 
@@ -98,18 +110,6 @@ Figure~\ref{fig:annotations} shows a simplified overview of the annotations gene
 using the WICUS ontology network for the Montage, Epigenomics, and SoyKB 
 workflows as well as for the Pegasus WMS. Below, we describe each of these
 semantic annotations in details:
-
-\begin{figure*}[!htb]
-	\centering
-	\includegraphics[width=\linewidth]{figures/annotations}
-	\vspace{-20pt}
-	\caption{Overview of the generated annotations for the Montage, Epigenomics, and 
-  	  SoyKB workflows using the WICUS ontology network (yellow rectangles represent the 
-	  workflow component; blue squashed rectangles represent the Montage workflow; green 
-	  bevelled rectangles represent the Epigenomics workflows; and red hexagons represent 
-	  the SoyKB workflow). \note{The figure does not take into account Vagrant.}}
-	\label{fig:annotations}
-\end{figure*}
 
 
 \paragraph{\textbf{Workflow Management System}}
@@ -140,11 +140,10 @@ generated individuals for the Montage workflow.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=.7\linewidth]{figures/annotations-montage}
+	\includegraphics[width=.75\linewidth]{figures/annotations-montage}
 	\vspace{-10pt}
 	\caption{Annotations for the Montage workflows using the \texttt{Workflow} domain ontology.}
 	\label{fig:annotations-montage}
-	\note{Rafael, should we also include the WMS reqs related to the Montage WF individual?}
 \end{figure}
 
 Application components are described in the Montage workflow's Transformation 
@@ -176,11 +175,10 @@ the Epigenomics  distribution, \texttt{maq} and \texttt{maqindex}.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=.7\linewidth]{figures/annotations-genome}
+	\includegraphics[width=.75\linewidth]{figures/annotations-genome}
 	\vspace{-10pt}
 	\caption{Annotations for the Epigenomics workflows using the \texttt{Workflow} domain ontology.}
 	\label{fig:annotations-genome}
-	\note{Rafael, should we also include the WMS reqs related to the Epigenomics WF individual?}
 \end{figure}
 
 
@@ -441,23 +439,29 @@ is composed by the following main sections:
 require superuser privileges on the VM. The workflow execution, however, is performed 
 under the user account created in the third section.
 
-\note{Rafael: continue to edit this section.}
+We executed the resultant scripts for the three workflows over their corresponding 
+platforms. That is, a total of 9 different executions, as each workflow is executed in 
+Futuregrid and Amazon EC2 using PRECIP, and in a local Vagrant execution 
+environment. All the executions were compared to their original one in a predefined 
+VM image, where the execution environment was already in place.
 
-\note{Idafen, modify this including the results of the 3 WFs, and how we check results are correct}.
-\note{I've added some text explaining it, but we still have to agree on how results are checked for soykb and epigenomics}.
+Results show that the VM execution environments deployed by all scripts are equivalent 
+to the former ones. To check that not only the workflows are successfully executed but also 
+that the results are correct and equivalent, we checked their produced output data. In the 
+case of Montage, which produces an image as output, we used a perceptual hash tool~\cite{phash}
+to compare the resulting image (0.1 degree image of the sky) against the one generated 
+by the baseline execution, obtaining a similarity factor of 1.0 (over 1.0) with a threshold of 
+0.85. In the Epigenomics and SoyKB workflows, the output data is non-deterministic due to
+the existence of probabilistic steps. In this case, the use of a hash method is unfeasible. 
+Hence, we have manually verified that the results are equivalent. In both cases the results 
+obtained in each infrastructure were equivalent in terms of their size (e.g., number of lines) 
+and content.
 
-We executed the resultant scripts for the three workflows over their corresponding platforms. That is, a total of 9 different executions, as each workflow is executed in Futuregrid and Amazon EC2, using PRECIP, and also in a local Vagrant execution environment. All the executions where compared to their original one in a predefined VM image, where the execution environment was already in place. 
-
-Results show that the VM execution environments deployed by all scripts are equivalent to the former ones. To check that not only the workflows are successfully executed but also that the results are equivalent we checked their output. In the case of Montage, which produces an image as output, we used a perceptual hash tool\footnote{pHash - \url{http://www.phash.org}} to compare the resulting image (0.1 degree image of the sky) against the one generated by the baseline execution, obtaining a similarity factor of 1.0 (over 1.0) with a threshold of 0.85.
-
-For Epigenomics and SoyKB, where the output of the workflow is not deterministic enough to be checked using a hash method, we have manually verified that the result is equivalent. In both cases the results obtained in each infrastructure were equivalent in terms of their size and content.
-
-
-
-All the original and generated scripts are available as part of the experimental material included in the Research Object (RO)~\cite{researchObjects} associated with this paper\footnote{\url{http://pegasus.isi.edu/publications/FGCS(CREATE-RO!)}}. This RO also contains pointers to the software and resources used in this experiment.
-
-
-
+All the original and generated scripts are available as part of the experimental material 
+included in the Research Object (RO)~\cite{researchObjects} associated with this 
+work~\cite{research-object}. This RO also contains pointers to the software and resources 
+used in the experimental evaluation.
+\note{Add URL to RO.}
 
 
 %\begin{listing}[!htb]

@@ -1,8 +1,5 @@
 \section{Introduction}
 
-%\note{Need to be more e-health oriented.}
-%\note{Idafen, go though the paper focusing on what's new compared to previous work (citing REPPAR14 paper)}
-
 Reproducibility of results of published scientific experiments is a cornerstone in 
 science. Therefore, the scientific community has been encouraging researchers 
 to publish their contributions in a verifiable and understandable 
@@ -12,11 +9,29 @@ code and data publicly available so that the data can be analyzed in a similar
 manner as in the original work described in the publication. Code must be available 
 to be distributed, and data must be accessible in a readable format~\cite{bookReproducibility}. 
 
-In the context of scientific experiments, terms such as reproducibility, replicability, and repeatability are sometimes used as synonymous. Even though there is no clear consensus on how to define both (definitions may vary over different scientific areas), in this work we understand them as separated concepts~\cite{Drummond2011}. In this work, we address the reproducibility of the execution environment for a scientific workflow, as we do not aim to obtain an exact incarnation of the original one, but rather an environment that is able to support the required capabilities exposed by the former environment.
+Many efforts have been reported on studying the reproducibility of published results 
+in life sciences. Some studies clearly show the difficulties when trying to replicate 
+experimental results in biology~\cite{Ioannidis2009}. The \emph{Reproducibility 
+Project: Cancer Biology}~\cite{ErringtonCancerRerpoducibility} is an active project 
+aiming to independently reproduce the experimental results of 50 high-impact cancer 
+biology studies, evaluating the degree of reproducibility of those results and the main 
+issues related to them.
 
-Many efforts have been reported on studying the reproducibility of published results in life sciences. Some studies clearly show the difficulties when trying to  replicate experimental results in biology~\cite{Ioannidis2009}. The {\it Reproducibility Project: Cancer Biology}~\cite{ErringtonCancerRerpoducibility} is an active project aiming to independently reproduce the experimental results of 50 high-impact cancer biology studies, evaluating the degree of reproducibility of those results and the main issues related to them.
+In the context of scientific experiments, terms such as reproducibility, replicability, and 
+repeatability are sometimes used interchangeably. Even though there is no clear 
+consensus on how to define them (definitions may vary over different scientific areas), 
+we understand them as separated concepts~\cite{Drummond2011}. In this work,
+we address the reproducibility of the execution environment for a scientific workflow, 
+as we do not aim to obtain an exact incarnation of the original one, but rather an 
+environment that is able to support the required capabilities exposed by the former 
+environment.
 
-Scientific workflows are a useful representation for managing the execution of large-scale computations. Many scientists now formulate their computational problems as scientific workflows running on distributed computing infrastructures such as campus Clusters, Clouds, and Grids~\cite{workflowBook}. This representation not only facilitates the creation and management of the computation but also builds a foundation upon which results can be validated and shared. Since workflows formally describe the sequence of computational and data management tasks, it is easy to trace the origin of the data produced. Many workflow systems capture provenance at runtime, which provides the lineage of data products and as such underpins the whole of scientific data reuse by providing the basis on which trust and understanding are built. A scientist would be able to look at the workflow and provenance data, retrace the steps, and arrive at the same data products. 
+Scientific workflows are a useful representation for managing the execution of large-scale 
+computations. Many scientists now formulate their computational problems as scientific 
+workflows running on distributed computing infrastructures such as campus Clusters, Clouds, 
+and Grids~\cite{workflowBook}. 
+
+This representation not only facilitates the creation and management of the computation but also builds a foundation upon which results can be validated and shared. Since workflows formally describe the sequence of computational and data management tasks, it is easy to trace the origin of the data produced. Many workflow systems capture provenance at runtime, which provides the lineage of data products and as such underpins the whole of scientific data reuse by providing the basis on which trust and understanding are built. A scientist would be able to look at the workflow and provenance data, retrace the steps, and arrive at the same data products. 
 However, this information is not sufficient for achieving full reproducibility.
 
 In~\cite{Garijo2013} authors explain the problems they faced when they tried to reproduce an experiment~\cite{drugomePrimer} about mapping all putative FDA and European drugs to protein receptors within the scope of a given proteome. For each one of the problems authors propose a set of suggestions for resolving the related issues must be solved. In four out of the total six advises, execution environment problems are mentioned.

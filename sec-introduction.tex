@@ -28,30 +28,78 @@ environment.
 
 Scientific workflows are a useful representation for managing the execution of large-scale 
 computations. Many scientists now formulate their computational problems as scientific 
-workflows running on distributed computing infrastructures such as campus Clusters, Clouds, 
-and Grids~\cite{workflowBook}. 
-
-This representation not only facilitates the creation and management of the computation but also builds a foundation upon which results can be validated and shared. Since workflows formally describe the sequence of computational and data management tasks, it is easy to trace the origin of the data produced. Many workflow systems capture provenance at runtime, which provides the lineage of data products and as such underpins the whole of scientific data reuse by providing the basis on which trust and understanding are built. A scientist would be able to look at the workflow and provenance data, retrace the steps, and arrive at the same data products. 
+workflows running on distributed computing infrastructures such as campus Clusters, 
+Clouds, and Grids~\cite{workflowBook}. Researchers in bioinformatics have 
+embraced workflows for a whole range of analyses, including protein folding~\cite{craddock2006science}, 
+DNA and RNA sequencing~\cite{blankenberg2010galaxy, giardine2005galaxy, kepler-clotho}, 
+and disease-related research~\cite{fisher2009systematic, gaizauskas2004} among others.
+The workflow representation not only facilitates the creation and management of the 
+computation but also builds a foundation upon which results can be validated and 
+shared. Since workflows formally describe the sequence of computational and data 
+management tasks, it is easy to trace the origin of the data produced. Many workflow 
+systems capture provenance at runtime, which provides the lineage of data products 
+and as such underpins the whole of scientific data reuse by providing the basis on which 
+trust and understanding are built. A scientist would be able to look at the workflow and 
+provenance data, retrace the steps, and arrive at the same data products. 
 However, this information is not sufficient for achieving full reproducibility.
 
-In~\cite{Garijo2013} authors explain the problems they faced when they tried to reproduce an experiment~\cite{drugomePrimer} about mapping all putative FDA and European drugs to protein receptors within the scope of a given proteome. For each one of the problems authors propose a set of suggestions for resolving the related issues must be solved. In four out of the total six advises, execution environment problems are mentioned.
+In~\cite{Garijo2013}, authors explain the problems they faced when they tried to 
+reproduce an experiment~\cite{drugomePrimer} for mapping all putative FDA 
+and European drugs to protein receptors within the scope of a given proteome. For 
+each identified problem, they enumerate a set of suggestions for addressing the related
+issues. In four out of the total six advises, execution environment problems are mentioned.
 
-Currently, most of the approaches in computational science conservation, in particular for scientific workflow executions, have been focused on data, code, and the workflow description, but not on the underlying infrastructure---which is composed of a set of computational resources (e.g. execution nodes, storage devices, and networking) and software components. We identify two approaches for conserving the environment of an experiment: \emph{physical conservation}, where the real object is conserved due to its relevance and the difficulty in obtaining a counterpart; and \emph{logical conservation}, where objects are described in such a way that an equivalent one can be obtained in a future experiment.
+Currently, most of the approaches in computational science conservation, in particular 
+for scientific workflow executions, have been focused on data, code, and the workflow 
+description, but not on the underlying infrastructure---which is composed of a set of 
+computational resources (e.g., execution nodes, storage devices, and networking) and 
+software components. We identify two approaches for conserving the environment of an 
+experiment: 1) \emph{physical conservation}, where the real object is conserved due to 
+its relevance and the difficulty in obtaining a counterpart; and 2) \emph{logical conservation}, 
+where objects are described in such a way that an equivalent one can be obtained in a 
+future experiment.
 
-The computational environment is often conserved by using the physical approach, where computational resources are made available to scientists over a sustained period of time. As a result, scientists are able to reproduce their experiments in the same environment. However, such infrastructures demand huge maintenance efforts, and there is no guarantee that it will not change or suffer from a natural decay process~\cite{Gavish2011637}. Furthermore, the infrastructure may be subjected to organization policies, which restricts its access to a selective group of scientists, thus limiting reproducibility to this restricted group. On the other hand, data, code, and workflow description can be conserved by using a logical approach that is not subjected to natural decay processes. 
+The computational environment is often conserved by using the physical approach, where 
+computational resources are made available to scientists over a sustained period of time. 
+As a result, scientists are able to reproduce their experiments in the same environment. 
+However, such infrastructures demand huge maintenance efforts, and there is no guarantee 
+that it will not change or suffer from a natural decay process~\cite{Gavish2011637}. 
+Furthermore, the infrastructure may be subjected to organization policies, which restricts 
+its access to a selective group of scientists, thereby limiting reproducibility to this restricted 
+group. On the other hand, data, code, and workflow description can be conserved by using 
+a logical approach, which is not subjected to natural decay processes.
 
-Accordingly, we propose a logical-oriented approach to conserve computational environments, where the capabilities of the resources (virtual machines (VM)) are described. From this description, any scientist, interested in reproducing an experiment, will be able to reconstruct the former infrastructure (or an equivalent one) in any Cloud computing infrastructure (either private or public). One may argue that it would be easier to keep and share VM images with the community research through a common repository, however the high storage demand of VM images remains a challenging problem~\cite{Mao:2014:ROD:2600090.2512348,6552826}. 
+Accordingly, we propose a logical-oriented approach to conserve computational environments, 
+where the capabilities of the resources (virtual machines (VM)) are described. From this 
+description, any scientist, interested in reproducing an experiment, will be able to reconstruct 
+the former infrastructure (or an equivalent one) in any Cloud computing infrastructure (either 
+private or public). One may argue that it would be easier to keep and share VM images with 
+the community research through a common repository, however the high storage demand of 
+VM images remains a challenging problem~\cite{Mao:2014:ROD:2600090.2512348,6552826}. 
 
-Semantics have been proposed as a way for achieving curation and preservation of the digital assets related to scientific experiments, in areas such as biomedical research~\cite{MaloneSWO2014}. Our approach uses semantic-annotated workflow descriptions to generate lightweight scripts for an experiment management API that can reconstruct the required infrastructure. We propose to describe the resources involved in the execution of the experiment, using a set of semantic vocabularies, and use those descriptions to define the infrastructure specification. This specification can then be used to derive the set of instructions that can be executed to obtain a new equivalent infrastructure. We conduct a practical evaluation for a real scientific workflow application in which we describe the application and its environment using a set of semantic models, and use an experiment management tool to reproduce a workflow execution in two different Cloud platforms. 
+Semantics have been proposed as a way for attaining curation and preservation of the digital 
+assets related to scientific experiments (e.g., biomedical research~\cite{MaloneSWO2014}). 
+Our approach uses semantic-annotated workflow descriptions to generate lightweight scripts 
+for an experiment management API that can reconstruct the required infrastructure. We 
+propose to describe the resources involved in the execution of the experiment using a set of 
+semantic vocabularies, and use those descriptions to define the infrastructure specification. 
+This specification can then be used to derive the set of instructions that can be executed to 
+obtain a new equivalent infrastructure. We conduct a practical evaluation using real scientific 
+workflow applications, in which we describe the applications and their environments using a 
+set of semantic models. Then, we use an experiment management tool to reproduce a 
+workflow execution in different Cloud platforms.
 
-In this work, we entail reproducibility from the execution environment point of view. For  the sake of showing how our approach works, we have also included the data and the workflow execution of the experiments we study in this paper.
+% --- Not sure about this paragraph
+%In this work, we entail reproducibility from the execution environment point of view. For the sake of showing how our approach works, we have also included the data and the workflow execution of the experiments we study in this paper.
 
 The semantics modeling of computational resources and some of the reproducibility tools 
-were introduced and evaluated in~\cite{SantanaPerez-REPPAR-2014} for a single astronomic scientific 
-workflow application. In this work, we extend our previous work by introducing 1) a set of new features on our
-framework as result of our previous work, 2) a study of two new life sciences workflows based on genomic processing applications,
- and 3) how the new features of our approach apply to them and also to the previous astronomy workflow application. 
-
- \note{Add what is new in this work. I added a list of the main contributions of this paper}.
+were introduced and evaluated in~\cite{SantanaPerez-REPPAR-2014} for a single astronomic 
+scientific workflow application. In this work, we extend our previous work by introducing 1) a set 
+of new features to our framework (as a result of our previous work), 2) a study of two new life 
+sciences workflows based on genomic processing applications, and 3) a practical evaluation 
+of the framework with the new features for the astronomic workflow as well as the two new 
+life science workflows. 
 
 The paper is organized as follows. Section~\ref{sec:semantic} describes our semantic approach for documenting computational infrastructures. Section~\ref{sec:reproducibility} presents the practical evaluation and the description of the tools used to implement the semantic models and manage the experiment. Section~\ref{sec:related-work} presents the related work, and Section~\ref{sec:conclusion} summarizes our results and identifies future works.
+
+

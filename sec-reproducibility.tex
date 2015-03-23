@@ -1,6 +1,10 @@
 \section{Reproducibility in Scientific Workflows}
 \label{sec:reproducibility}
 
+
+\feedback{@Oscar:  you can only evaluate if you have a research hypothesis to validate.
+If not, you are only doing experimentation, which is what you do in this section}
+
 In this section, we introduce the tools used in this work for the instantiation and evaluation 
 of the semantic models aforementioned. We first describe the Pegasus Workflow 
 Management System (WMS)~\cite{Pegasus, Deelman-FGCS-2014}, which is used as our 
@@ -11,12 +15,12 @@ experiment management.
 \subsection{Scientific Workflow Execution}
 
 The Pegasus WMS can manage workflows comprised of millions of tasks, recording data 
-about the execution and intermediate results. In Pegasus, workflows are described as an 
-abstract workflows, which do not contain resource information, or the physical locations of 
+about their execution and intermediate results. In Pegasus, workflows are described as 
+abstract workflows, that is, they do not contain resource information, or the physical locations of 
 data and executables. Workflows are described as directed acyclic graphs (DAGs), where 
 nodes represent individual computational tasks and the edges represent data and control 
 dependencies between tasks. The abstract workflow description is represented as a DAX 
-(DAG in XML), capturing all the tasks that perform computation, the execution order of these 
+(DAG in XML), capturing all the tasks that perform computations, the execution order of these 
 tasks, and for each task the required inputs, expected outputs, and the arguments with which 
 the task should be invoked. 
 
@@ -29,9 +33,9 @@ tasks are managed by a task scheduler (HTCondor~\cite{condor}), which supervises
 execution on local and remote resources.
 
 
-\subsection{Reproducibility Tools}
+\subsection{Reproducibility Artifacts}
 
-To conduct the evaluation of the semantic models when executing scientific workflows, we 
+To conduct the experimentation on scientific workflows reproducibility, we 
 use the WICUS framework~\cite{wicus}, which comprises the semantic models described 
 in Section~\ref{sec:semantic} and a set of tools for annotating and consuming data; and 
 the PRECIP~\cite{Azarnoosh-CRC-2013} experiment management tool to manage the 
@@ -41,20 +45,28 @@ Below, we describe each of these tools in detail.
 
 
 \subsubsection{WICUS}
-We introduce here the Workflow Infrastructure Conservation Using Semantics ontology 
-(WICUS), an OWL2~\cite{OWL2} (Web Ontology Language) ontology network that 
+
+\feedback{@Oscar:  I miss overall, a deeper description of the ontologies, 
+since they are key in the solution but have not been sufficiently described 
+so that a reader  can understand  better why the magic occurs}
+\feedback{@Idafen: so far we've assumed that this deeper description
+of the ontologies is already included on the wicus citation. May be this is not clear
+on this section.}
+
+The Workflow Infrastructure Conservation Using Semantics ontology 
+(WICUS) is an OWL2 (Web Ontology Language) ontology network that 
 implements the semantic models introduced in Section~\ref{sec:semantic}. This ontology 
-network is available online~\cite{wicus-online} and it is a continuous effort  to discover and 
-define the relevant and required properties for describing scientific computational infrastructures. 
+network is available online~\cite{wicus-online} and its goal is to define the relevant and 
+required properties for describing scientific computational infrastructures. 
 Currently two versions of the ontology network have been released. The latest one, released in
 August 2014,  includes a set of new properties for better describing software and hardware requirements, and for
 including also the output info of a configuration process (e.g. the resultant IP and port in 
 which a recently deployed service will be listening).
 
 
-Besides the ontology network, WICUS has a set of modules that facilitates the annotation of 
-the resources involved on the execution of a scientific workflow. These tools are not fully 
-automated yet, but represent a first step on helping users to define the requirements of their 
+Besides the ontology network, a set of modules have been developed around it, 
+for facilitating the annotation of the resources involved on the execution of a scientific workflow. 
+These tools are not fully automated yet, but represent a first step on helping users to define the requirements of their 
 experiments. Figure~\ref{fig:wicusflow} shows the main modules, their flow and intermediate 
 results involved in the process for achieving reproducibility, and describes the process of 
 data generation and consumption. Below, we provide an overview of each of these modules:
@@ -75,7 +87,7 @@ data generation and consumption. Below, we provide an overview of each of these 
 		and its infrastructure requirements.
 
 	\item \textbf{WMS Annotations.} An RDF file containing the information of the WMS component 
-		and its dependencies. This information will be added to the \emph{Software Components 
+		and its dependencies. This information is added to the \emph{Software Components 
 		Catalog}.
 
 	\item \textbf{Transformation Catalog Annotator.} This tool parses the Pegasus Transformation 
@@ -154,12 +166,17 @@ Oracle VirtualBox~\cite{Watson2008} (also open-source) or  VMWare~\cite{vmware},
 Amazon EC2-like server configurations. Since version 1.6 it also supports Docker~\cite{Merkel2014} 
 containers.
 Vagrant provides a set of commands and configuration files to enact and customize virtual machines
-(also referred as boxes). It allows to define the set of commands and/or scripts to be executed during 
+(also referred to as boxes). It allows defining the set of commands and/or scripts to be executed during 
 the different stages of the booting process. Several base images are publicly available for users to 
-download and customize them~\cite{vagrantbox}. 
+download and customize~\cite{vagrantbox}. 
  
 In this work, we introduce how Vagrant can be used for achieving reproducibility at a local execution
 environment---usually a scientist's laptop/desktop computer. As a result, users are able to repeat and 
 modify their original experiment, repurposing or improving it, which is a highly desirable goal of any 
-reproducibility process. 
+reproducibility process. By executing Vagrant with the resultant {\it Vagrantfile} generated by the ISA, 
+the user will create a virtual machine on its own computer and automatically execute the workflow, 
+being also able to access it and modify the environment.
+
+
+
 

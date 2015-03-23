@@ -1,9 +1,12 @@
 \section{Experimental Evaluation}
 \label{sec:experiment}
+%-- modified based on oscar's feedback
+%In this section, we conduct a practical evaluation through experimentation in 
+%which we instantiate the semantic models (Figure~\ref{fig:wicusrels}) for three real 
 
-In this section, we conduct a practical evaluation through experimentation in 
-which we instantiate the semantic models (Figure~\ref{fig:wicusrels}) for three real 
-scientific workflow applications. This process is an extension of the one introduced
+In this section, we instantiate the semantic models described in this paper
+(Figure~\ref{fig:wicusrels}) for three real scientific workflow applications. 
+This process is an extension of the one introduced
  in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate the the improvements on our
  approach to the Montage~\cite{Montage} workflow, and also evaluate the
  Epigenomics~\cite{genome}, and SoyKB~\cite{soybean, Joshi01012014} workflows.
@@ -45,8 +48,8 @@ The USC Epigenome Center~\cite{genome} is currently involved in mapping the epig
 state of human cells on a genome-wide scale. The Epigenomics workflow 
 (Figure~\ref{fig:workflow-genome}) processes multiple sets of genome sequences in
 parallel. These sequences are split into subsets, the subsets are filtered to remove
-contaminants, reformatted, then mapped to a reference genome. The mapped sequences are
-finally merged and indexed for later analysis. In this work, the Epigenome workflow was 
+contaminants, reformatted, and then mapped to a reference genome. The mapped sequences are
+finally merged and indexed for later analysis. In this work, the Epigenomics workflow was 
 used to align genome sequence reads to a reference genome for human chromosome 
 21. The size of the workflow depends on the chunking factor used on the input data, 
 which determines the number of sequence reads in each chunk.
@@ -90,6 +93,7 @@ production workflow, however it requires the same software components.
 	  bevelled rectangles represent the Epigenomics workflows; and red hexagons represent 
 	  the SoyKB workflow).}
 	\label{fig:annotations}
+	\note{Missing dependency arrows between Condor and Java and wget}
 \end{figure*}
 
 
@@ -98,7 +102,10 @@ production workflow, however it requires the same software components.
 
 In this subsection, we present the annotations generated for each of the scientific 
 workflows presented above and the Pegasus WMS using the WICUS ontology
-network. As described in Figure~\ref{fig:wicusflow}, the first step in the process of 
+network. All the annotations generated in this work are available on the 
+Research Object (RO)~\cite{researchObjects} associated to this paper~\cite{fgcs-2015-object}.
+
+ As described in Figure~\ref{fig:wicusflow}, the first step in the process of 
 documenting a workflow is the annotation of the workflow DAX file. We use the 
 \texttt{Workflow} domain ontology to describe a workflow as 1) an individual that 
 represents the top level workflow, and 2) a set of individuals representing its 
@@ -109,7 +116,7 @@ by each transformation.
 Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated 
 using the WICUS ontology network for the Montage, Epigenomics, and SoyKB 
 workflows as well as for the Pegasus WMS. Below, we describe each of these
-semantic annotations in details:
+semantic annotations in detail:
 
 
 \paragraph{\textbf{Workflow Management System}}
@@ -193,6 +200,9 @@ on a software bundle that is deployed on the computational nodes to be invoked b
 wrappers. Hence, a dependency for this bundle has been included in the Software 
 Components Catalog.
 
+\feedback{@Oscar: Something that should be discussed in a discussion or future
+work section is how we can build a library of descriptions for all the workflows
+in the world (is it possible? how many descriptions can be reused? how much reuse?}
 
 \paragraph{\textbf{Computational Resources}}
 We use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies 
@@ -265,7 +275,7 @@ frequency.
 
 The last step on the process for achieving reproducibility in scientific workflows 
 (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm 
-(ISA)~\cite{wicus}. The algorithm retrieves the corresponding information for the 
+(ISA) described in~\cite{wicus}. The algorithm retrieves the corresponding information for the 
 workflow and its dependencies from the annotations datasets, and calculates the 
 dependencies and compatibility between requirements and the available 
 computational resources. It also considers the software already installed on the
@@ -280,7 +290,7 @@ related sub-workflows (as defined in Figure~\ref{fig:annotations}). Requirements
 and software components are matched, and a dependency graph is built based 
 on the relation between the requirements and the component dependencies. This 
 graph is then used to compute the intersection between the set of software components 
-from the SVA and the dependency graph of each sub-workflow. ISA selects the 
+from the Scientific Virtual Appliance (SVA) and the dependency graph of each sub-workflow. ISA selects the 
 intersection where the value is maximized for each sub-workflow. Software components 
 already available in the SVA are then removed from the chosen graph. To reduce 
 the number of SVAs, the algorithm attempts to merge sub-workflows requirements 
@@ -326,7 +336,7 @@ selected SVAs that do not meet the hardware requirements specified for the workf
 (lines 23--25). To enact support to different execution scripts, we created an intermediate 
 phase (\emph{Abstract Deployment Plan}, step 9 in Figure~\ref{fig:wicusflow}), which 
 defines the steps and scripts to be executed, along with their configuration parameters. 
-ISA then concretizes this plan into a PRECIP or Vagrant script depending on the resultant 
+ISA then translates this plan into a PRECIP or Vagrant script depending on the resultant 
 target provider (line 27).
 
 
@@ -407,7 +417,7 @@ BWA-WRAPPER_SOFT_STACK stack
 
 
 \paragraph{\textbf{Execution Script}}
-In all cases, ISA is able to concretize the abstract plan either as a PRECIP or 
+In all cases, ISA is able to generate the abstract plan either as a PRECIP or 
 a Vagrant script (depending on the specified provider). Each generated script 
 is composed by the following main sections:
 
@@ -443,8 +453,8 @@ Futuregrid and Amazon EC2 using PRECIP, and in a local Vagrant execution
 environment. All the executions were compared to their original one in a predefined 
 VM image, where the execution environment was already in place.
 
-Results show that the VM execution environments deployed by all scripts are equivalent 
-to the former ones. To check that not only the workflows are successfully executed but also 
+Results show that the VM execution environments deployed by all scripts are able to
+fully execute their related workflows. To check that not only the workflows are successfully executed but also 
 that the results are correct and equivalent, we checked their produced output data. In the 
 case of Montage, which produces an image as output, we used a perceptual hash tool~\cite{phash}
 to compare the resulting image (0.1 degree image of the sky) against the one generated 
@@ -456,7 +466,7 @@ obtained in each infrastructure were equivalent in terms of their size (e.g., nu
 and content.
 
 All the original and generated scripts are available as part of the experimental material 
-included in the Research Object (RO)~\cite{researchObjects} associated with this 
+included in the RO associated with this 
 work~\cite{fgcs-2015-object}. This RO also contains pointers to the software and resources 
 used in the experimental evaluation.
 \note{Add URL to RO.}

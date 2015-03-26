@@ -80,7 +80,8 @@ genome, to de-duplicate the data, to identify indels and SNPs, and to merge and
 filter the results. The results are then used for genome-wide association studies 
 (GWAS) and genotype to phenotype analysis. The workflow instance used in this 
 paper is based on a sample dataset that requires less memory than a full-scale 
-production workflow, however it requires the same software components.
+production workflow, however it carries out the same process and 
+	requires the same software components.
 
 \begin{figure}[!htb]
 	\centering
@@ -206,10 +207,6 @@ on the parameters used for the execution of the workflow. The components are inc
 on a software bundle that is deployed on the computational nodes to be invoked by the 
 wrappers. Hence, a dependency for this bundle has been included in the Software 
 Components Catalog.
-
-\feedback{@Oscar: Something that should be discussed in a discussion or future
-work section is how we can build a library of descriptions for all the workflows
-in the world (is it possible? how many descriptions can be reused? how much reuse?}
 
 \paragraph{\textbf{Computational Resources}}
 We use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies 

@@ -20,27 +20,6 @@ The workflow representation not only facilitates the creation and management of 
 computation but also builds a foundation upon which results can be validated and 
 shared. 
 
-%\note{Idafen, better introduce here concepts such as: Reproducibility, replicability, conservation,...}
-
-In the context of scientific experiments, terms such as reproducibility, replicability, and 
-repeatability are sometimes used interchangeably. Even though there is no clear 
-consensus on how to define them (definitions may vary over different scientific areas), 
-we understand them as separated concepts~\cite{Drummond2011}. Replicability 
-can be defined as an strict recreation of the former experiment, using the same method,
-over the same data and individuals, with the same experimental parameters. Reproducibility,
-on the other hand, implies that at least some changes have occurred or have been introduced,
-so the experiment exposes different features.  While being a less restrictive term, reproducibility
-is a key concept in science, as it allows the incremental research of scientific studies.
-
-In this work,we address the reproducibility of the execution environment for a scientific workflow, 
-as we do not aim to obtain an exact incarnation of the original one, but rather an 
-environment that is able to support the required capabilities exposed by the former 
-environment. In order to reproduce or replicate any digital artifact we need to properly handle its conservation.
-According to~\cite{King1995}, to achieve it we need to guarantee that {\it ``sufficient information
-exists with which to understand, evaluate, and build upon a prior work if a third party could replicate
- the results without any additional information from the author.''}. In this work we address workflow conservation
- in order to achieve their reproducibility.
-
 Many efforts have been reported on studying the reproducibility of scientific results 
 in life sciences. Some studies clearly show the difficulties when trying to replicate 
 experimental results in biology~\cite{Ioannidis2009}. The \emph{Reproducibility 
@@ -57,6 +36,26 @@ and as such underpins the whole of scientific data reuse by providing the basis 
 trust and understanding are built. A scientist would be able to look at the workflow and 
 provenance data, retrace the steps, and arrive at the same data products. 
 However, this information is not sufficient for achieving full reproducibility.
+
+%\note{Idafen, better introduce here concepts such as: Reproducibility, replicability, conservation,...}
+
+Reproducibility, replicability, and repeatability are often used as synonyms. Even when they
+pursuit similar goals, there are several differences between them. In this work we consider them
+as separated concepts~\cite{Drummond2011}. While replicability can be defined as an
+strict recreation of the original experiment, using the same method, data and equipment, reproducibility
+implies that at least some changes have been introduced in the experiment, thus exposing 
+different features.  While being a less restrictive term, reproducibility
+is a key concept in science, as it allows the incremental research of scientific studies.
+
+In this work,we address the reproducibility of the execution environment for a scientific workflow, 
+as we do not aim to obtain an exact incarnation of the original one, but rather an 
+environment that is able to support the required capabilities exposed by the former 
+environment. In order to reproduce or replicate any digital artifact we need to properly handle its conservation.
+According to~\cite{King1995}, to achieve it we need to guarantee that {\it ``sufficient information
+exists with which to understand, evaluate, and build upon a prior work if a third party could replicate
+ the results without any additional information from the author.''}. In this work we address workflow conservation
+ in order to achieve their reproducibility.
+
 
 In~\cite{Garijo2013}, authors explain the problems they faced when they tried to 
 reproduce an experiment~\cite{drugomePrimer} for mapping all putative FDA 
@@ -79,7 +78,7 @@ computational resources are made available to scientists over a sustained period
 As a result, scientists are able to reproduce their experiments in the same environment. 
 However, such infrastructures demand huge maintenance efforts, and there is no guarantee 
 that it will not change or suffer from a natural decay process~\cite{Gavish2011637}. 
-Furthermore, the infrastructure may be subjected to organization policies, which restricts 
+Furthermore, the infrastructure may be subjected to organization policies, which restrict 
 its access to a selective group of scientists, thereby limiting reproducibility to this restricted 
 group. On the other hand, data, code, and workflow description can be conserved by using 
 a logical approach, which is not subjected to natural decay processes.

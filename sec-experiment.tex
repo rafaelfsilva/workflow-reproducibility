@@ -8,18 +8,18 @@
 In this section, we instantiate the semantic models described in this paper
 (Figure~\ref{fig:wicusrels}) for three real scientific workflow applications. 
 This process is an extension of the one introduced
- in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate the the improvements on our
+ in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate the improvements on our
  approach to the Montage~\cite{Montage} workflow, and also evaluate the
  Epigenomics~\cite{genome}, and SoyKB~\cite{soybean, Joshi01012014} workflows.
 We study and document these workflows and their execution environments, which include the application software components 
 and the workflow management system.
 
 The goal of this experiment is to reproduce original workflow executions into the three different 
-Cloud scenarios introduces in this work: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws} 
+Cloud scenarios introduced in this work: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws} 
 using PRECIP, and a local execution environment by using Vagrant. 
 FutureGrid is an academic Cloud test-bed facility that includes a number of computational 
 resources at distributed locations. Amazon Web Services EC2 is a public infrastructure 
-provider and the \emph{de facto} standard for IaaS Cloud platforms. 
+provider, and the \emph{de facto} standard for IaaS Cloud platforms. 
 
 
 \subsection{Scientific Workflows}
@@ -36,9 +36,9 @@ Figure~\ref{fig:workflow-montage} illustrates a small (20 node) Montage workflow
 size of the workflow depends on the number of images required to construct the desired 
 mosaic.
 
-\begin{figure}[!htt]
+\begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.9\linewidth]{figures/workflow-montage}
+	\includegraphics[width=0.85\linewidth]{figures/workflow-montage}
 	\caption{A small (20 node) Montage workflow.}
 	\label{fig:workflow-montage}
 \end{figure}
@@ -55,9 +55,9 @@ used to align genome sequence reads to a reference genome for human chromosome
 21. The size of the workflow depends on the chunking factor used on the input data, 
 which determines the number of sequence reads in each chunk.
 
-\begin{figure}[!htb]
+\begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.75\linewidth]{figures/workflow-genome}
+	\includegraphics[width=0.7\linewidth]{figures/workflow-genome}
 	\caption{Epigenomics workflow.}
 	\label{fig:workflow-genome}
 \end{figure}
@@ -77,9 +77,9 @@ paper is based on a sample dataset that requires less memory than a full-scale
 production workflow, however it carries out the same process and 
 	requires the same software components.
 
-\begin{figure}[!htb]
+\begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.95\linewidth]{figures/workflow-soybean}
+	\includegraphics[width=0.9\linewidth]{figures/workflow-soybean}
 	\caption{SoyKB workflow.}
 	\label{fig:workflow-soykb}
 \end{figure}
@@ -111,7 +111,7 @@ documenting a workflow is the annotation of the workflow DAX file. We use the
 \texttt{Workflow} domain ontology to describe a workflow as 1) an individual that 
 represents the top level workflow, and 2) a set of individuals representing its 
 sub-workflows, one for each transformation. We then generate the necessary 
-requirements, one for the top level workflow, which specifies the WMS requirements, 
+requirements, one for the top level workflow, which specifies the WMS requirements, and
 and one for each sub-workflow, which defines the software components required 
 by each transformation. 
 Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated 
@@ -126,8 +126,8 @@ compose the workflow engine (in this case Pegasus) as individuals, and to
 represent its dependencies. Pegasus relies on \texttt{HTCondor} as task manager, and 
 both depend on \texttt{Java} and \texttt{wget}. In addition, all components also
 depend on the operating system, which in our case is \texttt{CentOS}. The process
-to describe the deployment of the WMS components is based on the installation 
-and configuration processes as specified in their documentation. As a result, we 
+to describe the deployment of the WMS components is based on the installation of
+and configuration processes as specified in their documentation. As a result, we will
 defined a set of installation scripts for each of the components. These scripts are 
 included as part of the deployment plan along with their configuration information.
 The WMS components are defined as a requirement (WMS Requirements) using
@@ -145,13 +145,6 @@ requirements, which define the software components required by each transformati
 At this point, these requirements are empty, as they are not yet related to their 
 software components. Figure~\ref{fig:annotations-montage} shows the set of 
 generated individuals for the Montage workflow.
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=.85\linewidth]{figures/annotations-montage}
-	\caption{Annotations for the Montage workflows using the \texttt{Workflow} domain ontology.}
-	\label{fig:annotations-montage}
-\end{figure}
 
 Application components are described in the Montage workflow's Transformation 
 Catalog, where the binary file, version, and destination path are defined. These 
@@ -180,7 +173,15 @@ software dependencies related to the workflow, which include the Perl~\cite{perl
 the GNU libc~\cite{libc} and Libstdc++~\cite{libstdc} libraries, and two other binaries from 
 the Epigenomics  distribution, \texttt{maq} and \texttt{maqindex}.
 
-\begin{figure}[!htb]
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=.85\linewidth]{figures/annotations-montage}
+	\caption{Annotations for the Montage workflows using the \texttt{Workflow} domain ontology.}
+	\label{fig:annotations-montage}
+\end{figure}
+
+
+\begin{figure}[!t]
 	\centering
 	\includegraphics[width=.85\linewidth]{figures/annotations-genome}
 	\caption{Annotations for the Epigenomics workflows using the \texttt{Workflow} domain ontology.}
@@ -347,7 +348,7 @@ be composed by one or more \texttt{Software Components}. Each of them has an ass
 \texttt{Deployment Plan} according to the target execution platform, which is composed by 
 one or more \texttt{Deployment Steps}.
 
-\begin{figure}[!htb]
+\begin{figure}[!b]
 	\centering
 	\includegraphics[width=0.9\linewidth]{figures/stack-rel}
 	\caption{Overview of the WICUS software stack relation diagram.}
@@ -466,7 +467,6 @@ All the original and generated scripts are available as part of the experimental
 included in the RO associated with this 
 work~\cite{fgcs-2015-object}. This RO also contains pointers to the software and resources 
 used in the experimental evaluation.
-\note{Create the RO.}
 
 
 %\begin{listing}[!htb]

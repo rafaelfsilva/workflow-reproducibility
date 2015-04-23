@@ -31,7 +31,7 @@ issues related to them.
 
 Since workflows formally describe the sequence of computational and data 
 management tasks, it is easy to trace the origin of the data produced. Many workflow 
-systems capture provenance at runtime, which provides the lineage of data products 
+systems capture provenance at runtime, what provides the lineage of data products 
 and as such underpins the whole of scientific data reuse by providing the basis on which 
 trust and understanding are built. A scientist would be able to look at the workflow and 
 provenance data, retrace the steps, and arrive at the same data products. 
@@ -40,18 +40,19 @@ However, this information is not sufficient for achieving full reproducibility.
 %\note{Idafen, better introduce here concepts such as: Reproducibility, replicability, conservation,...}
 
 Reproducibility, replicability, and repeatability are often used as synonyms. Even when they
-pursuit similar goals, there are several differences between them. In this work we consider them
-as separated concepts~\cite{Drummond2011}. While replicability can be defined as an
+pursuit similar goals, there are several differences between them~\cite{Drummond2011}. In this work we consider them
+as separated concepts. While replicability can be defined as a
 strict recreation of the original experiment, using the same method, data and equipment, reproducibility
 implies that at least some changes have been introduced in the experiment, thus exposing 
 different features.  While being a less restrictive term, reproducibility
-is a key concept in science, as it allows the incremental research of scientific studies.
+is a key concept in science, as it allows the incremental research of scientific studies
+by modifying, improving and repurposing them. 
 
 In this work, we address the reproducibility of the execution environment for a scientific workflow, 
 as we do not aim to obtain an exact incarnation of the original one, but rather an 
 environment that is able to support the required capabilities exposed by the former 
 environment. In order to reproduce or replicate any digital artifact we need to properly handle its conservation.
-According to~\cite{King1995}, to achieve conservation one need to guarantee that \emph{``sufficient information
+According to~\cite{King1995}, to achieve conservation one needs to guarantee that \emph{``sufficient information
 exists with which to understand, evaluate, and build upon a prior work if a third party could replicate
  the results without any additional information from the author''}. Hence, we address workflow conservation
 in order to attain its reproducibility.
@@ -80,7 +81,7 @@ However, such infrastructures demand huge maintenance efforts, and there is no g
 that it will not change or suffer from a natural decay process~\cite{Gavish2011637}. 
 Furthermore, the infrastructure may be subjected to organization policies, which restrict 
 its access to a selective group of scientists, thereby limiting reproducibility to this restricted 
-group. On the other hand, data, code, and workflow description can be conserved by using 
+group. On the other hand, data, code, and workflow descriptions can be conserved by using 
 a logical approach, which is not subjected to natural decay processes.
 
 Accordingly, we propose a logical-oriented approach to conserve computational environments, 
@@ -93,7 +94,7 @@ VM images remains a challenging problem~\cite{Mao:2014:ROD:2600090.2512348,65528
 
 %\feedback{@Oscar: (following paragraph) big change in the story. Not sure about its usefulness}
 
-Inspired by the idea aforementioned ideas exposed in~\cite{King1995}, we aim to  define means 
+Inspired by the aforementioned ideas, exposed in~\cite{King1995}, we aim to  define means 
 for authors to share the relevant information about the execution environment of a given scientific
 workflow. We argue that by explicitly describing this knowledge we increase the reproducibility
 degree of the environment and of the workflow therefore.

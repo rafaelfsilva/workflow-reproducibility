@@ -5,7 +5,7 @@
 %In this section, we conduct a practical evaluation through experimentation in 
 %which we instantiate the semantic models (Figure~\ref{fig:wicusrels}) for three real 
 
-In this section, we instantiate the semantic models described in this paper
+In this section, we instantiate the semantic models introduced in section \ref{sec:reproducibility}
 (Figure~\ref{fig:wicusrels}) for three real scientific workflow applications. 
 This process is an extension of the one introduced
  in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate the improvements on our
@@ -67,7 +67,7 @@ The SoyKB workflow~\cite{soybean, Joshi01012014} is a genomics pipeline
 that re-sequences soybean germplasm lines selected for desirable traits such 
 as oil, protein, soybean cyst nematode resistance, stress resistance, and root 
 system architecture. The workflow (Figure~\ref{fig:workflow-soykb}) 
-implements a SNP and injection/deletion (indel) identification and analysis 
+implements a Single Nucleotide Polymorphism (SNP)  and injection/deletion (indel) identification and analysis 
 pipeline using the GATK haplotype caller~\cite{gatk} and a soybean reference 
 genome. The workflow analyzes samples in parallel to align them to the reference 
 genome, to de-duplicate the data, to identify indels and SNPs, and to merge and 
@@ -128,7 +128,7 @@ both depend on \texttt{Java} and \texttt{wget}. In addition, all components also
 depend on the operating system, which in our case is \texttt{CentOS}. The process
 to describe the deployment of the WMS components is based on the installation of
 and configuration processes as specified in their documentation. As a result, we will
-defined a set of installation scripts for each of the components. These scripts are 
+define a set of installation scripts for each of the components. These scripts are 
 included as part of the deployment plan along with their configuration information.
 The WMS components are defined as a requirement (WMS Requirements) using
 the \texttt{Workflow} domain ontology. This requirement is then linked to each
@@ -208,7 +208,7 @@ to describe computational resources. For each Cloud resource (Amazon EC2 and
 FutureGrid), we defined two virtual machines: one that meets the requirements for the 
 Montage and Epigenomics workflows (requires smaller disk space); and one for the 
 SoyKB workflow (requires larger disk space). In both cases, we generated conceptually 
-equivalent VMs appliances, as they both provide CentOS 6 operating system, but differed 
+equivalent VMs appliances, as they both provide the CentOS 6 operating system, but differ
 in the hardware configuration. We attempt to reduce the resource consumption of
 Cloud resources due to the cost for storing/transferring VM images. Since Vagrant
 execution is performed locally, we generated a single VM appliance that meets the 
@@ -219,7 +219,7 @@ Catalog (step 7 in Figure~\ref{fig:wicusflow}). We define  an Image Appliance th
 all VMs appliances into one single Scientific Virtual Appliance (\texttt{CentOS 6 SVA}). 
 As described in the Software domain ontology~\cite{wicus} a Scientific Virtual Appliance
 is defined by the set of software elements associated to it, while Image Appliances 
-describe the combination of hardware characteristics and infrastructure provider. Thus, 
+describe the combination of hardware characteristics and infrastructure providers. Thus, 
 we will have five different Image Appliances grouped into one single Scientific Virtual Appliance,
 defined by the Centos 6 software stack.
 Table~\ref{tab:imgapps} summarizes the main characteristics of the five appliances 
@@ -274,7 +274,7 @@ frequency.
 The last step on the process for achieving reproducibility in scientific workflows 
 (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm 
 (ISA) described in~\cite{wicus}. The algorithm retrieves the corresponding information for the 
-workflow and its dependencies from the annotations datasets, and calculates the 
+workflow and its dependencies from the annotation datasets, and calculates the 
 dependencies and compatibility between requirements and the available 
 computational resources. It also considers the software already installed on the
 resources to avoid unnecessary installation steps.
@@ -291,12 +291,12 @@ graph is then used to compute the intersection between the set of software compo
 from the Scientific Virtual Appliance (SVA) and the dependency graph of each sub-workflow. ISA selects the 
 intersection where the value is maximized for each sub-workflow. Software components 
 already available in the SVA are then removed from the chosen graph. To reduce 
-the number of SVAs, the algorithm attempts to merge sub-workflows requirements 
+the number of SVAs, the algorithm attempts to merge sub-workflow requirements 
 into a single SVA. Requirements can be merged if all their software components are 
 compatible. Finally, ISA generates a script (either using PRECIP or Vagrant) with 
 the set of required instructions to instantiate, configure, and deploy the computational 
 resources and software components on the corresponding provider. Listing~\ref{lst:pseudo}
-shows a pseudo-code of the algorithm.
+shows the pseudo-code of the algorithm.
           
 \begin{lstlisting}[caption={Pseudo-code overview of the Infrastructure Specification Algorithm (ISA).},label={lst:pseudo}]
 WorkflowRequirementsDataset.load();
@@ -355,7 +355,7 @@ one or more \texttt{Deployment Steps}.
 	\label{fig:stack-rel}
 \end{figure}
 
-Listing \ref{lst:plan-soykb} shows an example of the abstract plan for the SoyKB workflow. 
+Listing \ref{lst:plan-soykb} shows an example of the abstract plan for the SoyKB workflow generated by the ISA. 
 The first section of the plan (lines 1--26) describes the deployment of the \texttt{Pegasus 
 WMS} and its related dependencies. Note that this section is common across all deployment
 plans for the workflows covered in this work. The remaining lines describe how the SoyKB 
@@ -417,7 +417,7 @@ BWA-WRAPPER_SOFT_STACK stack
 \paragraph{\textbf{Execution Script}}
 In all cases, ISA is able to map the abstract plan either into a PRECIP or 
 a Vagrant script (depending on the specified provider). Each generated script 
-is composed by the following main sections:
+is composed of the following main sections:
 
 \begin{itemize}
 	\item \emph{Experiment Creation}: generates a new experiment using the 
@@ -431,7 +431,7 @@ is composed by the following main sections:
 		dependencies;
 
 	\item \emph{User Setup}: creates a user account on the VM (if it does not exist) 
-		and configures the necessary pair of SSH keys to enable file transfers and 
+		and configures the necessary pair of SSH keys to enable file transfer and 
 		execution. This account will be used to run the workflow;
 	   
 	\item \emph{Data Stage and Workflow Execution}: stages all the input data required 

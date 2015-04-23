@@ -459,8 +459,9 @@ to compare the resulting image (0.1 degree image of the sky) against the one gen
 by the baseline execution, obtaining a similarity factor of 1.0 (over 1.0) with a threshold of 
 0.85. In the Epigenomics and SoyKB workflows, the output data is non-deterministic due to
 the existence of probabilistic steps. In this case, the use of a hash method is unfeasible. 
-Hence, we have manually verified that the results are equivalent. In both cases the results 
-obtained in each infrastructure were equivalent in terms of their size (e.g., number of lines) 
+Hence, we validated the correct execution of the workflow by checking that correct output 
+files were actually produced, and that the standard errors produced by the applications did not contain any error message.
+In both cases the results obtained in each infrastructure were equivalent in terms of their size (e.g., number of lines) 
 and content.
 
 All the original and generated scripts are available as part of the experimental material 

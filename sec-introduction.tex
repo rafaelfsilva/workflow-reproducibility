@@ -1,13 +1,13 @@
 \section{Introduction}
 
-Reproducibility of results of scientific experiments is a cornerstone in 
-science. Therefore, the scientific community has been encouraging researchers 
+Reproducibility of results of scientific experiments is a cornerstone \rev{of the scientific 
+method}. Therefore, the scientific community has been encouraging researchers 
 to publish their contributions in a verifiable and understandable 
 way~\cite{YaleRoundtable09, James-XSEDE-2014}. In computational science, 
 or \emph{in-silico} science, reproducibility often requires that researchers make 
 code and data publicly available so that the data can be analyzed in a similar 
-manner as in the original work described in the publication. Code must be available 
-to be distributed, and data must be accessible in a readable format~\cite{bookReproducibility}. 
+manner as in the original work described in the publication. Code must be \rev{made } available, 
+and data must be accessible in a readable format~\cite{bookReproducibility}. 
 
 Scientific workflows are a useful representation for managing the execution of large-scale 
 computations. Many scientists now formulate their computational problems as scientific 
@@ -20,7 +20,7 @@ The workflow representation not only facilitates the creation and management of 
 computation but also builds a foundation upon which results can be validated and 
 shared. 
 
-Many efforts have been reported on studying the reproducibility of scientific results 
+\rev{Much research has focused } on studying the reproducibility of scientific results 
 in life sciences. Some studies clearly show the difficulties when trying to replicate 
 experimental results in biology~\cite{Ioannidis2009}. The \emph{Reproducibility 
 Project: Cancer Biology}~\cite{ErringtonCancerRerpoducibility} is an active project 
@@ -32,7 +32,7 @@ issues related to them.
 Since workflows formally describe the sequence of computational and data 
 management tasks, it is easy to trace the origin of the data produced. Many workflow 
 systems capture provenance at runtime, what provides the lineage of data products 
-and as such underpins the whole of scientific data reuse by providing the basis on which 
+and as such underpins scientific \rev{understanding and } data reuse by providing the basis on which 
 trust and understanding are built. A scientist would be able to look at the workflow and 
 provenance data, retrace the steps, and arrive at the same data products. 
 However, this information is not sufficient for achieving full reproducibility.
@@ -40,16 +40,16 @@ However, this information is not sufficient for achieving full reproducibility.
 %\note{Idafen, better introduce here concepts such as: Reproducibility, replicability, conservation,...}
 
 Reproducibility, replicability, and repeatability are often used as synonyms. Even when they
-pursuit similar goals, there are several differences between them~\cite{Drummond2011}. In this work we consider them
+\rev{pursue } similar goals, there are several differences between them~\cite{Drummond2011}. In this work we consider them
 as separated concepts. While replicability can be defined as a
 strict recreation of the original experiment, using the same method, data and equipment, reproducibility
 implies that at least some changes have been introduced in the experiment, thus exposing 
 different features.  While being a less restrictive term, reproducibility
-is a key concept in science, as it allows the incremental research of scientific studies
-by modifying, improving and repurposing them. 
+is a key concept in science, as it allows incremental research 
+by modifying, improving and repurposing \rev{the experimental methods and conditions}. 
 
 In this work, we address the reproducibility of the execution environment for a scientific workflow, 
-as we do not aim to obtain an exact incarnation of the original one, but rather an 
+as we do not aim to obtain an exact incarnation of the original \rev{setup}, but rather an 
 environment that is able to support the required capabilities exposed by the former 
 environment. In order to reproduce or replicate any digital artifact we need to properly handle its conservation.
 According to~\cite{King1995}, to achieve conservation one needs to guarantee that \emph{``sufficient information
@@ -62,7 +62,7 @@ In~\cite{Garijo2013}, authors explain the problems they faced when they tried to
 reproduce an experiment~\cite{drugomePrimer} for mapping all putative FDA 
 and European drugs to protein receptors within the scope of a given proteome. For 
 each identified problem, they enumerate a set of suggestions for addressing the related
-issues. In four out of the total six advises, execution environment problems are mentioned.
+issues. In four out of the total six \rev{cases}, execution environment problems are mentioned.
 
 Currently, most of the approaches in computational science conservation, in particular 
 for scientific workflow executions, have been focused on data, code, and the workflow 
@@ -96,10 +96,10 @@ VM images remains a challenging problem~\cite{Mao:2014:ROD:2600090.2512348,65528
 
 Inspired by the aforementioned ideas, exposed in~\cite{King1995}, we aim to  define means 
 for authors to share the relevant information about the execution environment of a given scientific
-workflow. We argue that by explicitly describing this knowledge we increase the reproducibility
-degree of the environment and of the workflow therefore.
+workflow. We argue that by explicitly describing this knowledge we increase \rev{the degree of 
+reproducibility } of the environment and of the workflow.
 
-Semantics have been proposed as a way for attaining curation and conservation of the digital 
+Semantics have been proposed as a way \rev{of } attaining curation and conservation of the digital 
 assets related to scientific experiments (e.g., biomedical research~\cite{MaloneSWO2014}). 
 Our approach uses semantic-annotated workflow descriptions to generate lightweight scripts 
 for an experiment management API that can reconstruct the required infrastructure. We 
@@ -115,11 +115,11 @@ workflow execution in different Cloud platforms.
 %In this work, we entail reproducibility from the execution environment point of view. For the sake of showing how our approach works, we have also included the data and the workflow execution of the experiments we study in this paper.
 
 The semantics modeling of computational resources and some of the reproducibility tools 
-were introduced and evaluated in~\cite{SantanaPerez-REPPAR-2014} for a single astronomic 
-scientific workflow application. In this work, we extend our previous work by introducing 1) a set 
+were introduced and evaluated in~\cite{SantanaPerez-REPPAR-2014} for a single \rev{astronomy } 
+workflow. In this work, we extend our previous work by introducing 1) a set 
 of new features to our framework (as a result of our previous work), 2) a study of two new life 
 sciences workflows based on genomic processing applications, and 3) a practical evaluation 
-of the framework with the new features for the astronomic workflow as well as the two new 
+of the framework with the new features for the \rev{astronomy } workflow as well as the two new 
 life science workflows. 
 
 The paper is organized as follows. Section~\ref{sec:semantic} describes our semantic approach 

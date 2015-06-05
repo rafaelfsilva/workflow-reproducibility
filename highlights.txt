@@ -1,0 +1,3 @@
+A semantic modeling approach to conserve computational environments of scientific workflow executions is proposed.
+We define a process for describing workflow applications, their workflow management system and  dependencies.
+Two life science applications and one astronomy application are documented and reproduced.

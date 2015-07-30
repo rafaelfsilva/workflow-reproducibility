@@ -14,7 +14,7 @@ This process is an extension of the one introduced
 We study and document these workflows and their execution environments, which include the application software components 
 and the workflow management system.
 
-The goal of this experiment is to reproduce original workflow executions \rev{on } the three different 
+The goal of this experiment is to reproduce original workflow executions on the three different 
 Cloud scenarios introduced in this work: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws} 
 using PRECIP, and a local execution environment by using Vagrant. 
 FutureGrid is an academic Cloud testbed facility that includes a number of computational 
@@ -103,7 +103,7 @@ production workflow, however it carries out the same process and
 
 In this subsection, we present the annotations generated for each of the scientific 
 workflows presented above and the Pegasus WMS using the WICUS ontology
-network. All the annotations generated in this work are available \rev{through } the 
+network. All the annotations generated in this work are available through the 
 Research Object (RO)~\cite{researchObjects} associated to this paper~\cite{fgcs-2015-object}.
 
  As described in Figure~\ref{fig:wicusflow}, the first step in the process of 
@@ -123,7 +123,7 @@ semantic annotations in detail:
 \paragraph{\textbf{Workflow Management System}}
 We use the \texttt{Software} domain ontology to describe the components that
 compose the workflow engine (in this case Pegasus) as individuals, and to 
-represent its dependencies. Pegasus relies on \texttt{HTCondor} as \rev{the } task manager, and 
+represent its dependencies. Pegasus relies on \texttt{HTCondor} as the task manager, and 
 both depend on \texttt{Java} and \texttt{wget}. In addition, all components also
 depend on the operating system, which in our case is \texttt{CentOS}. The process
 to describe the deployment of the WMS components is based on the installation of
@@ -166,7 +166,7 @@ sub-components that are defined as dependencies in the software catalog
 Following the same approach as in the previous case, we use the \texttt{Workflow} 
 domain ontology to describe the Epigenomics workflow as an individual that represents 
 the top level workflow, and another 8 individuals representing its sub-workflows, one 
-for each transformation (Figure~\ref{fig:annotations-genome}). \rev{We then annotate } 
+for each transformation (Figure~\ref{fig:annotations-genome}). We then annotate 
 the components described in the Epigenomics' Transformation Catalog as individuals 
 using the \texttt{Software} domain ontology. We have also identified and annotated 6 
 software dependencies related to the workflow, which include the Perl~\cite{perl} interpreter, 
@@ -198,7 +198,7 @@ work, it defines only four software components as dependencies (\texttt{bwa-wrap
 \texttt{gatk-wrapper}, \texttt{picard-wrapper}, and \texttt{software-wrapper}). These 
 components  are software wrappers that invoke different libraries and binaries depending 
 on the parameters used for the execution of the workflow. The components are included 
-\rev{in } a software bundle that is deployed on the computational nodes. Hence, a 
+in a software bundle that is deployed on the computational nodes. Hence, a 
 dependency for this bundle has been included in the Software 
 Components Catalog.
 
@@ -210,7 +210,7 @@ Montage and Epigenomics workflows (requires smaller disk space); and one for the
 SoyKB workflow (requires larger disk space). In both cases, we generated conceptually 
 equivalent VMs appliances, as they both provide the CentOS 6 operating system, but differ
 in the hardware configuration. We attempt to reduce the resource consumption of
-Cloud resources due to the cost \rev{of } storing/transferring VM images. Since Vagrant
+Cloud resources due to the cost of storing/transferring VM images. Since Vagrant
 execution is performed locally, we generated a single VM appliance that meets the 
 requirements of all workflows. 
 
@@ -218,7 +218,7 @@ The description of the appliances is then included in the Scientific Virtual App
 Catalog (step 7 in Figure~\ref{fig:wicusflow}). We define  an Image Appliance that groups 
 all VMs appliances into one single Scientific Virtual Appliance (\texttt{CentOS 6 SVA}). 
 As described in the Software domain ontology~\cite{wicus} a Scientific Virtual Appliance
-is defined by the set of software elements associated \rev{with } it, while Image Appliances 
+is defined by the set of software elements associated with it, while Image Appliances 
 describe the combination of hardware characteristics and infrastructure providers. Thus, 
 we will have five different Image Appliances grouped into one single Scientific Virtual Appliance,
 defined by the Centos 6 software stack.
@@ -251,7 +251,7 @@ process (described in the following section), we will consider that any resource
 meets the requirements specified by a workflow will be a valid candidate for running 
 the workflow. Since we do not target workflow execution performance, but a correct 
 execution of the workflow, we have not identified any specific capacity regarding CPU
-\rev{clock speed}.
+clock speed.
 
 \begin{table}[!htb]
 	\centering
@@ -286,7 +286,7 @@ the requirements of the workflow. The algorithm retrieves and propagates the WMS
 requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its 
 related sub-workflows (as defined in Figure~\ref{fig:annotations}). Requirements 
 and software components are matched, and a dependency graph is built based 
-on the \rev{relationship } between the requirements and the component dependencies. This 
+on the relationship between the requirements and the component dependencies. This 
 graph is then used to compute the intersection between the set of software components 
 from the Scientific Virtual Appliance (SVA) and the dependency graph of each sub-workflow. ISA selects the 
 intersection where the value is maximized for each sub-workflow. Software components 
@@ -342,10 +342,10 @@ target provider (line 27).
 This layer allows WICUS to generate abstract deployment plans regardless of the
 underlying execution tool. The abstract plan is based on the WICUS Software~\cite{wicus} 
 domain ontology, which defines the software stacks that should be deployed in the 
-execution platform. Figure~\ref{fig:stack-rel} shows the \rev{relationships } between the different
+execution platform. Figure~\ref{fig:stack-rel} shows the relationships between the different
 elements that compose the \texttt{Stack} domain ontology. A \texttt{Software Stack} may
-be composed \rev{of } one or more \texttt{Software Components}. Each of them has an associated 
-\texttt{Deployment Plan} according to the target execution platform, which is composed \rev{of } 
+be composed of one or more \texttt{Software Components}. Each of them has an associated 
+\texttt{Deployment Plan} according to the target execution platform, which is composed of 
 one or more \texttt{Deployment Steps}.
 
 \begin{figure}[!htb]
@@ -446,7 +446,7 @@ require superuser privileges on the VM. The workflow execution, however, is perf
 under the user account created in the third section.
 
 We executed the resultant scripts for the three workflows over their corresponding 
-platforms. That is, a total of 9 different executions, as each workflow is executed \rev{on } 
+platforms. That is, a total of 9 different executions, as each workflow is executed on  
 Futuregrid and Amazon EC2 using PRECIP, and in a local Vagrant execution 
 environment. All the executions were compared to their original one in a predefined 
 VM image, where the execution environment was already in place.

@@ -1,0 +1,308 @@
+\documentclass{letter}
+\usepackage{graphicx}
+\usepackage{color}
+\date{Aug 31, 2015}
+
+\newenvironment{review}%          environment name
+{\textbf{Reviewer comment:}\begin{quote}}% begin code
+{\end{quote}}%  
+
+\newcommand{\todo}[1]{%                                                                                                                            
+      \color{red}\textbf{[TODO]} #1\color{black}}
+
+\newcommand{\answer}[1]{%                                                                                                                            
+      \textbf{Answer:} #1}
+
+\usepackage{hyperref}
+
+\newcommand{\revised}[1]{\emph{#1}\color{black}}
+\newcommand{\rev}[1]{\color{blue} #1\color{black}}
+
+\begin{document}
+
+\begin{letter}{}
+
+\opening{Dear Editor and Reviewers,}
+
+We would like to thank you for your thorough review and the useful
+comments and suggestions formulated about our paper 
+``Reproducibility of Execution Environments in Computational Science Using Semantics and Clouds'' 
+submitted to Future Generation Computer Systems.
+
+The remainder of this letter contains our answers to your reviews. 
+
+We thank you again for your valuable review, and we remain available for any further information you may need.
+
+\vspace{0.5cm}
+
+Sincerely yours,
+
+\vspace{1cm}
+
+Idafen Santana-Perez, Rafael Ferreira da Silva, Mats Rynge, Ewa Deelman, Mar\'ia~S.~P\'erez-Hern\'andez, Oscar Corcho
+
+\newpage
+
+
+%
+% Reviewer 1
+%
+\textbf{Reviewer 1}
+
+
+\begin{review}
+What is reused from the previous works [21, 22] should be clarified, and the focus should be given on the new features (semantic modeling or algorithms).
+\end{review}
+
+\answer{\todo{add response}}
+
+\revised{}
+
+
+\begin{review}
+The structure of the paper could be clarified by, whenever possible, not mixing modeling and tooling aspects (beginning of 3.2.1, fig. 9 in 4.3). These modeling aspects should reinforce section 2.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+The related works section does not provide a positioning of the approach, whereas it is clearly described in [22].
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+The paper does not provide a discussion of the approach and results. The discussion could describe and analyze what is automated and what is manual in the overall process. It would be very helpful to evaluate the cost of preserving a computing infrastructure associated to an in-silico experiment, in terms of semantic annotation of the workflow, the workflow management systems, the infrastructure, in terms also of software packaging in virtual machines.
+\end{review}
+
+\answer{\todo{add discussion at the end of section 4 about the results}}
+
+
+\begin{review}
+In addition, it would be interesting to have more information on the extensibility of this approach to other cloud middleware or workflow management systems.
+\end{review}
+
+\answer{\todo{add to conclusion section. check future work, make an explicit mention, currently we're working on that. mention it on the letter}}
+
+
+\begin{review}
+The perspectives could be reinforced with respect to the Linked Data movement, the needs to provide data management plans in large scale research projects, etc.
+\end{review}
+
+\answer{\todo{section 4.2: following the principles of linked data, also as future work}}
+
+
+\begin{review}
+Finally, I really appreciated the availability of the supplementary materials. Even if I could not complete the execution of the "epigenomics" workflow (timeout with 2 success jobs, and 67 unsubmitted jobs), I could easily deploy a local computing environment with Vagrant, and run one of the paper experiments.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 2: The content of this section does not clearly state if it is a contribution of this paper or not with respect to [21,22]. The new features should be clearly described. To complement what has been introduced in [21,22] a simple ``running'' example in the form of RDF triples (turtle syntax) could illustrate the expressivity of the WICUS vocabularies in terms of workflow annotations, software \& hardware constraints as well as available virtual appliances. It would also illustrate how these informations could be queried to automate the process of in silico experiment deployment.
+\end{review}
+
+\answer{\todo{added new concepts (version 2 of wicus). turtle example + sparql query}}
+
+
+\begin{review}
+Section 2: This semantic modeling section should also clearly show how the proposed vocabularies are related to other ones such as, for instance, P-PLAN or PROV for the workflow descriptions.
+\end{review}
+
+\answer{\todo{aligned with pplan and dcterms?}}
+
+
+\begin{review}
+Section 3: Since the transformation catalog of Pegasus is part of the WICUS process fig 2, it should be better introduced in 3.1.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 3: The first part of 3.2.1 concerns the semantic modeling and not the tooling, it should be moved to section 2.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 3: The 11 steps of 3.2.1 are not easy to follow. Maybe reducing the number of steps and focusing on the processing steps (DAX and TC annotator, Inf. Spec. Algorithm, Script generator), would ease the understanding. Also, it would be interesting to see what are the overall inputs of this workflow.
+\end{review}
+
+\answer{\todo{modify figure 2, change colors and split it in 2 main phases}}
+
+
+\begin{review}
+Section 3: In 3.2.2 ``interactions with the provisioned instances are done by tagging'', is not clear.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 4: This section instantiate the semantic models and run the WICUS process to reproduce 3 workflows. Since the ISA algorithm is part of the core of the approach, it should be introduced and described earlier.
+\end{review}
+
+\answer{\todo{move}}
+
+
+\begin{review}
+Section 4: Figures 7 and 8 are not really informatives.
+\end{review}
+
+\answer{\todo{remove at least 1, keep montage}}
+
+
+\begin{review}
+Section 4: The use of terms "Image appliance", "Virtual appliance", "Scientific virtual appliance" are confusing. The sentence "We define an Image Appliance that groups all VMs appliances into one single Scientific Virtual Appliance" is unclear.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 4: In 4.3 ``ISA selects the intersection where the value is maximized for each sub-workflow''. It is unclear, which value do you refer to ? An example would be useful here.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 4: Listing 1 : the text describing the pseudo code should refer to the lines of the listing. It is only true for lines 23 to 27.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 4: The model of an Abstract Deployment Plan should be described in section 2.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 4: The results of the experiment should constitute a single subsection 4.4.
+\end{review}
+
+\answer{\todo{create a subsection}}
+
+
+\begin{review}
+Section 5: A positioning of the approach would reinforce the paper message, in particular with respect to the ReproZip approach which addresses the same objectives, and which also relies on Vagrant to automate the deployment of experiment.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 5: I don't see why Galaxy does not cover the local development of workflows. E-scientists can deploy a local galaxy server on their laptop and encapsulate or deploy binary softwares even outside the domain of ``omic'' data analysis.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 5: Links with the generic parts of SWO and EDAM ontologies should be highlighted. Existing works on modeling Cloud based infrastructures could also be mentioned.
+\end{review}
+
+\answer{\todo{add example and cloud ontologies}}
+
+
+\begin{review}
+Section 6: From an e-science perspective, a summary of what is needed to implement a reproducible computing environment with WICUS would be helpful.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 6: The results of the paper could also highlight what is stated in the introduction (``reproducibility implies that at least some changes have been introduced in the experiment''), by giving hints on how this approach ease e-scientists in changing some of the parameters of the experiments.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 6: Perspectives could be drawn on the benefits of publishing computing environment annotations as linked data.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+Section 6: ``...at the same time addresses the challenges of high storage demand of VM images.''; it should be clearly explained in the results section.
+\end{review}
+
+\answer{\todo{try to calculate how much we are saving, even compared to docker. We are saving just by reusing pegasus+condor with 3 wfs}}
+
+
+\begin{review}
+Section 6: "The drawback of our approach is that it assumes that the application ...  are publicly available.", it is rather a necessary condition to reproduce a software execution.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+A lot of references are URLs pointing to tools or projects. They should be added in the paper as footnotes.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+\begin{review}
+the WMS requirements, and and one for each $\rightarrow$ the WMS requirements, and one for each \\
+a well know workflow $\rightarrow$ a well known workflow \\
+WICUS is a on-going effort $\rightarrow$ WICUS is aN on-going effort \\
+for their valuable help $\rightarrow$ for their valuable help.
+\end{review}
+
+\answer{\todo{add response}}
+
+
+
+\newpage
+
+%
+% Reviewer 2
+%
+\textbf{Reviewer 2}
+
+
+\begin{review}
+The description of the infrastructure, at least at the level of the experiment, is very basic (architecture, RAM, DISK). There are other important and complex features such as networks, additional disks, etc. that require both configuration and direct actions on the infrastructure provider. It is clear that the objective of the system is not to provide an environment for the deployment of customised virtual infrastructures, which could imply tens or hundreds of nodes with special configurations, but to instantiate a small-scale compatible infrastructure. The question is if this would suffice the execution of the experiments in regular scientific papers.
+\end{review}
+
+\answer{\todo{justify that are evidences that show that many workflows fit in our approach (a relevante set of them). Justify that in this work we are assuming that we have a reliable network. We are targeting reproducibility, not replicability. We are not targeting large scale reproducibility}}
+
+\revised{}
+
+
+\begin{review}
+Other important concern is the selection of the technologies. Currently, cloud infrastructures are becoming to adopt TOSCA specification and TOSCA templates to deploy and configure the environments. Comparison to WICUS should be made. Moreover, other DevOps tools such as cloudify (getcloudify.org), Infrastructure Manager (www.grycap.upv.es/im), cloudformation from AWS, to name a few, have moved from script-based configuration systems to declarative templates based on Ansible. These technological decisions should be analysed.
+\end{review}
+
+\answer{\todo{step 10, open to new technologies, in this paper we introduce our current use case}}
+
+
+\begin{review}
+The impact in disk of the VMIs is important, but it is not the bottleneck, but the data. Moreover, the use of containers will strongly mitigate this fact. A good management of base VM image and the use of containers for the different experiments may be efficient. Regarding the data, scientific experiments, and specially those dealing with genomics and astrophyiscs may require huge amounts of data, and transferring it back and forth may not be efficient. The integration of this solution with data preservation infrastructures can be studied.
+\end{review}
+
+\answer{\todo{RAFAEL: wf footprint is way heavier than the input data. We can also use containers, and still save space}}
+
+
+\begin{review}
+Finally, a major part of the article is dedicated to the description of the workflow use cases. Despite that the inclusion of three different use cases is interesting, effort should concentrate more on how they challenge the system. Additional information, such as specifications, and why not, actual reproducibility of the experiments in the article would be important.
+\end{review}
+
+\answer{\todo{why would be important to reproduce them: think and try to motivate...}}
+
+
+\end{letter}
+\end{document}

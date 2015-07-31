@@ -43,20 +43,7 @@ Below, we describe each of these tools in detail.
 \subsubsection{WICUS}
 \label{subsec:wicus}
 
-The Workflow Infrastructure Conservation Using Semantics ontology 
-(WICUS) is an OWL2 (Web Ontology Language) ontology network that 
-implements the semantic models introduced in Section~\ref{sec:semantic}. This ontology 
-network is available online~\cite{wicus-online} and its goal is to define the relevant and 
-required properties for describing scientific computational infrastructures. 
-The detailed description of the ontologies, including their main terms and relation
-in the context of a workflow execution are provided in~\cite{wicus}.
-Currently, two versions of the ontology network have been released. The latest one, released in
-August 2014,  includes a set of new properties for better describing software and hardware requirements, 
-and also for including the output information of a configuration process (e.g., the resultant IP and port on
-which a recently deployed service will be listening).
-
-
-Besides the ontology network, a set of components have been developed around it, 
+Besides the ontology network introduced before, a set of components have been developed around it, 
 for facilitating the annotation of the resources involved in the execution of a scientific workflow. 
 These tools are not fully automated yet, but represent a first step in helping users define the requirements of their 
 experiments. Figure~\ref{fig:wicusflow} shows the main modules, their flow and intermediate 
@@ -128,9 +115,8 @@ and the applicability of each module for the target scientific workflows.
 \subsubsection{PRECIP}
 The Pegasus Repeatable Experiments for the Cloud in Python (PRECIP)~\cite{Azarnoosh-CRC-2013} 
 is a flexible experiment management control API for running experiments on all types of Clouds, 
-including academic Clouds such as FutureGrid~\cite{futuregrid} and the NSFCloud~\cite{chameleon,cloudlab}
-(through OpenStack), and commercial Clouds such as Amazon EC2~\cite{aws} and Google 
-Compute Engine~\cite{gce}. In PRECIP, interactions with the provisioned instances are done by 
+including academic Clouds such as FutureGrid\footnote{http://portal.futuregrid.org (accessed 2015-04-10)} and the NSFCloud\footnote{http://www.chameleoncloud.org (accessed 2015-04-10)}\textsuperscript{,}\footnote{http://cloudlab.us (accessed 2015-04-10)}
+(through OpenStack), and commercial Clouds such as Amazon EC2\footnote{http://aws.amazon.com/ec2 (accessed 2015-04-10)} and Google Compute Engine\footnote{https://cloud.google.com/compute (accessed 2015-04-10)}. In PRECIP, interactions with the provisioned instances are done by 
 tagging. When an instance is provisioned, the scientist can add arbitrary tags to that instance in 
 order to identify and group the instances in the experiment. API methods such as running remote 
 commands, or copying files, all use tags to specify which instances to target. PRECIP does not 
@@ -149,13 +135,13 @@ former experiment, and run it on a Cloud platform.
 
 Vagrant~\cite{palat2012introducing} is an open-source and multi-platform solution for deploying 
 development environments locally using virtualization. It relies on virtualization solutions such as 
-Oracle VirtualBox~\cite{Watson2008} (also open-source) or  VMWare~\cite{vmware}, and support 
+Oracle VirtualBox~\cite{Watson2008} (also open-source) or  VMWare\footnote{http://www.vmware.com (accessed 2015-04-10)}, and support 
 Amazon EC2-like server configurations. Since version 1.6 it also supports Docker~\cite{Merkel2014} 
 containers.
 Vagrant provides a set of commands and configuration files to enact and customize virtual machines
 (also referred to as boxes). It allows defining the set of commands and/or scripts to be executed during 
 the different stages of the booting process. Several base images are publicly available for users to 
-download and customize~\cite{vagrantbox}. 
+download and customize\footnote{http://www.vagrantbox.es (accessed 2015-04-10)}. 
  
 In this work, we introduce how Vagrant can be used for achieving reproducibility in a local execution
 environment---usually a scientist's laptop/desktop computer. As a result, users are able to repeat and 

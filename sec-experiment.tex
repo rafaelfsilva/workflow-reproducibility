@@ -10,12 +10,12 @@ In this section, we instantiate the semantic models introduced in section \ref{s
 This process is an extension of the one introduced
  in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate the improvements on our
  approach to the Montage~\cite{Montage} workflow, and also evaluate the
- Epigenomics~\cite{genome}, and SoyKB~\cite{soybean, Joshi01012014} workflows.
+ Epigenomics\footnote{http://epigenome.usc.edu/,(accessed 2015-04-10)}, and SoyKB~\cite{soybean, Joshi01012014} workflows.
 We study and document these workflows and their execution environments, which include the application software components 
 and the workflow management system.
 
 The goal of this experiment is to reproduce original workflow executions on the three different 
-Cloud scenarios introduced in this work: FutureGrid~\cite{futuregrid} and Amazon EC2~\cite{aws} 
+Cloud scenarios introduced in this work: FutureGrid and Amazon EC2
 using PRECIP, and a local execution environment by using Vagrant. 
 FutureGrid is an academic Cloud testbed facility that includes a number of computational 
 resources at distributed locations. Amazon Web Services EC2 is a public infrastructure 
@@ -45,7 +45,7 @@ mosaic.
 
 
 \paragraph{\textbf{Epigenomics}}
-The USC Epigenome Center~\cite{genome} is currently involved in mapping the epigenetic 
+The USC Epigenome Center is currently involved in mapping the epigenetic 
 state of human cells on a genome-wide scale. The Epigenomics workflow 
 (Figure~\ref{fig:workflow-genome}) processes multiple sets of genome sequences in
 parallel. These sequences are split into subsets, the subsets are filtered to remove
@@ -68,7 +68,7 @@ that re-sequences soybean germplasm lines selected for desirable traits such
 as oil, protein, soybean cyst nematode resistance, stress resistance, and root 
 system architecture. The workflow (Figure~\ref{fig:workflow-soykb}) 
 implements a Single Nucleotide Polymorphism (SNP)  and injection/deletion (indel) identification and analysis 
-pipeline using the GATK haplotype caller~\cite{gatk} and a soybean reference 
+pipeline using the GATK haplotype caller\footnote{https://www.broadinstitute.org/gatk,(accessed 2015-04-10)} and a soybean reference 
 genome. The workflow analyzes samples in parallel to align them to the reference 
 genome, to de-duplicate the data, to identify indels and SNPs, and to merge and 
 filter the results. The results are then used for genome-wide association studies 
@@ -104,16 +104,20 @@ production workflow, however it carries out the same process and
 In this subsection, we present the annotations generated for each of the scientific 
 workflows presented above and the Pegasus WMS using the WICUS ontology
 network. All the annotations generated in this work are available through the 
-Research Object (RO)~\cite{researchObjects} associated to this paper~\cite{fgcs-2015-object}.
+Research Object (RO)~\cite{researchObjects} associated to this paper\footnote{http://purl.org/net/FGCS-Wicus-Pegasus-Repro}.
 
  As described in Figure~\ref{fig:wicusflow}, the first step in the process of 
 documenting a workflow is the annotation of the workflow DAX file. We use the 
 \texttt{Workflow} domain ontology to describe a workflow as 1) an individual that 
 represents the top level workflow, and 2) a set of individuals representing its 
 sub-workflows, one for each transformation. We then generate the necessary 
-requirements, one for the top level workflow, which specifies the WMS requirements, and
+requirements, one for the top level workflow, which specifies the WMS requirements,
 and one for each sub-workflow, which defines the software components required 
-by each transformation. 
+by each transformation. \rev{The data generated using this process follows the 
+Linked Data~\cite{XXX} principles, as it uses HTTP URIs, exposing them using RDF standards. }
+
+\todo{add linked data citation}
+
 Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated 
 using the WICUS ontology network for the Montage, Epigenomics, and SoyKB 
 workflows as well as for the Pegasus WMS. Below, we describe each of these
@@ -166,11 +170,11 @@ sub-components that are defined as dependencies in the software catalog
 Following the same approach as in the previous case, we use the \texttt{Workflow} 
 domain ontology to describe the Epigenomics workflow as an individual that represents 
 the top level workflow, and another 8 individuals representing its sub-workflows, one 
-for each transformation (Figure~\ref{fig:annotations-genome}). We then annotate 
+for each transformation. We then annotate 
 the components described in the Epigenomics' Transformation Catalog as individuals 
 using the \texttt{Software} domain ontology. We have also identified and annotated 6 
-software dependencies related to the workflow, which include the Perl~\cite{perl} interpreter, 
-the GNU libc~\cite{libc} and Libstdc++~\cite{libstdc} libraries, and two other binaries from 
+software dependencies related to the workflow, which include the Perl\footnote{https://www.perl.org (accessed 2015-04-10)} interpreter, 
+the GNU libc\footnote{http://www.gnu.org/software/libc,(accessed 2015-04-10)} and Libstdc++\footnote{http://gcc.gnu.org/libstdc++ (accessed 2015-04-10)} libraries, and two other binaries from 
 the Epigenomics  distribution, \texttt{maq} and \texttt{maqindex}.
 
 \begin{figure}[!t]
@@ -181,12 +185,12 @@ the Epigenomics  distribution, \texttt{maq} and \texttt{maqindex}.
 \end{figure}
 
 
-\begin{figure}[!t]
-	\centering
-	\includegraphics[width=.85\linewidth]{figures/annotations-genome}
-	\caption{Annotations for the Epigenomics workflows using the \texttt{Workflow} domain ontology.}
-	\label{fig:annotations-genome}
-\end{figure}
+%\begin{figure}[!t]
+%	\centering
+%	\includegraphics[width=.85\linewidth]{figures/annotations-genome}
+%	\caption{Annotations for the Epigenomics workflows using the \texttt{Workflow} domain ontology.}
+%	\label{fig:annotations-genome}
+%\end{figure}
 
 
 \paragraph{\textbf{SoyKB Workflow}}
@@ -454,7 +458,7 @@ VM image, where the execution environment was already in place.
 Results show that the VM execution environments deployed by all scripts are able to
 fully execute their related workflows. To check that not only the workflows are successfully executed but also 
 that the results are correct and equivalent, we checked their produced output data. In the 
-case of Montage, which produces an image as output, we used a perceptual hash tool~\cite{phash}
+case of Montage, which produces an image as output, we used a perceptual hash tool\footnote{http://www.phash.org (accessed 2015-04-10)}
 to compare the resulting image (0.1 degree image of the sky) against the one generated 
 by the baseline execution, obtaining a similarity factor of 1.0 (over 1.0) with a threshold of 
 0.85. In the Epigenomics and SoyKB workflows, the output data is non-deterministic due to
@@ -466,7 +470,7 @@ and content.
 
 All the original and generated scripts are available as part of the experimental material 
 included in the RO associated with this 
-work~\cite{fgcs-2015-object}. This RO also contains pointers to the software and resources 
+work. This RO also contains pointers to the software and resources 
 used in the experimental evaluation.
 
 

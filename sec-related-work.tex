@@ -25,7 +25,12 @@ The Executable Paper Grand Challenge~\cite{elsevierchallenge} and the SIGMOD con
 %\feedback{@Maria: add more references to previous work on life science reproducibility}
 %\note{Idafen: there are several references to this in the introduction. Should we repeat them here?}
 
-Galaxy~\cite{goecks2010galaxy}, a well known workflow system in the context of life sciences, introduced a web-service based system for achieving accessible and reproducible computations, hiding the implementation details of the underlying tools for workflow developers, providing a web-based interface for retrieving an analyzing genomic data. Even when this approach has proved to be successful in several cases, we argue that it does not cover local development of workflows, which is a common case in computational science.  
+Galaxy~\cite{goecks2010galaxy}, a well known workflow system in the context of life sciences, introduced a web-service based system for achieving accessible and reproducible computations, hiding the implementation details of the underlying tools for workflow developers, providing a web-based interface for retrieving an analyzing genomic data. \rev{This approach has proved to be successful in several cases and, even when it works in a local execution scenario, it is mostly used for developing workflows with external services dependencies. Thus, it is not so suitable for our reproducibility approach, which mainly focused on workflows without this kind of dependencies, as they are out of workflow developer control.}
+
+
+% Even when this approach has proved to be successful in several cases, we argue that it does not cover local development of workflows, which is a common case in computational science.  
+
+%\todo{state that most galaxy wfs are developed usually using external services rather than local, and thus it does not fit into our REPRODUCIBILITY approach}
 
 
 Software components cannot be preserved just by maintaining their binary executable code, but by guaranteeing the performance of their features. In~\cite{Matthews}, the concept of adequacy is introduced to measure how a software component behaves relative to a certain set of features. Our work is based on this same concept, where we build a conceptual model to semantically annotate the relevant properties of each software component. Then, we use scripting to reconstruct an equivalent computational environment using these annotations.

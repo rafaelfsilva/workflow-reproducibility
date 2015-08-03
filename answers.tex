@@ -54,9 +54,9 @@ Idafen Santana-Perez, Rafael Ferreira da Silva, Mats Rynge, Ewa Deelman, Mar\'ia
 What is reused from the previous works [21, 22] should be clarified, and the focus should be given on the new features (semantic modeling or algorithms).
 \end{review}
 
-\answer{\todo{add response}}
+\answer{We have reinforced the main contributions of this work with respect to our previous work, stating in the introduction new additions and modifications. We also have explained those contributions in their corresponding sections, including examples.}
 
-\revised{}
+%\revised{}
 
 
 \begin{review}
@@ -100,14 +100,16 @@ The perspectives could be reinforced with respect to the Linked Data movement, t
 Finally, I really appreciated the availability of the supplementary materials. Even if I could not complete the execution of the "epigenomics" workflow (timeout with 2 success jobs, and 67 unsubmitted jobs), I could easily deploy a local computing environment with Vagrant, and run one of the paper experiments.
 \end{review}
 
-\answer{\todo{add response}}
+\answer{We highly value that the experiment were able to be reproduced based on the experimental material provided. We have checked that they can be run in public providers, such as AWS and OpenStack-based ones, whereas local reproduction using Vagrant may vary depending on the target computer. Several issues with RAM memory virtualization have been identified when working with Vagrant/VirtualBox solutions, which may cause timeouts in high memory consuming workflows such as Epigenomics. We would be glad to study and try to solve this precise case, as it is a valuable feedback to our work.}
 
 
 \begin{review}
 Section 2: The content of this section does not clearly state if it is a contribution of this paper or not with respect to [21,22]. The new features should be clearly described. To complement what has been introduced in [21,22] a simple ``running'' example in the form of RDF triples (turtle syntax) could illustrate the expressivity of the WICUS vocabularies in terms of workflow annotations, software \& hardware constraints as well as available virtual appliances. It would also illustrate how these informations could be queried to automate the process of in silico experiment deployment.
 \end{review}
 
-\answer{\todo{added new concepts (version 2 of wicus). turtle example + sparql query}}
+\answer{We have clarified the new concepts of our models, included on the latest version of the WICUS ontology network. We have also included a running example summarizing the main annotations of the SoyKB workflow.}
+
+\todo{add sparql queries?}
 
 
 \begin{review}
@@ -156,7 +158,7 @@ Section 4: This section instantiate the semantic models and run the WICUS proces
 Section 4: Figures 7 and 8 are not really informatives.
 \end{review}
 
-\answer{We have removed figure 8, describing the Epigenomics workflow annotations, from the manuscript, leaving only figure 7, that contains the annotations about the Montage workflow. We agree with the reviewer that both figures include the same type of information and thus are redundant. We have kept one of the as we consider that it offers a more detailed explanation of how a concrete workflow is annotated, in contrast to figure 6.}
+\answer{We have removed figure 8, describing the Epigenomics workflow annotations, from the manuscript, leaving only figure 7, that contains the annotations about the Montage workflow. We agree with the reviewer that both figures include the same type of information and thus are redundant. We have kept one of them as we consider that it offers a more detailed explanation of how a concrete workflow is annotated, in contrast to figure 6.}
 
 
 \begin{review}
@@ -184,14 +186,14 @@ Section 4: Listing 1 : the text describing the pseudo code should refer to the l
 Section 4: The model of an Abstract Deployment Plan should be described in section 2.
 \end{review}
 
-\answer{\todo{add response}}
+\answer{We have moved the description of the deployment plan and its related ontology description to section 2, as it is highly related to the semantic modeling.}
 
 
 \begin{review}
 Section 4: The results of the experiment should constitute a single subsection 4.4.
 \end{review}
 
-\answer{\todo{create a subsection}}
+\answer{We have added a new subsection covering the results of our experimental process.}
 
 
 \begin{review}
@@ -205,7 +207,7 @@ Section 5: A positioning of the approach would reinforce the paper message, in p
 Section 5: I don't see why Galaxy does not cover the local development of workflows. E-scientists can deploy a local galaxy server on their laptop and encapsulate or deploy binary softwares even outside the domain of ``omic'' data analysis.
 \end{review}
 
-\answer{\todo{add response}}
+\answer{In this statement we aimed to mean that Galaxy is mostly used for developing workflows involving external web services dependencies and thus it does not fit into our approach. We have modified this paragraph to better reflect this argument.}
 
 
 \begin{review}
@@ -246,7 +248,7 @@ Section 6: ``...at the same time addresses the challenges of high storage demand
 Section 6: "The drawback of our approach is that it assumes that the application ...  are publicly available.", it is rather a necessary condition to reproduce a software execution.
 \end{review}
 
-\answer{\todo{add response}}
+\answer{We agree with the reviewer in that this claim should be better stated as a necessary condition rather than as a drawback. We have modified our claim and explained that the mentioned condition hold in most cases in the context of computational scientific experiments. }
 
 
 \begin{review}

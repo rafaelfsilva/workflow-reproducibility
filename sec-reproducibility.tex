@@ -46,9 +46,8 @@ Below, we describe each of these tools in detail.
 Besides the ontology network introduced before, a set of components have been developed around it, 
 for facilitating the annotation of the resources involved in the execution of a scientific workflow. 
 These tools are not fully automated yet, but represent a first step in helping users define the requirements of their 
-experiments. Figure~\ref{fig:wicusflow} shows the main modules, their flow and intermediate 
-results involved in the process for achieving reproducibility. It also describes the process of 
-data generation and consumption. Below, we provide an overview of each of these modules:
+experiments. Figure~\ref{fig:wicusflow} shows the main modules involved in the process for achieving reproducibility. 
+It also describes the process of data generation and consumption. Below, we provide an overview of each of these modules:
 
 \begin{figure}[!htb]
 	\centering
@@ -59,57 +58,61 @@ data generation and consumption. Below, we provide an overview of each of these 
 
 \begin{enumerate}
 	\item \textbf{DAX Annotator.} This tool parses a DAX (Pegasus' workflow description) 
-		and generates a set of annotations using the terms of the WICUS vocabulary, 
+		and generates a set of annotations using the terms of the WICUS ontology network, 
 		representing workflow transformations and the workflow infrastructure requirements.
+		\rev{As a result of this process a file containing the description of the workflow 
+		and its infrastructure requirements is generated.}
 
-	\item \textbf{Workflow Annotations.} This RDF file contains the description of the workflow 
-		and its infrastructure requirements.
-
-	\item \textbf{WMS Annotations.} This RDF file contains the information of the WMS component 
-		and its dependencies. This information is added to the \emph{Software Components 
-		Catalog}.
+%	\item \textbf{WMS Annotations.} This RDF file contains the information of the WMS component 
+%		and its dependencies. This information is added to the \emph{Software Components 
+%		Catalog}.
 
 	\item \textbf{Transformation Catalog Annotator.} This tool parses the Pegasus Transformation 
-		Catalog (which describes the binaries involved on the workflow execution and their locations) 
-		and the WMS annotations file, to generate two set of annotations: the \emph{Software 
-		Components Catalog} and the \emph{Workflow \& Configuration Annotation} files.
+		Catalog and the WMS annotations file, to generate two set of annotations: the \emph{Software 
+		Components Catalog} file, \rev{which contains the set of annotations about 
+		the binaries, dependencies, deployment plans and scripts, and the \emph{Workflow \& Configuration 
+		Annotation} file, containing the configuration information for each workflow execution step, as 
+		specified in the transformation catalog.}
 
-	\item \textbf{Software Components Catalog.} This RDF file contains the set of annotations about 
-		the binaries, dependencies, deployment plans and scripts, and configuration information of 
-		the software involved in the experiment.
+%	\item \textbf{Software Components Catalog.} This RDF file contains the set of annotations about 
+%		the binaries, dependencies, deployment plans and scripts, and configuration information of 
+%		the software involved in the experiment.
+%
+%	\item \textbf{Workflow \& Configuration Annotation File.} This RDF file contains the same information 
+%		as in 2, but enriched with the configuration information for each workflow execution step, as 
+%		specified in the transformation catalog.
+%
+%	\item \textbf{Scientific Virtual Appliances Catalog.} This RDF file contains available \rev{SVAs}. 
+%		Information about the related infrastructure providers and the VM images that compose an 
+%		appliance are included in this dataset.
 
-	\item \textbf{Workflow \& Configuration Annotation File.} This RDF file contains the same information 
-		as in 2, but enriched with the configuration information for each workflow execution step, as 
-		specified in the transformation catalog.
-
-	\item \textbf{Scientific Virtual Appliances Catalog.} This RDF file contains available \rev{SVAs}. 
-		Information about the related infrastructure providers and the VM images that compose an 
-		appliance are included in this dataset.
-
-	\item \textbf{Infrastructure Specification Algorithm.} This process reads files 5, 6, and 7, and 
-		generates a configuration file, which describes VMs and software 
-		components to be created and deployed.
-
-	\item \textbf{Abstract Deployment Plan.} This plan contains information about the set of components 
-		and their associated deployment steps for configuring the execution infrastructure. This plan 
-		will be later enacted using a concrete language. This decoupled approach allows the integrations of
-		new enactment  systems easily.
+	\item \textbf{Infrastructure Specification Algorithm.} This process reads files \rev{ generated on previous steps
+		 and generates a file containing the \emph{Abstract Deployment Plan.} describing the VMs to be created
+		 and software components to be deployed. This plan will be later enacted using a concrete language. This 
+		 decoupled approach allows the integrations of new enactment  systems easily.}
 		
 	\item \textbf{Script Generator.} This module concretizes the abstract deployment plan using the selected
 		language (either PRECIP or Vagrant in this case) to generate an executable script. New script syntaxes 
 		may be added in the future.
 
-	\item \textbf{Executable Script.} This script creates a PRECIP/Vagrant experiment, which runs a VM, 
-		copies the required binaries, and executes deployment scripts to set the environment for the 
-		workflow execution. It also contains the original experiment commands in order to 
-		re-execute it.
+%	\item \textbf{Executable Script.} This script creates a PRECIP/Vagrant experiment, which runs a VM, 
+%		copies the required binaries, and executes deployment scripts to set the environment for the 
+%		workflow execution. It also contains the original experiment commands in order to 
+%		re-execute it.
 
 \end{enumerate}
 
+\rev{The main entries of the WICUS process are the \emph{DAX XML} file, describing the workflow DAG using an XML syntax, and the \emph{Pegasus Transformation Catalog} file, that contains the information about the software components required by the workflow. It also requires the \emph{WMS Annotations} file, which contains the information about the Pegasus system, and the \emph{SVA Catalog}, containing the information about the available computational resources. Both files are generated manually using to the WICUS ontologies.}
+ 
+\rev{The output of the process are the execution scripts, either using PRECIP or Vagrant , which create a VM,  copy the required binaries, and execute the deployment scripts to set the environment for the workflow execution. It also contains the original experiment commands in order to re-execute it.}
+ 
 In the experimentation process (Section~\ref{sec:experiment}), we will present a detailed description 
 and the applicability of each module for the target scientific workflows.
 
 
+\subsubsection{Infrastructure Specification Algorithm}
+
+\rev{
 The last step on the process for achieving reproducibility in scientific workflows 
 (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm 
 (ISA) described in~\cite{wicus}. The algorithm retrieves the corresponding information for the 
@@ -118,9 +121,7 @@ dependencies and compatibility between requirements and the available
 computational resources. It also considers the software already installed on the
 resources to avoid unnecessary installation steps.
 
-\subsubsection{Infrastructure Specification Algorithm}
-
-\rev{ISA combines the annotated data based on the 4 
+ISA combines the annotated data based on the 4 
 domain ontologies in order to find a suitable infrastructure specification that meets 
 the requirements of the workflow. The algorithm retrieves and propagates the WMS 
 requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its 

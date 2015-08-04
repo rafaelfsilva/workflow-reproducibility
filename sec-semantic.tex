@@ -117,6 +117,23 @@ SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK
 
 \end{lstlisting}
 
+\rev{For retrieving this information several mechanisms can be used, such as traversing the individuals using the Jena API\footnote{https://jena.apache.org/, last accessed XXXXXX} or SPARQL queries. In this work we have selected SPARQL, as it is the most standard and flexible way of accessing RDF data. Listing \ref{lst:wicus-query} depicts a query example for retrieving the software dependencies of a given workflow. In this case we are asking for the SoyKB workflow requirements (lines 6-8) and then  about its requirement's stacks and their dependencies (lines 9-11).}
+
+
+\begin{lstlisting}[caption={WICUS SPARQL query example.}, label={lst:wicus-query}]
+PREFIX wreqs: <http://purl.org/net/wicus-reqs#> 
+PREFIX wicus: <http://purl.org/net/wicus#> 
+PREFIX wstack: <http://purl.org/net/wicus-stack#> 
+
+select ?wf ?stack ?depstack where {
+ <http://purl.org/net/wicus-reqs/resource/
+ Workflow/soykb_WF> 
+    wreqs:requiresExecutionEnvironment ?req .
+ ?req a wreqs:SoftwareRequirements .
+ ?req wicus:composedBySoftwareStack ?stack .
+ ?stack wstack:dependsOn ?depstack 
+}
+\end{lstlisting}
 
 
 \rev{\paragraph{\textbf{Abstract Deployment Plan}}}

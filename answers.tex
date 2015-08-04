@@ -63,7 +63,7 @@ What is reused from the previous works [21, 22] should be clarified, and the foc
 The structure of the paper could be clarified by, whenever possible, not mixing modeling and tooling aspects (beginning of 3.2.1, fig. 9 in 4.3). These modeling aspects should reinforce section 2.
 \end{review}
 
-\answer{\todo{add response}}
+\answer{We haver re-allocated different sections and figures, as well as removing some others, based on reviewer's suggestion, trying to make it more readable and easy to follow.}
 
 
 \begin{review}
@@ -107,9 +107,9 @@ Finally, I really appreciated the availability of the supplementary materials. E
 Section 2: The content of this section does not clearly state if it is a contribution of this paper or not with respect to [21,22]. The new features should be clearly described. To complement what has been introduced in [21,22] a simple ``running'' example in the form of RDF triples (turtle syntax) could illustrate the expressivity of the WICUS vocabularies in terms of workflow annotations, software \& hardware constraints as well as available virtual appliances. It would also illustrate how these informations could be queried to automate the process of in silico experiment deployment.
 \end{review}
 
-\answer{We have clarified the new concepts of our models, included on the latest version of the WICUS ontology network. We have also included a running example summarizing the main annotations of the SoyKB workflow.}
+\answer{We have clarified the new concepts of our models, included on the latest version of the WICUS ontology network. We have also included a running example summarizing the main RDF annotations of the SoyKB workflow as well an SPARQL query example for retrieving its software dependencies.}
 
-\todo{add sparql queries?}
+%\todo{add sparql queries?}
 
 
 \begin{review}
@@ -151,7 +151,7 @@ Section 3: In 3.2.2 ``interactions with the provisioned instances are done by ta
 Section 4: This section instantiate the semantic models and run the WICUS process to reproduce 3 workflows. Since the ISA algorithm is part of the core of the approach, it should be introduced and described earlier.
 \end{review}
 
-\answer{\todo{move}}
+\answer{We agree with the reviewer on that it makes no sense to describe the ISA within the experimentation section, as it is part of the core of the system. Thus, we have moved the description of the ISA to section 3, after the description of the WICUS modules and flow.}
 
 
 \begin{review}
@@ -165,21 +165,20 @@ Section 4: Figures 7 and 8 are not really informatives.
 Section 4: The use of terms "Image appliance", "Virtual appliance", "Scientific virtual appliance" are confusing. The sentence "We define an Image Appliance that groups all VMs appliances into one single Scientific Virtual Appliance" is unclear.
 \end{review}
 
-\answer{\todo{add response}}
-
+\answer{In many cases, we used``Virtual appliance'' and ``Scientific virtual appliance' as synonyms, whereas ``Image Appliance'' is a different concept. We have reviewed the text trying to make a better distinction of these concepts where necessary. We have also added a brief explanation in section 4 on how they relate to each other according to the WICUS-SVA domain ontology.}
 
 \begin{review}
 Section 4: In 4.3 ``ISA selects the intersection where the value is maximized for each sub-workflow''. It is unclear, which value do you refer to ? An example would be useful here.
 \end{review}
 
-\answer{\todo{add response}}
+\answer{We have added a more detailed explanation on how the SVAs are selected, specifying what we mean by the maximization of the intersection. In the selection process we retrieve the software components already available on each SVA as well as the dependency graph of each requirement and calculate their intersection. We select the SVAs that maximize this intersection.}
 
 
 \begin{review}
 Section 4: Listing 1 : the text describing the pseudo code should refer to the lines of the listing. It is only true for lines 23 to 27.
 \end{review}
 
-\answer{\todo{add response}}
+\answer{We have added references to the lines on the pseudo code listing through the text description, which now belongs to section 3.2.2.}
 
 
 \begin{review}

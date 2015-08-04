@@ -82,7 +82,7 @@ data generation and consumption. Below, we provide an overview of each of these 
 		as in 2, but enriched with the configuration information for each workflow execution step, as 
 		specified in the transformation catalog.
 
-	\item \textbf{Scientific Virtual Appliances Catalog.} This RDF file contains available VM appliances. 
+	\item \textbf{Scientific Virtual Appliances Catalog.} This RDF file contains available \rev{SVAs}. 
 		Information about the related infrastructure providers and the VM images that compose an 
 		appliance are included in this dataset.
 
@@ -108,6 +108,72 @@ data generation and consumption. Below, we provide an overview of each of these 
 
 In the experimentation process (Section~\ref{sec:experiment}), we will present a detailed description 
 and the applicability of each module for the target scientific workflows.
+
+
+The last step on the process for achieving reproducibility in scientific workflows 
+(Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm 
+(ISA) described in~\cite{wicus}. The algorithm retrieves the corresponding information for the 
+workflow and its dependencies from the annotation datasets, and calculates the 
+dependencies and compatibility between requirements and the available 
+computational resources. It also considers the software already installed on the
+resources to avoid unnecessary installation steps.
+
+\subsubsection{Infrastructure Specification Algorithm}
+
+\rev{ISA combines the annotated data based on the 4 
+domain ontologies in order to find a suitable infrastructure specification that meets 
+the requirements of the workflow. The algorithm retrieves and propagates the WMS 
+requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its 
+related sub-workflows (as defined in Figure~\ref{fig:annotations}). 
+Requirements  and software components are matched, and a dependency graph is built based 
+on the relationship between the requirements and the component dependencies (line 13).. 
+ISA then calculates the intersection between the set of components installed on the SVA and the set of components
+from the dependency graph, selecting the SVA that maximizes the value of that intersection for each sub-workflow (line 17). Software components already available in the SVA are then removed from the dependency graph, as they do not
+have to be installed (line 19). To reduce the number of SVAs, the algorithm attempts to merge sub-workflow requirements 
+into a single SVA (line 21). Requirements can be merged if all their software components are 
+compatible. Finally, ISA generates a script (either using PRECIP or Vagrant) with 
+the set of required instructions to instantiate, configure, and deploy the computational 
+resources and software components on the corresponding provider. Listing~\ref{lst:pseudo}
+shows the pseudo-code of the algorithm.}
+          
+\begin{lstlisting}[caption={Pseudo-code overview of the Infrastructure Specification Algorithm (ISA).},label={lst:pseudo}]
+WorkflowRequirementsDataset.load();
+
+SVADataset.load();
+
+SoftwareCatalogDataset.load();
+
+Map<Workflow,List<Requirements>> wfSwReqs = retrieveSwRequirements( WorkflowRequirementsDataset, WorkflowID );
+
+Map<Workflow,List<Requirements>> propagatedWfSwReqs = propagateSwReqs( wfSwReqs );
+
+List<List<List<SWComponents>>> softwareComponents = getSoftwareComponents( propagatedWfSwReqs );
+
+Map<Requirement,D-Graph<SWComponents>> softwareComponentsDependencyGraph =    getSoftwareDependencies(softwareComponents );
+
+List<SVA> availableSvas = getAvailableSvas(providersList);
+
+Map<Requirements,SVA> maxCompatibilities = getCompatibilityIntersection( softwareComponentsDependencyGraph, availableSvas );
+
+Map<Requirement,D-Graph<SWComponents>> substractedSwComponentsDepGraph =  substractSoftwareComponents( softwareComponentsDependencyGraph, maxCompatibilities );
+
+Map<SVA, List<Requirments>>mergedSvas= mergeSubworkflows( propagatedWfSwReqs, maxCompatibilities );
+
+Map<Workflow,List<Requirements>> wfHwReqs =  retrieveHwRequirements( WorkflowRequirementsDataset, WorkflowID );
+
+Map<SVA, List<Requirments>>filteredSvas= getCompatibleHwImageAppliances( mergedSvas, wfHwReqs );
+
+generateScript( filteredSvas, substractedSwComponentsDepGraph );
+\end{lstlisting}
+
+\rev{In this work, we have extended ISA to support 1)~Image Appliance filtering, and 
+2) generation of Vagrant scripts. From the selected SVAs, the algorithm filters those that
+do not meet the hardware requirements specified for the workflow
+(lines 23--25). To enact support to different execution scripts, we created an intermediate 
+phase (\emph{Abstract Deployment Plan}, step 9 in Figure~\ref{fig:wicusflow}), which 
+defines the steps and scripts to be executed, along with their configuration parameters. 
+ISA then translates this plan into a PRECIP or Vagrant script depending on the resultant 
+target provider (line 27).}
 
 
 

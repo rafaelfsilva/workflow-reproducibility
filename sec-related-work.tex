@@ -42,7 +42,37 @@ Software components cannot be preserved just by maintaining their binary executa
 
 A recent and relevant contribution to the state of the art of workflow preservation was developed within the context of the TIMBUS project~\cite{Mayer2014Ontologies}. The project  aimed to preserve and ensure the availability of business processes and their computational infrastructure, aligned with the enterprise risk and the business continuity management. They also proposed a semantic approach for describing the execution environment of a process.  However, even though TIMBUS has studied the applicability of their approach to the eScience domain, their approach is mainly focused on business processes.
 
-Semantics have been also proposed in the area of biomedical research as a way for achieving reproducibility of published experiments~\cite{MaloneSWO2014}. In this work authors proposed to annotate the software artifacts in the same way that gene products or phenotypes are annotated. In order to do so, authors developed the {\it Software Ontology} (SWO), a model for describing the software involved on the storage and management of data. The SWO have many concepts in common with the WICUS ontology  network, but is specialized on the biomedical domain, focusing on modeling biomedical-related software specifically. WICUS aims to be a more generic ontology that can be applied in different scientific domains.
+Semantics have been also proposed in the area of biomedical research as a way for achieving reproducibility of published experiments~\cite{MaloneSWO2014}. In this work authors \rev{ propose a taxonomy for classifying software artifacts in the context of biological computations, in the same way that gene products or phenotypes are classified. In order to do so, authors developed the {\it Software Ontology} (SWO), a model for cataloguing the software involved on the storage and management of data.
 
+The SWO is a comprehensive catalogue of software-related concepts for composing description of processing artifacts. It contains more than 4000 classes distributed in several modules for describing the different areas of software information Many of this concepts share commonalities with the concepts on the WICUS network, specially with its {\it Software Domain} ontology. We can identify a conceptual equivalences between \path{swo:Software} and \path{wstack:SotfwareComponent} classes or \path{swo:has_version} and \path{wstack:hasVersion}, even tough their context and purpose is not the same. While the SWO ontology focuses on describing the properties of biology software, aiming to make it more understandable and potentially reproducible, the WICUS ontologies focus on the deployment of software artifacts and stating their necessary dependencies. We aim to develop a more generic and flexible ontology that can be applied in different scientific domains.
+
+Another related approach, the EDAM ontology~\cite{XXX}, is a more concise ontology for describing bioinformatics resources. It includes concepts for annotating different data types, identifiers and formats, as well as topics and operations. Even when concept of operations can be related to the concept of software components, they are more related to data transformations than to executable deployment and computations. The ontologies we are proposing in this work are not directly focused to data descriptions and analysis.
+
+}
+
+\rev{
+Several models have been also proposed to describe Cloud environments~\cite{Youseff2008}. Several initiatives have been undertaken to define Cloud Computing interfaces, such as the Open Cloud Computing Interface (OCCI\footnote{http://occi-wg.org/}), one of the pioneering initiatives in the area, and Unified Cloud Interface (UCI\footnote{http://code.google.com/p/unifiedcloud/}), that defines not only an interface but also provides several ontologies describing cloud infrastructures. Cloud taxonomies for describing services and providers from the three main layers of Cloud Computing have been proposed also~\cite{Hoefer2010}. The CoCoOn ontology~\cite{zhang2012ontology} describes the main terms of Infrastructure as a Service (IaaS) providers, including functional concepts such as memory or pricing, and non-functional ones, such as Quality of Service (QoS) information. 
+
+Even when we characterize the main properties of computational resources, belonging to the IaaS layer, we do not aim to model the Cloud providers themselves neither their quality of the services they provide. Those considerations, even  though they are interesting for scheduling purposes, are out of the scope of this work.
+}
+
+
+
+
+\note{mygrid}
+%The myGrid Ontology [23], though focusing on bioinformatics software resources, makes many of the same distinctions as the SWO, but has not been actively maintained for a long-time. EDAM covers the concepts included in myGrid and, with the SWO, supersedes and replaces the myGrid ontology.
 %\feedback{Ewa: there is a lot of problems with tense. Sometimes is in the past, sometimes in the present. Revise it.}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

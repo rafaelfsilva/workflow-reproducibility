@@ -329,9 +329,20 @@ files were actually produced, and that the standard errors produced by the appli
 In both cases the results obtained in each infrastructure were equivalent in terms of their size (e.g., number of lines) 
 and content.
 
+%reviewer
+%The paper does not provide a discussion of the approach and results. The discussion could describe and analyze what is automated and what is manual in the overall process. It would be very helpful to evaluate the cost of preserving a computing infrastructure associated to an in-silico experiment, in terms of semantic annotation of the workflow, the workflow management systems, the infrastructure, in terms also of software packaging in virtual machines.
+\note{not sure whether this should be here or in section 6, as it is part of the discussion}
+
+
+\rev{
+The obtained results show scientific experiments in form of computational workflows can be reproduced based on semantic annotations using a proper vocabulary. In this work we introduce a set of tools for generating those annotations, which ease the effort of documenting the execution environment. However, those tools do not provide a fully automated process and some manual interactions is still required. Two of the entry files of the reproducibility process (Figure \ref{fig:wicusflow}), the \emph{WMS Annotations} and the \emph{SVA Catalog}, are generated manually. These files are reused for the three experiments exposed in this section, and would be also used for new Pegasus workflows. When reproducing a workflow belonging to a different WMS, a new set of annotations about it would be necessary, whereas the \emph{SVA Catalog} could be reused. This catalog is extended as new computational resources are added to the system.
+
+Most of the software involved on the execution of the three workflows studied in this work was, and still is, available online either through distribution packages repositories or hosted online by different institutions. Other software applications, such as the ones designed for the workflow, have been hosted in a public repository for this work. We decided to upload them to GItHub\footnote{https://github.com/} to ensure that they could be retrieved remotely. 
+}
+ 
+
 All the original and generated scripts are available as part of the experimental material 
-included in the RO associated with this 
-work. This RO also contains pointers to the software and resources 
+included in the RO associated with this work. This RO also contains pointers to the software and resources 
 used in the experimental evaluation.
 
 

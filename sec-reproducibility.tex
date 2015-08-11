@@ -105,6 +105,9 @@ It also describes the process of data generation and consumption. Below, we prov
 \rev{The main entries of the WICUS process are the \emph{DAX XML} file, describing the workflow DAG using an XML syntax, and the \emph{Pegasus Transformation Catalog} file, that contains the information about the software components required by the workflow. It also requires the \emph{WMS Annotations} file, which contains the information about the Pegasus system, and the \emph{SVA Catalog}, containing the information about the available computational resources. Both files are generated manually using to the WICUS ontologies.}
  
 \rev{The output of the process are the execution scripts, either using PRECIP or Vagrant , which create a VM,  copy the required binaries, and execute the deployment scripts to set the environment for the workflow execution. It also contains the original experiment commands in order to re-execute it.}
+
+\rev{In this work we introduce our current use case, using PRECIP and Vagrant as enactment systems for recreating the execution environments. New solutions could be added by extending the last component of the WICUS system. Thanks to the decoupled design of the system, the \textbf{Script Generator} could translate the \textbf{Abstract Deployment Plan} into new syntaxes for using new technologies Docker containers or the recent TOSCA templates for example.}
+ 
  
 In the experimentation process (Section~\ref{sec:experiment}), we will present a detailed description 
 and the applicability of each module for the target scientific workflows.

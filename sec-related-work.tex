@@ -40,6 +40,19 @@ Galaxy~\cite{goecks2010galaxy}, a well known workflow system in the context of l
 
 Software components cannot be preserved just by maintaining their binary executable code, but by guaranteeing the performance of their features. In~\cite{Matthews}, the concept of adequacy is introduced to measure how a software component behaves relative to a certain set of features. Our work is based on this same concept, where we build a conceptual model to semantically annotate the relevant properties of each software component. Then, we use scripting to reconstruct an equivalent computational environment using these annotations.
 
+
+\rev{
+Some efforts have been undertaken to define syntaxes for describing the execution environment of scientific applications. The recently released TOSCA\footnote{http://docs.oasis-open.org/tosca/TOSCA/v1.0/os/TOSCA-v1.0-os.html} standard has been proposed to specify the components and life cycle of scientific workflows, including their dependencies. TOSCA is a cloud management standard that allows to define declarative templates for defining the workflow as well as the information required for enacting its environment. This makes the workflow portable to any provider compliant with TOSCA~\cite{TOSCA}. As well as in this work, this approach increases the reproducibility degree of the experiment. However it differs from ours as we do not aim to rewrite the workflow itself. Our goal is to describe it and obtain an equivalent environment depending on the available providers.
+}
+
+\rev{
+In this work we explore different tools, such as PRECIP and Vagrant, for enacting the supporting environment. Further studied should study other well-known solutions. Based on the aforementioned TOSCA standard, Cloudify\footnote{http://getcloudify.org/} allows to define the configuration of a given application and its dependencies. These descriptions can be later used to state the application's installation process as well as its lifecycle. Infrastructure Manager~\cite{IM2015} is a tool that adds an abstraction layer for selecting, deploying and configuring virtual machines in several providers, such as OpenNebula~\cite{opennebula}, Microsoft Azure\footnote{http://azure.microsoft.com} and OpenStack, among many others, making the target application cloud-independent. 
+
+These technologies and standards are compatible with our approach, and they could be integrated into our system as new enactment and specification solutions.
+
+}
+
+
 A recent and relevant contribution to the state of the art of workflow preservation was developed within the context of the TIMBUS project~\cite{Mayer2014Ontologies}. The project  aimed to preserve and ensure the availability of business processes and their computational infrastructure, aligned with the enterprise risk and the business continuity management. They also proposed a semantic approach for describing the execution environment of a process.  However, even though TIMBUS has studied the applicability of their approach to the eScience domain, their approach is mainly focused on business processes.
 
 Semantics have been also proposed in the area of biomedical research as a way for achieving reproducibility of published experiments~\cite{MaloneSWO2014}. In this work authors \rev{ propose a taxonomy for classifying software artifacts in the context of biological computations, in the same way that gene products or phenotypes are classified. In order to do so, authors developed the {\it Software Ontology} (SWO), a model for cataloguing the software involved on the storage and management of data.

@@ -1,34 +1,27 @@
 \section{Semantic Modeling of Computational Resources}
 \label{sec:semantic}
 
-%\feedback{@Oscar: (following paragraph) this paragraph is actually summarizing and taking for granted many assumptions and preexisting knowledge. Expand it}
-
-%--Deleted base on oscar's feedback
-%Scientific workflows are also used for preserving and sharing scientific experiments in science. 
-
-
-%Some previous research efforts have focused on describing the workflow structure and the 
-%experimental data, both input data and results. 
-
 In this work, we argue that in order to achieve reproducibility of a scientific workflow, enough information 
 about the computational resources should be provided. These descriptions allow the target audience, 
 usually another computational scientist in the same domain, to better understand the underlying 
 components involved in a workflow execution.
 
-\rev{\paragraph{\textbf{WICUS ontology networkx}}}
+
+% subsection
+\subsection{WICUS ontology network}
 
 We define semantic models for describing the main domains of a 
 computational infrastructure, and for defining the taxonomy of concepts and the relationships 
 between them. These models describe software components, hardware specifications, 
 and computational resources (in the form of VMs). They also capture infrastructure 
-dependencies of the workflows (e.g services that must be running, available libraries, etc.).
+dependencies of the workflows (e.g., services that must be running, available libraries, etc.).
  
  As a result, this process facilitates experiment's reusability since 
 a new experiment, which may reuse parts of the workflow previously modeled, or a reproduction 
 of a workflow, would benefit from the infrastructure dependencies already described.
 
 We have identified four main domains of interest for documenting computational scientific 
-infrastructures~\cite{wicus} and developed a set of models, one for each domain, 
+infrastructures~\cite{wicus}, and developed a set of models, one for each domain, 
 and an ontology network that defines the inter-domain relations between these models 
 (Figure~\ref{fig:wicusrels}):
 
@@ -44,19 +37,19 @@ and an ontology network that defines the inter-domain relations between these mo
 	\setlength{\parskip}{0pt}
 	\setlength{\parsep}{0pt}
 
-	\item{\emph{Hardware domain}}: it identifies the most common hardware information, 
+	\item{\emph{Hardware domain}}: identifies the most common hardware information, 
 		including CPU, Storage and RAM memory, and their capacities.
 	
-	\item{\emph{Software domain}}: it defines the software components involved on the execution. 
+	\item{\emph{Software domain}}: defines the software components involved on the execution. 
     		It includes the pieces of executable software (e.g., scripts, binaries, and libraries) used in 
 		the experiment. In addition, dependencies between those components and configuration 
-		information are also defined, as well as the required steps for deploying them.
+		information are also defined, \rev{as well as the steps required for their deployment}.
 	
-	\item{\emph{Workflow domain}}: it describes and relates workflow fragments (a.k.a transformations) 
+	\item{\emph{Workflow domain}}: describes and relates workflow fragments (a.k.a transformations) 
     		to their dependencies. Therefore, scientists can understand which are the relevant infrastructure 
 		components for each part of the workflow.
 	
-	\item{\emph{Computing Resources domain}}: it expresses the information about the available 
+	\item{\emph{Computing Resources domain}}: expresses the information about the available 
     		computing resources. In this domain, only virtualized resources are currently considered 
 		(i.e., virtual machine). It includes the description of the VM image, its provider, and specifications.
 \end{itemize}
@@ -65,24 +58,38 @@ and an ontology network that defines the inter-domain relations between these mo
 \rev{The Workflow Infrastructure Conservation Using Semantics ontology 
 (WICUS) is an OWL2 (Web Ontology Language) ontology network that 
 implements the conceptualization of these domains. This ontology 
-network is available online\footnote{http://purl.org/net/wicus} and its goal is to define the relevant and 
-required properties for describing scientific computational infrastructures. 
-The detailed description of the ontologies, including their main terms and relation
-in the context of a workflow execution are provided in~\cite{wicus}.
-Currently, two versions of the ontology network have been released. The latest one, released in
-August 2014,  includes a set of new properties for better describing software and hardware requirements, 
-and also for including the output information of a configuration process (e.g., the resultant IP and port on
-which a recently deployed service will be listening).}
+network is available online\footnote{http://purl.org/net/wicus} and its goal 
+is to define the relevant and required properties for describing scientific 
+computational infrastructures. The detailed description of the ontologies, 
+including their main terms and relation in the context of a workflow execution 
+are provided in~\cite{wicus}. Currently, two versions of the ontology network 
+have been released. The latest one, released in August 2014,  includes a set 
+of new properties for better describing software and hardware requirements, 
+and also for including the output information of a configuration process (e.g., 
+the resultant IP and port on which a recently deployed service will be listening).}
 
 
-\rev{These models have been documented and published online, and have been also aligned with several of well-known vocabularies, such as p-plan\footnote{http://purl.org/net/p-plan} and DCMI Metadata Terms\footnote{http://dublincore.org/documents/dcmi-terms/}. For example, the class wreqs:Workflow that represents a scientific workflow in our domain, has been aligned as a subclass of p-plan:Plan, which in turn is a subclass of prov:Plan, from the PROV vocabulary\footnote{http://www.w3.org/ns/prov}. Further versions of the WICUS ontology network might be aligned with new vocabularies}.  
+\rev{These models have been documented and made available online, and have also
+been aligned with several of well-known vocabularies, such as 
+p-plan\footnote{http://purl.org/net/p-plan} and DCMI Metadata 
+Terms\footnote{http://dublincore.org/documents/dcmi-terms/}. For example, the 
+class \texttt{wreqs:Workflow} that represents a scientific workflow in our domain, 
+has been aligned as a subclass of \texttt{p-plan:Plan}, which turns to be a subclass 
+of \texttt{prov:Plan} from the PROV vocabulary\footnote{http://www.w3.org/ns/prov}. 
+Further versions of the WICUS ontology network might also be aligned with 
+new vocabularies}.  
 
-\rev{Listing \ref{lst:wicus-sample} illustrates a running example, summarizing the main annotations of the SoyKB workflow requirements.  From line 1 to 5 states the individual \path{Workflow:soykb_WF} as a member of the \path{wreqs:Workflow} class and indicates that it requires the \path{SoftwareRequirements:soykb_WF_SOFT_REQ} requirement as part of it execution environment. Lines 6-11 define the different parts of the main workflow which will define their own requirements. From lines 13 to 16, we define the workflow software requirement to be composed by the \path{SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK} software stack, and that this stack depends on other several software stack, such as Condor, SSH or the Java SDK (lines 24-29).}
+\rev{Listing~\ref{lst:wicus-sample} illustrates a running example that summarizes the 
+main annotations of the SoyKB workflow requirements.  Lines 1--5 state the individual 
+\path{Workflow:soykb_WF} as a member of the \path{wreqs:Workflow} class and indicates 
+that it requires the \path{SoftwareRequirements:soykb_WF_SOFT_REQ} requirement as 
+part of its execution environment. Lines 6--11 define the different components of the main 
+workflow, which defines their own requirements. Lines 13--16 define the workflow software 
+requirement \path{SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK}, which
+depends on other software stacks such as Condor, SSH or the Java SDK (lines 24--29).}
 
 
-
-%%add examples ttl here
-
+% Listing
 \begin{lstlisting}[caption={WICUS workflow annotations example.}, label={lst:wicus-sample}]
 Workflow:soykb_WF
  a wreqs:Workflow ;
@@ -112,12 +119,16 @@ SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK
   SoftwareStack:OPEN_SSH_SERVER_SOFT_STACK 
   SoftwareStack:OPEN_SSH_CLIENTS_SOFT_STACK ;
  wstack:hasSoftwareComponent
-  SoftwareComponent:PEGASUS_WMS_CENTOS_6_5_SOFT_COMP .
-
-
+  SoftwareComponent:PEGASUS_WMS_CENTOS_6_5_SOFT_COMP.
 \end{lstlisting}
 
-\rev{For retrieving this information several mechanisms can be used, such as traversing the individuals using the Jena API\footnote{https://jena.apache.org/, last accessed XXXXXX} or SPARQL queries. In this work we have selected SPARQL, as it is the most standard and flexible way of accessing RDF data. Listing \ref{lst:wicus-query} depicts a query example for retrieving the software dependencies of a given workflow. In this case we are asking for the SoyKB workflow requirements (lines 6-8) and then  about its requirement's stacks and their dependencies (lines 9-11).}
+\rev{To retrieve this information mechanisms such as the Jena API\footnote{https://jena.apache.org} 
+or SPARQL queries can be used to traverse the individuals. In this work, we have 
+used SPARQL as it is the most standard and flexible way of accessing RDF data. 
+Listing~\ref{lst:wicus-query} shows a query example for retrieving the software 
+dependencies of a given workflow. We first inquire for the SoyKB workflow 
+requirements (lines 6--8), and then about its requirement's stacks and their 
+dependencies (lines 9--11).}
 
 
 \begin{lstlisting}[caption={WICUS SPARQL query example.}, label={lst:wicus-query}]
@@ -135,10 +146,22 @@ select ?wf ?stack ?depstack where {
 }
 \end{lstlisting}
 
-\rev{In this work we have focused mainly on software artifacts, arguing that they are the primary resource in terms of computational reproducibility. We have model the main hardware capabilities required by our applications to run, such as CPU, RAM, and storage. For this work, as we are working with single node configurations, we have not included network as part of the hardware requirements. The reproducibility of the experiments studied in this paper is not highly network consuming, thus we assume that we will work with a network reliable enough. However network is already included as part of the WICUS vocabulary, allowing to integrate and extend descriptions of this hardware feature.}
+\rev{In this work, we have mainly focused on software artifacts, arguing that 
+they are the primary resource in terms of computational reproducibility. 
+Nevertheless, we have also modeled the main hardware capabilities required 
+by our applications such as CPU, memory, and storage. We do not address 
+network requirements since we focus on single node configurations and 
+network performance is not a major concern for the reproducibility of the
+experiments. We acknowledge that network may impact experiment repeatability,
+hence network is already included as part of the WICUS vocabulary}.
+
+%For this work, as we are working with single node configurations, we have not included network as part of the hardware requirements. The reproducibility of the experiments studied in this paper is not highly network consuming, thus we assume that we will work with a network reliable enough. However network is already included as part of the WICUS vocabulary, allowing to integrate and extend descriptions of this hardware feature.
 
 
-\rev{\paragraph{\textbf{Abstract Deployment Plan}}}
+
+% subsection
+\subsection{Abstract Deployment Plan}
+
 \rev{This layer allows WICUS to generate abstract deployment plans regardless of the
 underlying execution tool. The abstract plan is based on the WICUS Software~\cite{wicus} 
 domain ontology, which defines the software stacks that should be deployed in the 

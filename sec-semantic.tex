@@ -87,11 +87,11 @@ that it requires the \path{SoftwareRequirements:soykb_WF_SOFT_REQ} requirement a
 part of its execution environment. Lines 6--11 define the different components of the main 
 workflow, which defines their own requirements. Lines 13--16 define the workflow software 
 requirement \path{SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK}, which
-depends on other software stacks such as Condor, SSH or the Java SDK (lines 24--29).}
+depends on other software stacks such as Condor, SSH or the Java SDK (lines 23--28).}
 
 
 % Listing
-\begin{lstlisting}[caption={WICUS workflow annotations example.}, label={lst:wicus-sample}]
+\begin{lstlisting}[caption={WICUS workflow annotations example.}, label={lst:wicus-sample}, basicstyle=\scriptsize]
 Workflow:soykb_WF
  a wreqs:Workflow ;
   wreqs:requiresExecutionEnvironment
@@ -109,7 +109,6 @@ SoftwareRequirements:soykb_WF_SOFT_REQ
  wicus:composedBySoftwareStack
   SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK.
   
-
 SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK
  a wstack:SoftwareStack ;
  wstack:dependsOn
@@ -132,7 +131,7 @@ requirements (lines 6--8), and then about its requirement's stacks and their
 dependencies (lines 9--11).}
 
 
-\begin{lstlisting}[caption={WICUS SPARQL query example.}, label={lst:wicus-query}]
+\begin{lstlisting}[caption={WICUS SPARQL query example.}, label={lst:wicus-query}, basicstyle=\scriptsize]
 PREFIX wreqs: <http://purl.org/net/wicus-reqs#> 
 PREFIX wicus: <http://purl.org/net/wicus#> 
 PREFIX wstack: <http://purl.org/net/wicus-stack#> 
@@ -190,7 +189,7 @@ the first component to be deployed (lines 27--29). Finally, the last section of 
 deployment steps are required: 1)~copy of the program execution binary, and 2)~the
  granting of proper execution permissions.}
 
-\begin{lstlisting}[caption={Abstract deployment plan of the SoyKB WF.}, label={lst:plan-soykb}]
+\begin{lstlisting}[caption={Abstract deployment plan of the SoyKB WF.}, label={lst:plan-soykb}, basicstyle=\scriptsize]
 OPEN_SSH_CLIENTS_SOFT_STACK stack
   OPEN_SSH_CLIENTS_SOFT_COMP component
     OPEN_SSH_CLIENTS_DEP_STEP step

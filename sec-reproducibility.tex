@@ -3,11 +3,12 @@
 
 In this section, we introduce the tools used for the instantiation and evaluation 
 of the aforementioned semantic models. We first describe the Pegasus Workflow 
-Management System (WMS)~\cite{Deelman-FGCS-2014}, which is used as our 
+Management System (WMS)~\cite{Deelman-FGCS-2014}, which is used as \rev{the }
 workflow engine, and then a set of reproducibility tools for semantic annotations and 
 experiment management.
 
 
+% subsection
 \subsection{Scientific Workflow Execution}
 
 The Pegasus WMS can manage workflows comprised of millions of tasks, recording data 
@@ -29,6 +30,7 @@ tasks are managed by a task scheduler (HTCondor~\cite{condor}), which supervises
 execution on local and remote resources.
 
 
+% subsection
 \subsection{Reproducibility Artifacts}
 
 To conduct the experimentation on scientific workflows reproducibility, we 
@@ -60,8 +62,8 @@ It also describes the process of data generation and consumption. Below, we prov
 	\item \textbf{DAX Annotator.} This tool parses a DAX (Pegasus' workflow description) 
 		and generates a set of annotations using the terms of the WICUS ontology network, 
 		representing workflow transformations and the workflow infrastructure requirements.
-		\rev{As a result of this process a file containing the description of the workflow 
-		and its infrastructure requirements is generated.}
+		\rev{As a result of this process, a file containing the description of the workflow and 
+		its infrastructure requirements is generated.}
 
 %	\item \textbf{WMS Annotations.} This RDF file contains the information of the WMS component 
 %		and its dependencies. This information is added to the \emph{Software Components 
@@ -86,59 +88,94 @@ It also describes the process of data generation and consumption. Below, we prov
 %		Information about the related infrastructure providers and the VM images that compose an 
 %		appliance are included in this dataset.
 
-	\item \textbf{Infrastructure Specification Algorithm.} This process reads files \rev{ generated on previous steps
-		 and generates a file containing the \emph{Abstract Deployment Plan.} describing the VMs to be created
-		 and software components to be deployed. This plan will be later enacted using a concrete language. This 
-		 decoupled approach allows the integrations of new enactment  systems easily.}
+	\item \textbf{Infrastructure Specification Algorithm.} This process reads files 
+		\rev{generated on the previous steps and generates a file containing 
+		the \emph{Abstract Deployment Plan} describing the VMs to be created,
+		and the software components to be deployed. This plan will be enacted 
+		later using a concrete language.}
+		% This decoupled approach facilitates the integrations of new enactment systems.}
 		
-	\item \textbf{Script Generator.} This module concretizes the abstract deployment plan using the selected
-		language (either PRECIP or Vagrant in this case) to generate an executable script. New script syntaxes 
-		may be added in the future.
+	\item \textbf{Script Generator.} This module concretizes the abstract deployment 
+		plan using the selected language (either PRECIP or Vagrant in this case) to 
+		generate an executable script. New script syntaxes may be added in the future.
 
 %	\item \textbf{Executable Script.} This script creates a PRECIP/Vagrant experiment, which runs a VM, 
 %		copies the required binaries, and executes deployment scripts to set the environment for the 
 %		workflow execution. It also contains the original experiment commands in order to 
 %		re-execute it.
-
 \end{enumerate}
 
-\rev{The main entries of the WICUS process are the \emph{DAX XML} file, describing the workflow DAG using an XML syntax, and the \emph{Pegasus Transformation Catalog} file, that contains the information about the software components required by the workflow. It also requires the \emph{WMS Annotations} file, which contains the information about the Pegasus system, and the \emph{SVA Catalog}, containing the information about the available computational resources. Both files are generated manually using to the WICUS ontologies.}
- 
-\rev{The output of the process are the execution scripts, either using PRECIP or Vagrant , which create a VM,  copy the required binaries, and execute the deployment scripts to set the environment for the workflow execution. It also contains the original experiment commands in order to re-execute it.}
+\rev{The main entries of the WICUS process include the \emph{DAX XML} file
+(DAG in XML), and the \emph{Pegasus Transformation Catalog} file, which 
+contains the information about the software components required by the workflow.
+It also requires the \emph{WMS Annotations} file, which describes the Pegasus 
+system, and the \emph{SVA Catalog} file, which contains information about the
+available computational resources. Both files are generated manually using 
+the WICUS ontologies. Upon completion, the process outputs execution scripts,
+%(either using PRECIP or Vagrant)
+which create a VM, copy the required 
+binaries, and execute the deployment scripts to set the environment for the 
+workflow execution. It also contains the original experiment commands in order 
+to re-execute it.}
 
-\rev{In this work we introduce our current use case, using PRECIP and Vagrant as enactment systems for recreating the execution environments. New solutions could be added by extending the last component of the WICUS system. Thanks to the decoupled design of the system, the \textbf{Script Generator} could translate the \textbf{Abstract Deployment Plan} into new syntaxes for using new technologies Docker containers or the recent TOSCA templates for example.}
+\rev{In this work, we introduce our current use case using PRECIP and Vagrant 
+as enactment systems for recreating the execution environments. Thanks to
+the decoupled design of the system, additional solutions could be easily 
+incorporated by extending the \emph{Script Generator} component. For instance,
+the \emph{Abstract Deployment Plan} could be translated into new syntaxes to
+explore new technologies such as Docker containers~\cite{Merkel2014}, or 
+TOSCA templates.}
  
  
-In the experimentation process (Section~\ref{sec:experiment}), we will present a detailed description 
-and the applicability of each module for the target scientific workflows.
+In the experimentation process (Section~\ref{sec:experiment}), we will present 
+a detailed description and the applicability of each module for the target 
+scientific \rev{workflow applications}.
 
 
 \subsubsection{Infrastructure Specification Algorithm}
 
 \rev{
-The last step on the process for achieving reproducibility in scientific workflows 
+The third step on the process for achieving reproducibility in scientific workflows 
 (Figure~\ref{fig:wicusflow}) is to execute the Infrastructure Specification Algorithm 
-(ISA) described in~\cite{wicus}. The algorithm retrieves the corresponding information for the 
+(ISA). The algorithm retrieves the corresponding information for the 
 workflow and its dependencies from the annotation datasets, and calculates the 
 dependencies and compatibility between requirements and the available 
 computational resources. It also considers the software already installed on the
 resources to avoid unnecessary installation steps.
 
-ISA combines the annotated data based on the 4 
-domain ontologies in order to find a suitable infrastructure specification that meets 
-the requirements of the workflow. The algorithm retrieves and propagates the WMS 
-requirements of the top-level workflow (\texttt{Workflow} domain ontology) to its 
-related sub-workflows (as defined in Figure~\ref{fig:annotations}). 
-Requirements  and software components are matched, and a dependency graph is built based 
-on the relationship between the requirements and the component dependencies (line 13).. 
-ISA then calculates the intersection between the set of components installed on the SVA and the set of components
-from the dependency graph, selecting the SVA that maximizes the value of that intersection for each sub-workflow (line 17). Software components already available in the SVA are then removed from the dependency graph, as they do not
-have to be installed (line 19). To reduce the number of SVAs, the algorithm attempts to merge sub-workflow requirements 
-into a single SVA (line 21). Requirements can be merged if all their software components are 
-compatible. Finally, ISA generates a script (either using PRECIP or Vagrant) with 
-the set of required instructions to instantiate, configure, and deploy the computational 
-resources and software components on the corresponding provider. Listing~\ref{lst:pseudo}
-shows the pseudo-code of the algorithm.}
+Listing~\ref{lst:pseudo} shows the pseudo-code of the algorithm. ISA combines 
+the annotated data based on the 4 domain ontologies in order to find a suitable 
+infrastructure specification that meets the requirements of the workflow. The 
+algorithm retrieves and propagates the WMS requirements of the top-level 
+workflow (\texttt{Workflow} domain ontology) to its related sub-workflows (as 
+defined in Figure~\ref{fig:annotations}). Requirements  and software components 
+are matched, and a dependency graph is built based on the relationship between 
+the requirements and the component dependencies (line 13). ISA then calculates 
+the intersection between the set of components installed on the SVA and the set 
+of components from the dependency graph, selecting the SVA that maximizes the 
+value of that intersection for each sub-workflow (line 17). Software components 
+already available in the SVA are then removed from the dependency graph, as they 
+do not have to be installed (line 19). To reduce the number of SVAs, we have extended
+ISA to support \emph{Image Appliance} filtering. The algorithm attempts to merge 
+sub-workflow requirements into a single SVA (line 21). Requirements can be merged 
+if all their software components are compatible. Thus, the algorithm filters those that 
+do not meet the hardware requirements specified for the workflow (lines 23--25).
+Finally, ISA generates a script with the set of required instructions to instantiate, 
+configure, and deploy the computational resources and software components on 
+the corresponding provider (line 27). To enact support to different execution scripts, 
+we introduced an intermediate phase (\emph{Abstract Deployment Plan}), which 
+defines the steps and scripts to be executed, along with their configuration 
+parameters. We also extended ISA to generate Vagrant scripts in addition to
+PRECIP. A complete description and evaluation of the algorithm can be found 
+in~\cite{wicus}.}
+
+%\rev{In this work, we have extended ISA to support 1)~Image Appliance filtering, and 
+%2) generation of Vagrant scripts. From the selected SVAs, the algorithm filters those that
+%do not meet the hardware requirements specified for the workflow
+%(lines 23--25). To enact support to different execution scripts, we introduced an intermediate 
+%phase (\emph{Abstract Deployment Plan}), which defines the steps and scripts to be executed, 
+%along with their configuration parameters.}
+%ISA then translates this plan into a PRECIP or Vagrant script depending on the resultant target provider (line 27).}
           
 \begin{lstlisting}[caption={Pseudo-code overview of the Infrastructure Specification Algorithm (ISA).},label={lst:pseudo}]
 WorkflowRequirementsDataset.load();
@@ -170,19 +207,11 @@ Map<SVA, List<Requirments>>filteredSvas= getCompatibleHwImageAppliances( mergedS
 generateScript( filteredSvas, substractedSwComponentsDepGraph );
 \end{lstlisting}
 
-\rev{In this work, we have extended ISA to support 1)~Image Appliance filtering, and 
-2) generation of Vagrant scripts. From the selected SVAs, the algorithm filters those that
-do not meet the hardware requirements specified for the workflow
-(lines 23--25). To enact support to different execution scripts, we created an intermediate 
-phase (\emph{Abstract Deployment Plan}, step 9 in Figure~\ref{fig:wicusflow}), which 
-defines the steps and scripts to be executed, along with their configuration parameters. 
-ISA then translates this plan into a PRECIP or Vagrant script depending on the resultant 
-target provider (line 27).}
-
 
 
 % PRECIP
 \subsubsection{PRECIP}
+
 The Pegasus Repeatable Experiments for the Cloud in Python (PRECIP)~\cite{Azarnoosh-CRC-2013} 
 is a flexible experiment management control API for running experiments on all types of Clouds, 
 including academic Clouds such as FutureGrid\footnote{http://portal.futuregrid.org (accessed 2015-04-10)} and the NSFCloud\footnote{http://www.chameleoncloud.org (accessed 2015-04-10)}\textsuperscript{,}\footnote{http://cloudlab.us (accessed 2015-04-10)}

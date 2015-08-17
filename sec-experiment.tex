@@ -1,25 +1,25 @@
 \section{Experimentation Process}
 \label{sec:experiment}
 
-%-- modified based on oscar's feedback
-%In this section, we conduct a practical evaluation through experimentation in 
-%which we instantiate the semantic models (Figure~\ref{fig:wicusrels}) for three real 
+In this section, we instantiate the semantic models introduced in 
+Section~\ref{sec:reproducibility} (Figure~\ref{fig:wicusrels}) \rev{for real }
+scientific workflow applications. This process is an extension of the one 
+introduced in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate 
+the improvements on our approach to the Montage~\cite{Montage} workflow.
+\rev{In addition, we extend this evaluation to the Epigenomics\footnote{http://epigenome.usc.edu} 
+and SoyKB~\cite{soybean, Joshi01012014} workflows}. We study and 
+document these workflows and their execution environments, which include 
+the application software components and the workflow management system.
 
-In this section, we instantiate the semantic models introduced in section \ref{sec:reproducibility}
-(Figure~\ref{fig:wicusrels}) for three real scientific workflow applications. 
-This process is an extension of the one introduced
- in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate the improvements on our
- approach to the Montage~\cite{Montage} workflow, and also evaluate the
- Epigenomics\footnote{http://epigenome.usc.edu/,(accessed 2015-04-10)}, and SoyKB~\cite{soybean, Joshi01012014} workflows.
-We study and document these workflows and their execution environments, which include the application software components 
-and the workflow management system.
-
-The goal of this experiment is to reproduce original workflow executions on the three different 
-Cloud scenarios introduced in this work: FutureGrid and Amazon EC2
+The goal of this experiment is to reproduce original workflow executions 
+on the three different Cloud scenarios: FutureGrid and Amazon EC2
 using PRECIP, and a local execution environment by using Vagrant. 
-FutureGrid is an academic Cloud testbed facility that includes a number of computational 
-resources at distributed locations\rev{ It is based on OpenStack\footnote{https://www.openstack.org/}, 
-as our system would be able to work with any OpenStack cloud}. Amazon Web Services EC2 is a public infrastructure provider, and the \emph{de facto} standard for IaaS Cloud platforms. 
+FutureGrid is an academic Cloud testbed facility that includes a number 
+of computational resources at distributed locations. Amazon Web Services 
+EC2 is a public infrastructure provider, and the \emph{de facto} standard 
+for IaaS Cloud platforms. \rev{Since most of Cloud platforms are based on
+OpenStack\footnote{https://www.openstack.org}, our system can be used
+by most of them}.
 
 
 \subsection{Scientific Workflows}
@@ -69,7 +69,7 @@ that re-sequences soybean germplasm lines selected for desirable traits such
 as oil, protein, soybean cyst nematode resistance, stress resistance, and root 
 system architecture. The workflow (Figure~\ref{fig:workflow-soykb}) 
 implements a Single Nucleotide Polymorphism (SNP)  and injection/deletion (indel) identification and analysis 
-pipeline using the GATK haplotype caller\footnote{https://www.broadinstitute.org/gatk,(accessed 2015-04-10)} and a soybean reference 
+pipeline using the GATK haplotype caller\footnote{https://www.broadinstitute.org/gatk} and a soybean reference 
 genome. The workflow analyzes samples in parallel to align them to the reference 
 genome, to de-duplicate the data, to identify indels and SNPs, and to merge and 
 filter the results. The results are then used for genome-wide association studies 

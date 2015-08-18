@@ -174,8 +174,9 @@ the top level workflow, and another 8 individuals representing its sub-workflows
 for each transformation. We then annotate 
 the components described in the Epigenomics' Transformation Catalog as individuals 
 using the \texttt{Software} domain ontology. We have also identified and annotated 6 
-software dependencies related to the workflow, which include the Perl\footnote{https://www.perl.org (accessed 2015-04-10)} interpreter, 
-the GNU libc\footnote{http://www.gnu.org/software/libc,(accessed 2015-04-10)} and Libstdc++\footnote{http://gcc.gnu.org/libstdc++ (accessed 2015-04-10)} libraries, and two other binaries from 
+software dependencies related to the workflow, which include the Perl\footnote{https://www.perl.org} interpreter, 
+the GNU libc\footnote{http://www.gnu.org/software/libc} and 
+Libstdc++\footnote{http://gcc.gnu.org/libstdc++} libraries, and two other binaries from 
 the Epigenomics  distribution, \texttt{maq} and \texttt{maqindex}.
 
 \begin{figure}[!t]
@@ -211,7 +212,7 @@ Components Catalog.
 We use the \texttt{Computing Resources} and \texttt{Hardware} domain ontologies 
 to describe computational resources. For each Cloud resource (Amazon EC2 and 
 FutureGrid), we defined two virtual machines: one that meets the requirements for the 
-Montage and Epigenomics workflows (requires smaller disk space); and one for the 
+Montage and Epigenomics workflows (requires smaller disk space); and another for the 
 SoyKB workflow (requires larger disk space). In both cases, we generated conceptually 
 equivalent  appliances, as they both provide the CentOS 6 operating system, but differ
 in the hardware configuration. We attempt to reduce the resource consumption of
@@ -220,12 +221,15 @@ execution is performed locally, we generated a single VM appliance that meets th
 requirements of all workflows. 
 
 The description of the appliances is then included in the Scientific Virtual Appliances 
-Catalog (step 7 in Figure~\ref{fig:wicusflow}). \rev{According to the SVA model, an 
+catalog (SVA, Figure~\ref{fig:wicusflow}). \rev{According to the SVA model, an 
 SVA is supported by one or more Image Appliances, which represent the set of VMs
 belonging to a single infrastructure provider that are able to enact the characteristics
-(software and hardware) specified for the SVA.  Thus, we defined  an Image Appliance that groups 
-all Image Appliances into the \texttt{CentOS 6 SVA}. We will have five different Image Appliances 
-grouped into one single Scientific Virtual Appliance, defined by the Centos 6 software stack}.
+(software and hardware) specified for the SVA. Thus, we created five Image Appliances 
+that are grouped into a single Scientific Virtual Appliance (\texttt{CentOS 6 SVA}), 
+which is defined by the CentOS 6 software stack}.
+%Thus, we defined  an Image Appliance that groups 
+%all image appliances into the \texttt{CentOS 6 SVA}.  will have five different Image Appliances 
+%grouped into one single Scientific Virtual Appliance, defined by the CentOS 6 software stack}.
 Table~\ref{tab:imgapps} summarizes the main characteristics of the five appliances 
 we have annotated.
 
@@ -260,7 +264,7 @@ clock speed.
 \begin{table}[!htb]
 	\centering
 	\footnotesize
-	\setlength{\tabcolsep}{7pt}
+	\setlength{\tabcolsep}{6pt}
 	\begin{tabular}{l | c c r r}
  					& CPU (GHz) 	& CPU Arch. 	& RAM (GB)	& Disk (GB) \\ \hline
 		Montage 		& -		 	& 64 bits 		& 4 			& 4 \\
@@ -273,9 +277,9 @@ clock speed.
 
 
 %%%
-\subsection{Reproducing Workflow Executions.}
+\subsection{Reproducing Workflow Executions}
 
-\paragraph{\textbf{Execution Script}}
+%\paragraph{\textbf{Execution Script}}
 
 In all cases, \rev{after executing the ISA over the described annotations for the three workflows},
 we were able to map the abstract plan either into a PRECIP or 
@@ -309,7 +313,8 @@ require superuser privileges on the VM. The workflow execution, however, is perf
 under the user account created in the third section.
 
 
-\rev{\subsection{Reproduction Results}}
+% subsection
+\rev{\subsection{Results and Discussion}}
 
 We executed the resultant scripts for the three workflows over their corresponding 
 platforms. That is, a total of 9 different executions, as each workflow is executed on  
@@ -320,25 +325,45 @@ VM image, where the execution environment was already in place.
 Results show that the VM execution environments deployed by all scripts are able to
 fully execute their related workflows. To check that not only the workflows are successfully executed but also 
 that the results are correct and equivalent, we checked their produced output data. In the 
-case of Montage, which produces an image as output, we used a perceptual hash tool\footnote{http://www.phash.org (accessed 2015-04-10)}
+case of Montage, which produces an image as output, we used a perceptual hash 
+tool\footnote{http://www.phash.org}
 to compare the resulting image (0.1 degree image of the sky) against the one generated 
 by the baseline execution, obtaining a similarity factor of 1.0 (over 1.0) with a threshold of 
 0.85. In the Epigenomics and SoyKB workflows, the output data is non-deterministic due to
 the existence of probabilistic steps. In this case, the use of a hash method is unfeasible. 
 Hence, we validated the correct execution of the workflow by checking that correct output 
-files were actually produced, and that the standard errors produced by the applications did not contain any error message.
-In both cases the results obtained in each infrastructure were equivalent in terms of their size (e.g., number of lines) 
-and content.
+files were actually produced, and that the standard errors produced by the applications 
+did not contain any error message. In both cases the results obtained in each infrastructure 
+were equivalent in terms of their size (e.g., number of lines) and content.
 
 %reviewer
 %The paper does not provide a discussion of the approach and results. The discussion could describe and analyze what is automated and what is manual in the overall process. It would be very helpful to evaluate the cost of preserving a computing infrastructure associated to an in-silico experiment, in terms of semantic annotation of the workflow, the workflow management systems, the infrastructure, in terms also of software packaging in virtual machines.
-\note{not sure whether this should be here or in section 6, as it is part of the discussion}
+%\note{not sure whether this should be here or in section 6, as it is part of the discussion}
 
 
 \rev{
-The obtained results show scientific experiments in form of computational workflows can be reproduced based on semantic annotations using a proper vocabulary. In this work we introduce a set of tools for generating those annotations, which ease the effort of documenting the execution environment. However, those tools do not provide a fully automated process and some manual interactions is still required. Two of the entry files of the reproducibility process (Figure \ref{fig:wicusflow}), the \emph{WMS Annotations} and the \emph{SVA Catalog}, are generated manually. These files are reused for the three experiments exposed in this section, and would be also used for new Pegasus workflows. When reproducing a workflow belonging to a different WMS, a new set of annotations about it would be necessary, whereas the \emph{SVA Catalog} could be reused. This catalog is extended as new computational resources are added to the system.
-
-Most of the software involved on the execution of the three workflows studied in this work was, and still is, available online either through distribution packages repositories or hosted online by different institutions. Other software applications, such as the ones designed for the workflow, have been hosted in a public repository for this work. We decided to upload them to GItHub\footnote{https://github.com/} to ensure that they could be retrieved remotely. 
+Experimental results show that scientific experiments in form of computational 
+workflows can be reproduced based on semantic annotations using a proper 
+vocabulary. The set of tools introduced in this work enables the generation 
+of semantic annotations, which ease the effort of documenting the execution
+environment. However, those tools do not provide a fully automated process,
+thus some manual interactions are still required. Two of the entry files of the 
+reproducibility process (\emph{WMS Annotations} and \emph{SVA Catalog}, 
+Figure \ref{fig:wicusflow}) are manually generated. Although these files require
+some effort to elaborate, they are created once and reused for all workflows
+of a workflow management system}.
+\note{Explain why would be challenging to automate the creation of these files. Maybe due to the need of specialized knowledge of the WMS. }
+%These files are reused for the three experiments exposed in this section, and would be also used for new Pegasus workflows. 
+\rev{
+When reproducing workflows from different WMS, a new set of annotations 
+would be required, whereas the \emph{SVA Catalog} could be reused. This 
+catalog is extended as new computational resources are added to the system.
+Most of the software involved on the execution of the three workflows studied 
+in this work was, and still is, available online either through distribution packages 
+repositories or hosted online by different institutions. Other software applications, 
+such as the ones designed for the workflow, have been hosted in a public 
+repository for this work. We decided to upload them to GItHub\footnote{https://github.com} 
+to ensure that they could be retrieved remotely.
 }
  
 

@@ -22,7 +22,24 @@ Replicability and reproducibility of computational experiments using cloud compu
 
 The Executable Paper Grand Challenge~\cite{elsevierchallenge} and the SIGMOD conference in 2011~\cite{SIGMOD} highlighted the importance of allowing the scientific community to reexamine experiment execution. The conservation of virtual machine (VM) images emerges as a way of preserving the execution environment~\cite{Brammer,SHARE}. However, the high storage demand of VM images remains a challenging problem~\cite{Mao:2014:ROD:2600090.2512348,6552826}. Moreover, the cost of storing and managing data in the Cloud is still high, and the execution of high-interactivity experiments through a network connection to remote virtual machines is also challenging. A list of advantages and challenges of using VMs for achieving reproducibility was exposed in~\cite{Howe2012}.
 
-In~\cite{reprozip}, authors introduce ReproZip, a provenance-based tool for tracking the operating system calls to identify the libraries and data dependencies, as well as the configuration parameters involved in an experiment. The tool combines all these dependencies into a single package that can be used to reproduce an experiment. \rev{Although this approach avoids storing VM images, it still requires storing the application binaries and their dependencies. Instead, our work uses semantic annotations to describe these dependencies. In our approach we are not trying to capture and package the original elements of the former infrastructure (copy the files and libraries). We are rather describing them in a way that an available counterpart can be retrieved and tuned to expose the same characteristics. In this work we claim that we are not only providing a technical solution, but also increasing the reproducibility degree of the experiment by exposing the knowledge about the underlaying infrastructure in an structured way. The dynamism of this solution would be higher using an approach like the one exposed on our work, as we abstract the description of the infrastructure from the concrete elements that are involved in the former experiment}
+In~\cite{reprozip}, authors introduce ReproZip, a provenance-based 
+tool for tracking the operating system calls to identify the libraries and 
+data dependencies, as well as the configuration parameters involved 
+in an experiment. The tool combines all these dependencies into a 
+single package that can be used to reproduce an experiment. 
+\rev{Although this approach avoids storing VM images, it still requires 
+storing the application binaries and their dependencies. In this work, we
+use semantic annotations to describe these dependencies. In our 
+approach, we do not try to capture and package the original elements of 
+the former infrastructure (copy the files and libraries). Instead, we describe 
+them in a way that an available counterpart can be retrieved and tuned to 
+expose the same characteristics. We claim that we do not only provide a 
+technical solution, but also increase the reproducibility degree of the 
+experiment by exposing the knowledge about the underlying infrastructure 
+in a structured way. ReproZip would attain better dynamism if an 
+approach as the one proposed in this work is used, since it abstracts 
+the description of the infrastructure from the concrete elements that 
+are involved in the original experiment.}
 
 
 %These approaches differ from ours as we do not try to capture the real elements of the infrastructure (copy the files and libraries) but rather we try to describe them and obtain an available counterpart that can be tuned to expose the same features. We agree with ReproZip authors that packaging the physical infrastructure components limits the scope of applicability, as the packages require most of the target machine to be the same. We also argue that the knowledge and understanding of the infrastructure, as well as the dynamism of this solution would be higher using an approach like the one exposed on our work, as we abstract the description of the infrastructure from the concrete elements that are involved in the former experiment.
@@ -30,7 +47,16 @@ In~\cite{reprozip}, authors introduce ReproZip, a provenance-based tool for trac
 %\feedback{@Maria: add more references to previous work on life science reproducibility}
 %\note{Idafen: there are several references to this in the introduction. Should we repeat them here?}
 
-Galaxy~\cite{goecks2010galaxy}, a well known workflow system in the context of life sciences, introduced a web-service based system for achieving accessible and reproducible computations, hiding the implementation details of the underlying tools for workflow developers, providing a web-based interface for retrieving an analyzing genomic data. \rev{This approach has proved to be successful in several cases and, even when it works in a local execution scenario, it is mostly used for developing workflows with external services dependencies. Thus, it is not so suitable for our reproducibility approach, which mainly focused on workflows without this kind of dependencies, as they are out of workflow developer control.}
+Galaxy~\cite{goecks2010galaxy}, a well known workflow system in the context 
+of life sciences, introduced a web-service based system for achieving accessible 
+and reproducible computations, hiding the implementation details of the 
+underlying tools for workflow developers, providing a web-based interface for 
+retrieving an analyzing genomic data. \rev{This approach has proved to be 
+successful in several cases, however workflows are strongly dependent of
+external services, even when running in a local execution environment.
+Therefore, this approach does not satisfy our reproducibility constraints, 
+which focus on scientific workflows where the developers have full control
+over the applications used within a workflow.}
 
 
 % Even when this approach has proved to be successful in several cases, we argue that it does not cover local development of workflows, which is a common case in computational science.  
@@ -42,25 +68,71 @@ Software components cannot be preserved just by maintaining their binary executa
 
 
 \rev{
-Some efforts have been undertaken to define syntaxes for describing the execution environment of scientific applications. The recently released TOSCA\footnote{http://docs.oasis-open.org/tosca/TOSCA/v1.0/os/TOSCA-v1.0-os.html} standard has been proposed to specify the components and life cycle of scientific workflows, including their dependencies. TOSCA is a cloud management standard that allows to define declarative templates for defining the workflow as well as the information required for enacting its environment. This makes the workflow portable to any provider compliant with TOSCA~\cite{TOSCA}. As well as in this work, this approach increases the reproducibility degree of the experiment. However it differs from ours as we do not aim to rewrite the workflow itself. Our goal is to describe it and obtain an equivalent environment depending on the available providers.
+Some efforts have been undertaken to define syntaxes for describing the 
+execution environment of scientific applications. The recently released 
+TOSCA\footnote{http://docs.oasis-open.org/tosca/TOSCA/v1.0/os/TOSCA-v1.0-os.html} 
+standard has been proposed to specify the components and life cycle of 
+scientific workflows, including their dependencies. TOSCA is a Cloud 
+management standard that allows the definition of declarative templates 
+for defining the workflow as well as the information required for enacting 
+its environment. As a result, workflows are portable to any TOSCA-compliant 
+provider~\cite{TOSCA}. Although this approach significantly increases the 
+reproducibility degree of the experiment, it requires the workflow to be
+rewritten. In this work, however, our goal is to describe the workflow to 
+obtain an equivalent execution environment depending on the available 
+providers.
 }
 
 \rev{
-In this work we explore different tools, such as PRECIP and Vagrant, for enacting the supporting environment. Further studied should study other well-known solutions. Based on the aforementioned TOSCA standard, Cloudify\footnote{http://getcloudify.org/} allows to define the configuration of a given application and its dependencies. These descriptions can be later used to state the application's installation process as well as its lifecycle. Infrastructure Manager~\cite{IM2015} is a tool that adds an abstraction layer for selecting, deploying and configuring virtual machines in several providers, such as OpenNebula~\cite{opennebula}, Microsoft Azure\footnote{http://azure.microsoft.com} and OpenStack, among many others, making the target application cloud-independent. 
-
-These technologies and standards are compatible with our approach, and they could be integrated into our system as new enactment and specification solutions.
-
+Several tools have been developed to enact the supporting environment.
+For instance, Cloudify\footnote{http://getcloudify.org/} (a tool based on the
+TOSCA standard) allows to define the configuration of a given application 
+and its dependencies. These descriptions can be later used to state the 
+application's installation process as well as its lifecycle. Infrastructure 
+Manager~\cite{IM2015} is a tool that adds an abstraction layer for selecting, 
+deploying, and configuring VMs in several providers, such as OpenNebula~\cite{opennebula}, 
+Microsoft Azure\footnote{http://azure.microsoft.com}, and OpenStack. In
+this work, we explore PRECIP and Vagrant, but thanks to WICUS decoupled
+architecture, other tools can be easily incorporated.
+% making the target application cloud-independent. 
+%In this work we explore different tools, such as PRECIP and Vagrant, for enacting the supporting environment. Further studied should study other well-known solutions. Based on the aforementioned TOSCA standard, 
+%These technologies and standards are compatible with our approach, and they could be integrated into our system as new enactment and specification solutions.
 }
 
 
 A recent and relevant contribution to the state of the art of workflow preservation was developed within the context of the TIMBUS project~\cite{Mayer2014Ontologies}. The project  aimed to preserve and ensure the availability of business processes and their computational infrastructure, aligned with the enterprise risk and the business continuity management. They also proposed a semantic approach for describing the execution environment of a process.  However, even though TIMBUS has studied the applicability of their approach to the eScience domain, their approach is mainly focused on business processes.
 
-Semantics have been also proposed in the area of biomedical research as a way for achieving reproducibility of published experiments~\cite{MaloneSWO2014}. In this work authors \rev{ propose a taxonomy for classifying software artifacts in the context of biological computations, in the same way that gene products or phenotypes are classified. In order to do so, authors developed the {\it Software Ontology} (SWO), a model for cataloguing the software involved on the storage and management of data.
+Semantics have also been proposed in the area of biomedical research 
+as a way for achieving reproducibility of published experiments. 
+\rev{
+For instance, in~\cite{MaloneSWO2014} authors propose a taxonomy for 
+classifying software artifacts in the context of biological computations in 
+the same way that gene products or phenotypes are classified. To build the
+classification, they developed the {\it Software Ontology} (SWO), a model 
+for cataloguing the software involved on the storage and management of data.
+The SWO is a comprehensive catalogue of software-related concepts for 
+composing description of processing artifacts. It contains more than 4000 
+classes distributed in several modules for describing the different areas of 
+software information Many of these concepts share commonalities with the 
+concepts used in the WICUS network, in particular on the \texttt{Software 
+Domain} ontology. We identify a conceptual equivalences between 
+\path{swo:Software} and \path{wstack:SotfwareComponent} classes, or 
+\path{swo:has_version} and \path{wstack:hasVersion}, even tough their 
+context and purpose are not the same. While the SWO ontology focuses 
+on describing the properties of a biology software, aiming to make it more 
+understandable and potentially reproducible, the WICUS ontologies focus 
+on the deployment of software artifacts and stating their necessary 
+dependencies. We aim to develop a more generic and flexible ontology 
+that can be applied in different scientific domains.
 
-The SWO is a comprehensive catalogue of software-related concepts for composing description of processing artifacts. It contains more than 4000 classes distributed in several modules for describing the different areas of software information Many of this concepts share commonalities with the concepts on the WICUS network, specially with its {\it Software Domain} ontology. We can identify a conceptual equivalences between \path{swo:Software} and \path{wstack:SotfwareComponent} classes or \path{swo:has_version} and \path{wstack:hasVersion}, even tough their context and purpose is not the same. While the SWO ontology focuses on describing the properties of biology software, aiming to make it more understandable and potentially reproducible, the WICUS ontologies focus on the deployment of software artifacts and stating their necessary dependencies. We aim to develop a more generic and flexible ontology that can be applied in different scientific domains.
-
-Another related approach, the EDAM ontology\footnote{http://edamontology.org/page}, is a more concise ontology for describing bioinformatics resources. It includes concepts for annotating different data types, identifiers and formats, as well as topics and operations. Even when concept of operations can be related to the concept of software components, they are more related to data transformations than to executable deployment and computations. The ontologies we are proposing in this work are not directly focused to data descriptions and analysis.
-
+The EDAM ontology\footnote{http://edamontology.org/page} is a more 
+concise ontology for describing bioinformatics resources. It includes concepts 
+for annotating different data types, identifiers and formats, as well as topics 
+and operations. Even when concept of operations can be related to the 
+concept of software components, they are more related to data 
+transformations rather than to executable deployment and computations.
+The ontologies proposed in this work are not strictly focused on data 
+descriptions and analysis.
 }
 
 \rev{
@@ -69,8 +141,6 @@ Several models have been also proposed to describe Cloud environments~\cite{Yous
 Even when we characterize the main properties of computational resources, belonging to the IaaS layer, we do not aim to model the Cloud providers themselves neither their quality of the services they provide. Those considerations, even  though they are interesting for scheduling purposes, are out of the scope of this work.
 }
 
-
-%\feedback{Ewa: there is a lot of problems with tense. Sometimes is in the past, sometimes in the present. Revise it.}
 
 
 

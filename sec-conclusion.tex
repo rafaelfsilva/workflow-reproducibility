@@ -1,22 +1,56 @@
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
 
-%\feedback{@Oscar: this conclusion section is missing a statement (paragrph) of what can be derived from the experiments run, on what are the envisaged challenges that %you foresee, etc.}
+In this work, we proposed a semantic modeling approach to conserve 
+computational environments in scientific workflow executions, where  
+the resources involved in the execution of the experiment are described 
+using a set of semantic vocabularies. We defined and implemented four 
+domain ontologies, aggregated in the the WICUS ontology network. From 
+these models, we defined a process for documenting workflow applications, 
+the workflow management system, and their dependencies.
 
-%\feedback{@Oscar: Something that should be discussed in a discussion or future
-%work section is how we can build a library of descriptions for all the workflows
-%in the world (is it possible? how many descriptions can be reused? how much reuse?}
+We conducted experiments with three real workflow applications (Montage, 
+Epigenomics, and SoyKB) from different sciences using the Pegasus WMS. 
+We used the Infrastructure Specification Algorithm (ISA) to obtain a set of 
+PRECIP and Vagrant scripts to describe and execute the experiment. 
+Experimental results show that our approach can reproduce an equivalent 
+execution environment of a predefined VM image on academic, public, and 
+local Cloud platforms.
 
-In this work, we proposed a semantic modeling approach to conserve computational environments in scientific workflow executions, where  the resources involved in the execution of the experiment are described using a set of semantic vocabularies. We defined and implemented 4 domain ontologies, aggregated in the the WICUS ontology network. From these models, we defined a process for documenting workflow applications, the workflow management system where they can be executed, and their dependencies. 
+Semantic annotations of the computational environment, combined with the 
+ISA and the scripting functionality provided by PRECIP and Vagrant, is a 
+powerful approach for achieving reproducibility of computational environments 
+in future experiments, and at the same time addresses the challenges of high 
+storage demand of VM images. \rev{In this work, we have demonstrated that
+an equivalent computational environment (that fulfills the requirements of a
+workflow) can be obtained from simple base VM images, which are already 
+available in most Cloud platforms. Consequently, there is no need to create 
+and store a new VM image for each workflow. Therefore, this approach 
+significantly diminishes the costs and efforts in maintaining a VM image that 
+may have limited usage. We acknowledge that this approach may be limited 
+to the online (publicly) availability of the software, however most of the scientific
+tools developed nowadays are hosted as an open-source project.}
 
-We conducted experiments with three workflow applications from different areas of science (Montage, Epigenomics and SoyKB) using the Pegasus WMS. We executed the ISA to obtain a set of PRECIP and Vagrant scripts to describe and execute the experiment. Experimental results show that our approach can reproduce an equivalent execution environment of a predefined VM image on academic, public, and local Cloud platforms.
+% how by using a generic VM image, only containing the operating system and its default associated tools, we have been able to dynamically generate three different virtual machines, each of them fulfilling the requirements of a workflow. These images are public and were already available and supported by the different providers we have worked with. Thus, we have saved several gigabytes by not generating an image for each workflow.}
+%\note{Not sure how to quantify the amount of GB we save. We could ask Mats for the size of the WM Images at FG, but not sure how to calculate the size of the AWS and Vagrant VMs}
 
-Semantic annotations of the computational environment, combined with the ISA and the scripting functionality provided by PRECIP and Vagrant, is a powerful approach for achieving reproducibility of computational environments in future experiments, and at the same time addresses the challenges of high storage demand of VM images. \rev{In this work we have shown how by using a generic virtual machine image, only containing the operating system and its default associated tools, we have been able to dynamically generate three different virtual machines, each of them fulfilling the requirements of a workflow. These images are public and were already available and supported by the different providers we have worked with. Thus, we have saved several gigabytes by not generating an image for each workflow.}
-\note{Not sure how to quantify the amount of GB we save. We could ask Mats for the size of the WM Images at FG, but not sure how to calculate the size of the AWS and Vagrant VMs}
+%\rev{This kind of solution requires the workflow management system and the scientific applications related to the workflow to be publicly available. We argue that this necessary condition holds in most cases, being the majority of software solutions developed in science open and public}. 
 
-\rev{This kind of solution requires the workflow management system and the scientific applications related to the workflow to be publicly available. We argue that this necessary condition holds in most cases, being the majority of software solutions developed in science open and public}. \rev{For achieving the reproducibility of the workflow execution environment, as we have done in this work, access to the resources describing the workflow is required. The information about the software components involved on the execution must be available and as explicit as possible. In the case of the experiments of this work, the Pegasus Transformation Catalog file provided this information, which is also available in other workflow systems using similar files.}
-
-\rev{Also, knowledge about semantic technologies is required for generating some of the annotations for describing the underlaying infrastructure. At the time of this writing the description of the WMS and the computational resources are generated manually, whereas the rest of the descriptions are annotated by the tools of the WICUS system. Future versions of the system might include tools for fully automating this process. Nevertheless, as those annotations are reused, we argue that this effort is reasonable. Moreover, this process may be assisted by experts on these technologies, in the same way librarians help book authors and publishers to conserve their contributions.}
+\rev{To attain reproducibility, the proposed model requires that information about
+the software components involved on the workflow execution should be available
+and as explicit as possible. In Pegasus, the transformation catalog provides 
+all necessary information. Similar catalogs (or files) are also available in other
+workflow systems. }
+%\rev{For achieving the reproducibility of the workflow execution environment, as we have done in this work, access to the resources describing the workflow is required. The information about the software components involved on the execution must be available and as explicit as possible. In the case of the experiments of this work, the Pegasus Transformation Catalog file provided this information, which is also available in other workflow systems using similar files.}
+\rev{Also, knowledge about semantic technologies is required for generating 
+some of the annotations for describing the underlying infrastructure. Currently,
+the description of the WMS and the computational resources are manually 
+generated, whereas the remaining annotations are performed by tools of the 
+WICUS system. Future work include the development of tools to fully (or 
+partially) automate this process. The annotation process may be assisted 
+by experts, in the same way librarians aid book authors and publishers to 
+conserve their contributions.}
+%Nevertheless, as those annotations are reused, we argue that this effort is reasonable.
 
 
 %The drawback of our approach is that it assumes that the application and the workflow management system binaries are publicly available.

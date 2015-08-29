@@ -112,18 +112,18 @@ Finally, I really appreciated the availability of the supplementary materials. E
 Section 2: The content of this section does not clearly state if it is a contribution of this paper or not with respect to [21,22]. The new features should be clearly described. To complement what has been introduced in [21,22] a simple ``running'' example in the form of RDF triples (turtle syntax) could illustrate the expressivity of the WICUS vocabularies in terms of workflow annotations, software \& hardware constraints as well as available virtual appliances. It would also illustrate how these informations could be queried to automate the process of in silico experiment deployment.
 \end{review}
 
-\answer{We have clarified the new concepts of our models, included on the latest version of the WICUS ontology network. We have also included a running example summarizing the main RDF annotations of the SoyKB workflow as well an SPARQL query example for retrieving its software dependencies.}
-
-%\todo{add sparql queries?}
+\answer{We have clarified the new concepts of our models, included on the latest version of the WICUS ontology network. We have also included a running example summarizing the main RDF annotations of the SoyKB workflow (Listing 1), as well as an SPARQL query example for retrieving its software dependencies (Listing 2).}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 2: This semantic modeling section should also clearly show how the proposed vocabularies are related to other ones such as, for instance, P-PLAN or PROV for the workflow descriptions.
 \end{review}
 
-\answer{At the end of Section 2, we have added an explanation detailing which vocabularies have been aligned to the WICUS ontology network, introducing an small example.}
+\answer{At the end of Section 2, we have added an explanation detailing which vocabularies have been aligned to the WICUS ontology network, introducing a simple example (\todo{add reference to example}).}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 3: Since the transformation catalog of Pegasus is part of the WICUS process fig 2, it should be better introduced in 3.1.
 \end{review}
@@ -131,21 +131,23 @@ Section 3: Since the transformation catalog of Pegasus is part of the WICUS proc
 \answer{\todo{add response}}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 3: The first part of 3.2.1 concerns the semantic modeling and not the tooling, it should be moved to section 2.
 \end{review}
 
-\answer{We have re-allocated the beginning of section 3.2.1 to section 2, as we agree with the reviewer that it makes  more sense and increases the understandability of the semantics models description. We have also modified section 3.2.1 to be consistent with these changes.}
+\answer{We have moved the beginning of Section 3.2.1 to Section 2, as we acknowledge that it improves the understandability of the semantics models description. We have also modified Section 3.2.1 to be consistent with these changes.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 3: The 11 steps of 3.2.1 are not easy to follow. Maybe reducing the number of steps and focusing on the processing steps (DAX and TC annotator, Inf. Spec. Algorithm, Script generator), would ease the understanding. Also, it would be interesting to see what are the overall inputs of this workflow.
 \end{review}
 
-\answer{We have modified Figure 3, reducing the number of steps and removing the intermediate files, so it is more concise and easy to follow. We have grouped the main inputs and outputs of the WICUS process flow. We have also rewritten the description of the process in order to make it more understandable.}
-%\todo{modify figure 2, change colors and split it in 2 main phases}}
+\answer{We have revised Figure 3 to reduce the number of steps and remove the intermediate files, so it is more concise and easy to follow. We have grouped the main inputs and outputs of the WICUS process flow. We have also rewritten the description of the process in order to ease its understanding.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 3: In 3.2.2 ``interactions with the provisioned instances are done by tagging'', is not clear.
 \end{review}
@@ -155,110 +157,127 @@ Section 3: In 3.2.2 ``interactions with the provisioned instances are done by ta
 \revised{In PRECIP, when an instance is provisioned, the scientist can add arbitrary tags to that instance in order to identify and group the instances in the experiment. Then, future interactions can be performed by using the given tags.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 4: This section instantiate the semantic models and run the WICUS process to reproduce 3 workflows. Since the ISA algorithm is part of the core of the approach, it should be introduced and described earlier.
 \end{review}
 
-\answer{We agree with the reviewer on that it makes no sense to describe the ISA within the experimentation section, as it is part of the core of the system. Thus, we have moved the description of the ISA to section 3, after the description of the WICUS modules and flow.}
+\answer{We acknowledge that the description of the ISA should not be part of the experimentation section. Therefore, we have moved the description of the algorithm to Section 3, where we introduce the description of the WICUS modules and flow.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 4: Figures 7 and 8 are not really informatives.
 \end{review}
 
-\answer{We have removed figure 8, describing the Epigenomics workflow annotations, from the manuscript, leaving only figure 7, that contains the annotations about the Montage workflow. We agree with the reviewer that both figures include the same type of information and thus are redundant. We have kept one of them as we consider that it offers a more detailed explanation of how a concrete workflow is annotated, in contrast to figure 6.}
+\answer{We have removed Figure 8 (description of the Epigenomics workflow annotations) since it is conceptually redundant to Figure 7. However, we kept Figure 7 (annotations about the Montage workflow) since we consider that it offers a more detailed explanation of how a concrete workflow is annotated, in contrast to Figure 6 where an overview is provided.}
 
 
+% -----------------------------------------------
 \begin{review}
-Section 4: The use of terms "Image appliance", "Virtual appliance", "Scientific virtual appliance" are confusing. The sentence "We define an Image Appliance that groups all VMs appliances into one single Scientific Virtual Appliance" is unclear.
+Section 4: The use of terms "Image appliance", "Virtual appliance", "Scientific virtual appliance" are confusing. The sentence ``We define an Image Appliance that groups all VMs appliances into one single Scientific Virtual Appliance" is unclear.
 \end{review}
 
-\answer{In many cases, we used``Virtual appliance'' and ``Scientific virtual appliance' as synonyms, whereas ``Image Appliance'' is a different concept. We have reviewed the text trying to make a better distinction of these concepts where necessary. We have also added a brief explanation in section 4 on how they relate to each other according to the WICUS-SVA domain ontology.}
+\answer{In many cases, we used ``Virtual appliance'' and ``Scientific virtual appliance' as interchangeably, whereas ``Image Appliance'' is a different concept. We have revised the text to clarify the differences between these concepts when necessary. We have also added a brief explanation in Section 4 on how they relate to each other according to the WICUS-SVA domain ontology.}
 
+
+% -----------------------------------------------
 \begin{review}
-Section 4: In 4.3 ``ISA selects the intersection where the value is maximized for each sub-workflow''. It is unclear, which value do you refer to ? An example would be useful here.
+Section 4: In 4.3 ``ISA selects the intersection where the value is maximized for each sub-workflow''. It is unclear, which value do you refer to? An example would be useful here.
 \end{review}
 
 \answer{We have added a more detailed explanation on how the SVAs are selected, specifying what we mean by the maximization of the intersection. In the selection process we retrieve the software components already available on each SVA as well as the dependency graph of each requirement and calculate their intersection. We select the SVAs that maximize this intersection.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 4: Listing 1 : the text describing the pseudo code should refer to the lines of the listing. It is only true for lines 23 to 27.
 \end{review}
 
-\answer{We have added references to the lines on the pseudo code listing through the text description, which now belongs to section 3.2.2.}
+\answer{We have included references to the lines on the pseudo code listing through the text description, which now belongs to Section 3.2.2.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 4: The model of an Abstract Deployment Plan should be described in section 2.
 \end{review}
 
-\answer{We have moved the description of the deployment plan and its related ontology description to section 2, as it is highly related to the semantic modeling.}
+\answer{We have moved the description of the deployment plan and its related ontology description to Section 2, as it is highly related to the semantic modeling.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 4: The results of the experiment should constitute a single subsection 4.4.
 \end{review}
 
-\answer{We have added a new subsection covering the results of our experimental process.}
+\answer{We have created a new subsection (4.4) covering the results and discussion of our experimental process.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 5: A positioning of the approach would reinforce the paper message, in particular with respect to the ReproZip approach which addresses the same objectives, and which also relies on Vagrant to automate the deployment of experiment.
 \end{review}
 
-\answer{We have reviewed section 5 including several positioning statements for our approach. We have stated how our work differs from approaches such as RerpoZip, arguing that exposing the knowledge about the execution environment using semantics increases the reproducibility degree.}
+\answer{We have revised and extended the related work section to include several positioning statements related to our approach and additional efforts. We have stated how our work differs from approaches such as RerpoZip, arguing that exposing the knowledge about the execution environment using semantics increases the reproducibility degree.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 5: I don't see why Galaxy does not cover the local development of workflows. E-scientists can deploy a local galaxy server on their laptop and encapsulate or deploy binary softwares even outside the domain of ``omic'' data analysis.
 \end{review}
 
-\answer{In this statement we aimed to mean that Galaxy is mostly used for developing workflows involving external web services dependencies and thus it does not fit into our approach. We have modified this paragraph to better reflect this argument.}
+\answer{Galaxy is mostly used for developing workflows involving external web services dependencies. This method does not fit into our approach, which describes local dependencies. We have revised the text to better reflect this argument.} \todo{Idafen, please check if my changes are ok for this answer.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 5: Links with the generic parts of SWO and EDAM ontologies should be highlighted. Existing works on modeling Cloud based infrastructures could also be mentioned.
 \end{review}
 
-\answer{We have added a more detailed comparison between our ontology network and the SWO and EDAM ontologies, as well as with some previous ontologies for Cloud Computing solutions.}
+\answer{We have improved the comparison between our ontology network and the SWO and EDAM ontologies, as well as with some previous ontologies for Cloud Computing solutions.}
 
 
-
+% -----------------------------------------------
 \begin{review}
 Section 6: From an e-science perspective, a summary of what is needed to implement a reproducible computing environment with WICUS would be helpful.
 \end{review}
 
-\answer{We have included several statements as part of the conclusions of the paper, describing the requirements that must be fulfilled in order to implement and share a reproducible environment. We describe which information must be harvested and which skills are required to achieve the reproducibility of a workflow execution environment.}
+\answer{We have included several statements as part of the discussion and conclusions of this work, which describes the requirements that must be fulfilled in order to implement and share a reproducible environment. We also describe which information must be harvested and which skills are required to achieve the reproducibility of a workflow execution environment.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 6: The results of the paper could also highlight what is stated in the introduction (``reproducibility implies that at least some changes have been introduced in the experiment''), by giving hints on how this approach ease e-scientists in changing some of the parameters of the experiments.
 \end{review}
 
-\answer{In section 6 we have included a paragraph to explain what reproducibility means in the context of our approach and how it relates to the results of our experiments. Also, we stat how it might be used by scientists to study the effects of modifying the execution environment.}
+\answer{In Section 4.4 we have included a paragraph to explain what reproducibility means in the context of our approach and how it relates to the results of our experiments. Also, we state how it might be used by scientists to study the effects of modifying the execution environment.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 6: Perspectives could be drawn on the benefits of publishing computing environment annotations as linked data.
 \end{review}
 
-\answer{We have added several statements introducing that our approach is generating annotations following the Linked Data principles and discuss how publishing it will improve its benefits}
+\answer{We have added several statements introducing that our approach is generating annotations in conform to the Linked Data  principles (along with some examples), and discussing how its publication would improve its benefits.}
 
+
+% -----------------------------------------------
 \begin{review}
 Section 6: ``...at the same time addresses the challenges of high storage demand of VM images.''; it should be clearly explained in the results section.
 \end{review}
 
-\answer{In order to better explain and justify this claim we have introduced how we save space by using public and generic images combined with our dynamic deployment approach, rather than generating a new VM image for each experiment.}
+\answer{We acknowledge that this statement is bold. Therefore, we alleviated the boldness of the statement and explained how our approach tackles storage constraints by using public and generic images combined with the dynamic deployment approach, rather than generating a new VM image for each experiment.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 6: "The drawback of our approach is that it assumes that the application ...  are publicly available.", it is rather a necessary condition to reproduce a software execution.
 \end{review}
 
-\answer{We agree with the reviewer in that this claim should be better stated as a necessary condition rather than as a drawback. We have modified our claim and explained that the mentioned condition hold in most cases in the context of computational scientific experiments. }
+\answer{We acknowledge that this claim should be stated as a necessary condition rather than as a drawback. Thus, we have revised our claim and explained that the mentioned condition hold in most cases in the context of computational scientific experiments.}
 
 
+% -----------------------------------------------
 \begin{review}
 A lot of references are URLs pointing to tools or projects. They should be added in the paper as footnotes.
 \end{review}
@@ -266,6 +285,7 @@ A lot of references are URLs pointing to tools or projects. They should be added
 \answer{We have changed the URL references to footnotes where necessary.}
 
 
+% -----------------------------------------------
 \begin{review}
 the WMS requirements, and and one for each $\rightarrow$ the WMS requirements, and one for each \\
 a well know workflow $\rightarrow$ a well known workflow \\
@@ -273,7 +293,8 @@ WICUS is a on-going effort $\rightarrow$ WICUS is aN on-going effort \\
 for their valuable help $\rightarrow$ for their valuable help.
 \end{review}
 
-\answer{We have fixed these typos.}
+\answer{We have fixed these and other typos.}
+
 
 
 
@@ -289,24 +310,20 @@ for their valuable help $\rightarrow$ for their valuable help.
 The description of the infrastructure, at least at the level of the experiment, is very basic (architecture, RAM, DISK). There are other important and complex features such as networks, additional disks, etc. that require both configuration and direct actions on the infrastructure provider. It is clear that the objective of the system is not to provide an environment for the deployment of customised virtual infrastructures, which could imply tens or hundreds of nodes with special configurations, but to instantiate a small-scale compatible infrastructure. The question is if this would suffice the execution of the experiments in regular scientific papers.
 \end{review}
 
-\answer{In this paper we cover single-node execution environments, arguing that they cover a wide range of computational environments. We have reviewed the paper trying to explain and exemplify this consideration. We have defined the scope of applicability in the first section, as well a described how we are planning to extend it to large and mor complex infrastructures in section 6. We also have discussed the hardware descriptions we have generated in this work within section 2.}
-
-%\todo{justify that are evidences that show that many workflows fit in our approach (a relevant set of them). Justify that in this work we are assuming that we have a reliable network. We are targeting reproducibility, not replicability. We are not targeting large scale reproducibility}}
-
-
+\answer{In this work, we cover single-node execution environments, arguing that they cover a wide range of computational environments. We have revised the manuscript in order to clarify and exemplify this consideration. We have then defined the scope of applicability in Section 1, and described how we plan to extend it to large and more complex infrastructures in Section 6. We have also discussed the hardware descriptions generated in this work within Section~2.}
 
 \revised{}
 
 
+% -----------------------------------------------
 \begin{review}
 Other important concern is the selection of the technologies. Currently, cloud infrastructures are becoming to adopt TOSCA specification and TOSCA templates to deploy and configure the environments. Comparison to WICUS should be made. Moreover, other DevOps tools such as cloudify (getcloudify.org), Infrastructure Manager (www.grycap.upv.es/im), cloudformation from AWS, to name a few, have moved from script-based configuration systems to declarative templates based on Ansible. These technological decisions should be analysed.
 \end{review}
 
-\answer{We added several statement through the paper discussing the technological decisions made for our system. We agree with reviewer that they are relevant solutions and argue that most of them can be integrated in our system, as they provide an interesting and complementary approach to our work. In section 3 we introduce how the {\it Script Generator} component can be extended to support new cloud management system. In section 6, we have described them and stated the differences and commonalities with regard to our approach.}
-
-%\todo{step 10, open to new technologies, in this paper we introduce our current use case}
+\answer{We have included several statements that discuss the technological decisions made for our system. We acknowledge the relevance of these solutions. Thus, we argue that most of them can be integrated into our system, as they provide an interesting and complementary approach to our work. In Section 3, we have introduced how the {\it Script Generator} component could be extended to support new cloud management systems. In Section 6, we have described several of them and stated the differences and commonalities with regard to our approach.}
 
 
+% -----------------------------------------------
 \begin{review}
 The impact in disk of the VMIs is important, but it is not the bottleneck, but the data. Moreover, the use of containers will strongly mitigate this fact. A good management of base VM image and the use of containers for the different experiments may be efficient. Regarding the data, scientific experiments, and specially those dealing with genomics and astrophyiscs may require huge amounts of data, and transferring it back and forth may not be efficient. The integration of this solution with data preservation infrastructures can be studied.
 \end{review}

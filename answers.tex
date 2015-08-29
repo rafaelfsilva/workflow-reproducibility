@@ -1,7 +1,7 @@
 \documentclass{letter}
 \usepackage{graphicx}
 \usepackage{color}
-\date{Aug 31, 2015}
+\date{Sep 11, 2015}
 
 \newenvironment{review}%          environment name
 {\textbf{Reviewer comment:}\begin{quote}}% begin code
@@ -49,7 +49,7 @@ Idafen Santana-Perez, Rafael Ferreira da Silva, Mats Rynge, Ewa Deelman, Mar\'ia
 %
 \textbf{Reviewer 1}
 
-
+% -----------------------------------------------
 \begin{review}
 What is reused from the previous works [21, 22] should be clarified, and the focus should be given on the new features (semantic modeling or algorithms).
 \end{review}
@@ -59,49 +59,55 @@ What is reused from the previous works [21, 22] should be clarified, and the foc
 %\revised{}
 
 
+% -----------------------------------------------
 \begin{review}
 The structure of the paper could be clarified by, whenever possible, not mixing modeling and tooling aspects (beginning of 3.2.1, fig. 9 in 4.3). These modeling aspects should reinforce section 2.
 \end{review}
 
-\answer{We haver re-allocated different sections and figures, as well as removing some others, based on reviewer's suggestion, trying to make it more readable and easy to follow.}
+\answer{In order to improve the readability and flow of this work, we have rearranged the disposition of sections and figures, based on the reviewer's suggestion. We also have suppressed some figures and listing that did not append meaningful insights (e.g., Fig.8 in the former version of the manuscript).}
 
 
+% -----------------------------------------------
 \begin{review}
 The related works section does not provide a positioning of the approach, whereas it is clearly described in [22].
 \end{review}
 
-\answer{We have reviewed the  manuscript, specially section 5, trying to state more clearly the added value of our approach with respect to previous works on the area.}
+\answer{We have reviewed the  manuscript, in particular Section 5, highlighting the added value of our approach with respect to previous works on this research area.}
 
 
+% -----------------------------------------------
 \begin{review}
 The paper does not provide a discussion of the approach and results. The discussion could describe and analyze what is automated and what is manual in the overall process. It would be very helpful to evaluate the cost of preserving a computing infrastructure associated to an in-silico experiment, in terms of semantic annotation of the workflow, the workflow management systems, the infrastructure, in terms also of software packaging in virtual machines.
 \end{review}
 
-\answer{At the end of section 4, we have added a discussion paragraph, highlighting the cost and benefits of annotating the execution environment of a workflow, as well as explaining the different types of software components we faced in our experimentation process and how we dealt with them.}
+\answer{We have add a \emph{Results and Discussion} section (Section 4.4), which highlights the costs and benefits of annotating a workflow execution environment. In addition, we discuss the different types of software components we faced in our experimentation process and how we deal with them.}
 
+
+% -----------------------------------------------
 \begin{review}
 In addition, it would be interesting to have more information on the extensibility of this approach to other cloud middleware or workflow management systems.
 \end{review}
 
-\answer{We have stated in section 6 that we are currently applying our approach to new workflows and workflow management systems. We have applied it to workflows from new scientific domains (e.g. seismology) and included two new WMS in our system.} Also, we introduce that, even when we have included in this work several representative cloud solutions, new scenarios and providers, such as the ones using containers (e.g Docker), are currently being studied in the context of our work.
-
-%\todo{add to conclusion section. check future work, make an explicit mention, currently we're working on that. mention it on the letter}}
+\answer{We have stated in Section 6 that we are currently extending our approach to different workflow applications and systems. We have addressed workflow applications from other scientific domains (e.g., seismology), and analyzed two additional WMS. We have also investigated novel cloud scenarios and providers (e.g., containerization via Docker) in addition to the ones considered in this work.}
 
 
+% -----------------------------------------------
 \begin{review}
 The perspectives could be reinforced with respect to the Linked Data movement, the needs to provide data management plans in large scale research projects, etc.
 \end{review}
 
-\answer{We have explained in section 4.2 how our annotations are generated following the Linked Data principles and motivated how publishing and integrating these annotations could improve their reusability an understandability.}
+\answer{We have extended Section 4.2 to explain how our annotations conform to the Linked Data principles, and motivated how publishing and integrating these annotations could improve their reusability an understandability.}
 
 
+% -----------------------------------------------
 \begin{review}
 Finally, I really appreciated the availability of the supplementary materials. Even if I could not complete the execution of the "epigenomics" workflow (timeout with 2 success jobs, and 67 unsubmitted jobs), I could easily deploy a local computing environment with Vagrant, and run one of the paper experiments.
 \end{review}
 
-\answer{We highly value that the experiment were able to be reproduced based on the experimental material provided. We have checked that they can be run in public providers, such as AWS and OpenStack-based ones, whereas local reproduction using Vagrant may vary depending on the target computer. Several issues with RAM memory virtualization have been identified when working with Vagrant/VirtualBox solutions, which may cause timeouts in high memory consuming workflows such as Epigenomics. We would be glad to study and try to solve this precise case, as it is a valuable feedback to our work.}
+\answer{We highly value that the experiment were able to be reproduced based on the experimental material provided. We have checked that they can be run in public providers, such as AWS and OpenStack-based platforms, whereas local reproduction using Vagrant may vary depending on the target computer. Several issues with RAM memory virtualization have been identified when working with Vagrant/VirtualBox solutions, which may cause timeouts in high-memory consuming workflows such as Epigenomics. We would be glad to investigate and address this specific case, as it is a valuable feedback to our work.}
 
 
+% -----------------------------------------------
 \begin{review}
 Section 2: The content of this section does not clearly state if it is a contribution of this paper or not with respect to [21,22]. The new features should be clearly described. To complement what has been introduced in [21,22] a simple ``running'' example in the form of RDF triples (turtle syntax) could illustrate the expressivity of the WICUS vocabularies in terms of workflow annotations, software \& hardware constraints as well as available virtual appliances. It would also illustrate how these informations could be queried to automate the process of in silico experiment deployment.
 \end{review}

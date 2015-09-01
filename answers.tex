@@ -120,7 +120,7 @@ Section 2: The content of this section does not clearly state if it is a contrib
 Section 2: This semantic modeling section should also clearly show how the proposed vocabularies are related to other ones such as, for instance, P-PLAN or PROV for the workflow descriptions.
 \end{review}
 
-\answer{At the end of Section 2, we have added an explanation detailing which vocabularies have been aligned to the WICUS ontology network, introducing a simple example (\todo{add reference to example}).}
+\answer{At the end of Section 2, we have added an explanation detailing which vocabularies have been aligned to the WICUS ontology network, introducing a simple example depicting the relation between WICUS and P-PLAN.}
 
 
 % -----------------------------------------------
@@ -226,7 +226,8 @@ Section 5: A positioning of the approach would reinforce the paper message, in p
 Section 5: I don't see why Galaxy does not cover the local development of workflows. E-scientists can deploy a local galaxy server on their laptop and encapsulate or deploy binary softwares even outside the domain of ``omic'' data analysis.
 \end{review}
 
-\answer{Galaxy is mostly used for developing workflows involving external web services dependencies. This method does not fit into our approach, which describes local dependencies. We have revised the text to better reflect this argument.} \todo{Idafen, please check if my changes are ok for this answer.}
+\answer{Galaxy is mostly used for developing workflows involving external web services dependencies. This method does not fit into our approach, which describes local dependencies. We have revised the text to better reflect this argument.} 
+
 
 
 % -----------------------------------------------
@@ -328,18 +329,14 @@ Other important concern is the selection of the technologies. Currently, cloud i
 The impact in disk of the VMIs is important, but it is not the bottleneck, but the data. Moreover, the use of containers will strongly mitigate this fact. A good management of base VM image and the use of containers for the different experiments may be efficient. Regarding the data, scientific experiments, and specially those dealing with genomics and astrophyiscs may require huge amounts of data, and transferring it back and forth may not be efficient. The integration of this solution with data preservation infrastructures can be studied.
 \end{review}
 
-\answer{We acknowledge that the size of the VMI is important, but is not the bottleneck. We have lowered the boldness of our sentence. We argue that VM images (and containers) are suitable for applications that consume small amount of data. However, for big data applications, the conservation of the input data may significantly impact the size of a VMI. On the other hand, transferring this data may be a cumbersome process. Therefore, we intend to investigate how data preservation infrastructures and data transfer services of high-performance (e.g., Globus Online) may improve our system. We also intend to evaluate the effectiveness of using containers to preserve the execution environment.
-
-\todo{idafen, please revise this answer and let me know if you agree with it.}}
+\answer{We acknowledge that the size of the VMI is important, but is not the bottleneck. We have lowered the boldness of our sentence. We argue that VM images (and containers) are suitable for applications that consume small amount of data. However, for applications consuming large amounts of data, the conservation of the input data may significantly impact the size of a VMI. On the other hand, transferring this data may be a cumbersome process. Therefore, we intend to investigate how data preservation infrastructures and data transfer services of high-performance (e.g., Globus Online) may improve our system. We also intend to evaluate the effectiveness of using containers to preserve the execution environment.}
 
 
 \begin{review}
 Finally, a major part of the article is dedicated to the description of the workflow use cases. Despite that the inclusion of three different use cases is interesting, effort should concentrate more on how they challenge the system. Additional information, such as specifications, and why not, actual reproducibility of the experiments in the article would be important.
 \end{review}
 
-\answer{We thank the reviewer for highlighting this important aspect. We have created a results and discussion section (Section 4.4), which highlights the costs and benefits of annotating a workflow execution environment. In addition, we discuss the different types of software components we faced in our experimentation process and how we deal with them. We have also included a discussion on how reproducibility is approached in this work, and how our approach might be used by the scientific community. We have also extended the related work section to provide a comprehensive discussion on how our approach differentiates from other systems.
-
-\todo{idafen, please revise this answer and let me know if you agree with it.}}
+\answer{We thank the reviewer for highlighting this important aspect. We have created a results and discussion section (Section 4.4), which highlights the costs and benefits of annotating a workflow execution environment. In addition, we discuss the different types of software components we faced in our experimentation process and how we deal with them. We have also included a discussion on how reproducibility is approached in this work, and how our approach might be used by the scientific community. We have also extended the related work section to provide a comprehensive discussion on how our approach differentiates from other systems.}
 
 
 \end{letter}

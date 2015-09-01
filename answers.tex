@@ -1,7 +1,7 @@
 \documentclass{letter}
 \usepackage{graphicx}
 \usepackage{color}
-\date{Sep 11, 2015}
+\date{Sep 23, 2015}
 
 \newenvironment{review}%          environment name
 {\textbf{Reviewer comment:}\begin{quote}}% begin code
@@ -328,14 +328,18 @@ Other important concern is the selection of the technologies. Currently, cloud i
 The impact in disk of the VMIs is important, but it is not the bottleneck, but the data. Moreover, the use of containers will strongly mitigate this fact. A good management of base VM image and the use of containers for the different experiments may be efficient. Regarding the data, scientific experiments, and specially those dealing with genomics and astrophyiscs may require huge amounts of data, and transferring it back and forth may not be efficient. The integration of this solution with data preservation infrastructures can be studied.
 \end{review}
 
-\answer{\todo{RAFAEL: wf footprint is way heavier than the input data. We can also use containers, and still save space}}
+\answer{We acknowledge that the size of the VMI is important, but is not the bottleneck. We have lowered the boldness of our sentence. We argue that VM images (and containers) are suitable for applications that consume small amount of data. However, for big data applications, the conservation of the input data may significantly impact the size of a VMI. On the other hand, transferring this data may be a cumbersome process. Therefore, we intend to investigate how data preservation infrastructures and data transfer services of high-performance (e.g., Globus Online) may improve our system. We also intend to evaluate the effectiveness of using containers to preserve the execution environment.
+
+\todo{idafen, please revise this answer and let me know if you agree with it.}}
 
 
 \begin{review}
 Finally, a major part of the article is dedicated to the description of the workflow use cases. Despite that the inclusion of three different use cases is interesting, effort should concentrate more on how they challenge the system. Additional information, such as specifications, and why not, actual reproducibility of the experiments in the article would be important.
 \end{review}
 
-\answer{\todo{why would be important to reproduce them: think and try to motivate...}}
+\answer{We thank the reviewer for highlighting this important aspect. We have created a results and discussion section (Section 4.4), which highlights the costs and benefits of annotating a workflow execution environment. In addition, we discuss the different types of software components we faced in our experimentation process and how we deal with them. We have also included a discussion on how reproducibility is approached in this work, and how our approach might be used by the scientific community. We have also extended the related work section to provide a comprehensive discussion on how our approach differentiates from other systems.
+
+\todo{idafen, please revise this answer and let me know if you agree with it.}}
 
 
 \end{letter}

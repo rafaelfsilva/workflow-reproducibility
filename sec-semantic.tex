@@ -71,7 +71,7 @@ the resultant IP and port on which a recently deployed service will be listening
 
 \rev{These models have been documented and made available online, and have also
 been aligned with several of well-known vocabularies, such as 
-p-plan\footnote{http://purl.org/net/p-plan} and DCMI Metadata 
+P-Plan\footnote{http://purl.org/net/p-plan} and DCMI Metadata 
 Terms\footnote{http://dublincore.org/documents/dcmi-terms/}. For example, the 
 class \texttt{wreqs:Workflow} that represents a scientific workflow in our domain, 
 has been aligned as a subclass of \texttt{p-plan:Plan}, which turns to be a subclass 
@@ -124,12 +124,12 @@ SoftwareStack:PEGASUS_WMS_CENTOS_6_5_SOFT_STACK
   SoftwareComponent:PEGASUS_WMS_CENTOS_6_5_SOFT_COMP.
 \end{lstlisting}
 
-\rev{To retrieve this information mechanisms such as the Jena API\footnote{https://jena.apache.org} 
+\rev{To retrieve this information, mechanisms such as the Jena API\footnote{https://jena.apache.org} 
 or SPARQL queries can be used to traverse the individuals. In this work, we have 
 used SPARQL as it is the most standard and flexible way of accessing RDF data. 
 Listing~\ref{lst:wicus-query} shows a query example for retrieving the software 
 dependencies of a given workflow. We first inquire for the SoyKB workflow 
-requirements (lines 6--8), and then about its requirement's stacks and their 
+requirements (lines 6--8), and then its requirement's stacks and their 
 dependencies (lines 9--11).}
 
 
@@ -149,7 +149,7 @@ select ?wf ?stack ?depstack where {
 \end{lstlisting}
 
 \rev{In this work, we have mainly focused on software artifacts, arguing that 
-they are the primary resource in terms of computational reproducibility. 
+they are the primary resources in terms of computational reproducibility. 
 Nevertheless, we have also modeled the main hardware capabilities required 
 by our applications such as CPU, memory, and storage. We do not address 
 network requirements since we focus on single node configurations and 

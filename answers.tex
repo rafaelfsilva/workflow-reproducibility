@@ -29,7 +29,7 @@ comments and suggestions formulated about our paper
 ``Reproducibility of Execution Environments in Computational Science Using Semantics and Clouds'' 
 submitted to Future Generation Computer Systems.
 
-The remainder of this letter contains our answers to your reviews. 
+The remainder of this letter contains our answers to your reviews. All the suggested changes to the manuscript have been marked in blue, in order to ease their tracking.
 
 We thank you again for your valuable review, and we remain available for any further information you may need.
 
@@ -64,7 +64,7 @@ What is reused from the previous works [21, 22] should be clarified, and the foc
 The structure of the paper could be clarified by, whenever possible, not mixing modeling and tooling aspects (beginning of 3.2.1, fig. 9 in 4.3). These modeling aspects should reinforce section 2.
 \end{review}
 
-\answer{In order to improve the readability and flow of this work, we have rearranged the disposition of sections and figures, based on the reviewer's suggestion. We also have suppressed some figures and listing that did not append meaningful insights (e.g., Fig.8 in the former version of the manuscript).}
+\answer{In order to improve the readability and flow of this work, we have rearranged the disposition of sections and figures, based on the reviewer's suggestion. We also have removed some figures and listing that did not add meaningful insights (e.g., Fig.8 in the former version of the manuscript).}
 
 
 % -----------------------------------------------
@@ -80,7 +80,7 @@ The related works section does not provide a positioning of the approach, wherea
 The paper does not provide a discussion of the approach and results. The discussion could describe and analyze what is automated and what is manual in the overall process. It would be very helpful to evaluate the cost of preserving a computing infrastructure associated to an in-silico experiment, in terms of semantic annotation of the workflow, the workflow management systems, the infrastructure, in terms also of software packaging in virtual machines.
 \end{review}
 
-\answer{We have add a \emph{Results and Discussion} section (Section 4.4), which highlights the costs and benefits of annotating a workflow execution environment. In addition, we discuss the different types of software components we faced in our experimentation process and how we deal with them.}
+\answer{We have added a \emph{Results and Discussion} section (Section 4.4), which highlights the costs and benefits of annotating a workflow execution environment. In addition, we discuss the different types of software components we faced in our experimentation process and how we deal with them.}
 
 
 % -----------------------------------------------
@@ -96,7 +96,7 @@ In addition, it would be interesting to have more information on the extensibili
 The perspectives could be reinforced with respect to the Linked Data movement, the needs to provide data management plans in large scale research projects, etc.
 \end{review}
 
-\answer{We have extended Section 4.2 to explain how our annotations conform to the Linked Data principles, and motivated how publishing and integrating these annotations could improve their reusability an understandability.}
+\answer{We have extended Section 4.2 to explain how our annotations conform to the Linked Data principles, and motivated how publishing and integrating these annotations could improve their reusability and understandability. In our approach we focus on the execution environment aspects for workflow conservation, thus data management plans are not covered in this work. Some of these initiatives, such as the {\it Checklist for a Workflow Conservation Plan}\footnote{http://figshare.com/articles/Checklist\_for\_a\_Workflow\_Conservation\_Plan/1285012}, which is based on the {\it DCC Data Management Plan}, consider the software environment as a relevant question for  data conservation and experimental reproducibility. We argue that our approach could be of value to those managementplans.}
 
 
 % -----------------------------------------------
@@ -104,7 +104,7 @@ The perspectives could be reinforced with respect to the Linked Data movement, t
 Finally, I really appreciated the availability of the supplementary materials. Even if I could not complete the execution of the "epigenomics" workflow (timeout with 2 success jobs, and 67 unsubmitted jobs), I could easily deploy a local computing environment with Vagrant, and run one of the paper experiments.
 \end{review}
 
-\answer{We highly value that the experiment were able to be reproduced based on the experimental material provided. We have checked that they can be run in public providers, such as AWS and OpenStack-based platforms, whereas local reproduction using Vagrant may vary depending on the target computer. Several issues with RAM memory virtualization have been identified when working with Vagrant/VirtualBox solutions, which may cause timeouts in high-memory consuming workflows such as Epigenomics. We would be glad to investigate and address this specific case, as it is a valuable feedback to our work.}
+\answer{We highly value that the experiment was able to be reproduced based on the experimental material provided. We have checked that they can be run in public providers, such as AWS and OpenStack-based platforms, whereas local reproduction using Vagrant may vary depending on the target computer. Several issues with RAM memory virtualization have been identified when working with Vagrant/VirtualBox solutions, which may cause timeouts in high-memory consuming workflows such as Epigenomics. We would be glad to investigate and address this specific case, as it is a valuable feedback to our work.}
 
 
 % -----------------------------------------------
@@ -175,7 +175,7 @@ Section 4: Figures 7 and 8 are not really informatives.
 
 % -----------------------------------------------
 \begin{review}
-Section 4: The use of terms "Image appliance", "Virtual appliance", "Scientific virtual appliance" are confusing. The sentence ``We define an Image Appliance that groups all VMs appliances into one single Scientific Virtual Appliance" is unclear.
+Section 4: The use of terms ``Image appliance'', ``Virtual appliance", "Scientific virtual appliance'' are confusing. The sentence ``We define an Image Appliance that groups all VMs appliances into one single Scientific Virtual Appliance" is unclear.
 \end{review}
 
 \answer{In many cases, we used ``Virtual appliance'' and ``Scientific virtual appliance' as interchangeably, whereas ``Image Appliance'' is a different concept. We have revised the text to clarify the differences between these concepts when necessary. We have also added a brief explanation in Section 4 on how they relate to each other according to the WICUS-SVA domain ontology.}
@@ -321,7 +321,7 @@ The description of the infrastructure, at least at the level of the experiment, 
 Other important concern is the selection of the technologies. Currently, cloud infrastructures are becoming to adopt TOSCA specification and TOSCA templates to deploy and configure the environments. Comparison to WICUS should be made. Moreover, other DevOps tools such as cloudify (getcloudify.org), Infrastructure Manager (www.grycap.upv.es/im), cloudformation from AWS, to name a few, have moved from script-based configuration systems to declarative templates based on Ansible. These technological decisions should be analysed.
 \end{review}
 
-\answer{We have included several statements that discuss the technological decisions made for our system. We acknowledge the relevance of these solutions. Thus, we argue that most of them can be integrated into our system, as they provide an interesting and complementary approach to our work. In Section 3, we have introduced how the {\it Script Generator} component could be extended to support new cloud management systems. In Section 6, we have described several of them and stated the differences and commonalities with regard to our approach.}
+\answer{We have included several statements that discuss the technological decisions made for our system. We acknowledge the relevance of these solutions. Thus, we argue that most of them can be integrated into our system, as they provide an interesting and complementary approach to our work. In Section 3, we have introduced how the {\it Script Generator} component could be extended to support new cloud management systems. In Section 5, we have described several of them and stated the differences and commonalities with regard to our approach.}
 
 
 % -----------------------------------------------

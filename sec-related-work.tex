@@ -27,7 +27,7 @@ tool for tracking the operating system calls to identify the libraries and
 data dependencies, as well as the configuration parameters involved 
 in an experiment. The tool combines all these dependencies into a 
 single package that can be used to reproduce an experiment. 
-\rev{Although this approach avoids storing VM images, it still requires 
+Although this approach avoids storing VM images, it still requires 
 storing the application binaries and their dependencies. In this work, we
 use semantic annotations to describe these dependencies. In our 
 approach, we do not try to capture and package the original elements of 
@@ -39,7 +39,7 @@ experiment by exposing the knowledge about the underlying infrastructure
 in a structured way. ReproZip would attain better dynamism if an 
 approach as the one proposed in this work is used, since it abstracts 
 the description of the infrastructure from the concrete elements that 
-are involved in the original experiment.}
+are involved in the original experiment.
 
 
 %These approaches differ from ours as we do not try to capture the real elements of the infrastructure (copy the files and libraries) but rather we try to describe them and obtain an available counterpart that can be tuned to expose the same features. We agree with ReproZip authors that packaging the physical infrastructure components limits the scope of applicability, as the packages require most of the target machine to be the same. We also argue that the knowledge and understanding of the infrastructure, as well as the dynamism of this solution would be higher using an approach like the one exposed on our work, as we abstract the description of the infrastructure from the concrete elements that are involved in the former experiment.
@@ -51,12 +51,12 @@ Galaxy~\cite{goecks2010galaxy}, a well known workflow system in the context
 of life sciences, introduced a web-service based system for achieving accessible 
 and reproducible computations, hiding the implementation details of the 
 underlying tools for workflow developers, providing a web-based interface for 
-retrieving an analyzing genomic data. \rev{This approach has proved to be 
+retrieving an analyzing genomic data. This approach has proved to be 
 successful in several cases. However, Galaxy workflows are mostly dependent of
 external services, even when running in a local execution environment.
 Therefore, this approach does not satisfy our reproducibility constraints, 
 which focus on scientific workflows where the developers have full control
-over the applications used within a workflow.}
+over the applications used within a workflow.
 
 
 % Even when this approach has proved to be successful in several cases, we argue that it does not cover local development of workflows, which is a common case in computational science.  
@@ -67,7 +67,7 @@ over the applications used within a workflow.}
 Software components cannot be preserved just by maintaining their binary executable code, but by guaranteeing the performance of their features. In~\cite{Matthews}, the concept of adequacy is introduced to measure how a software component behaves relative to a certain set of features. Our work is based on this same concept, where we build a conceptual model to semantically annotate the relevant properties of each software component. Then, we use scripting to reconstruct an equivalent computational environment using these annotations.
 
 
-\rev{
+
 Some efforts have been undertaken to define syntaxes for describing the 
 execution environment of scientific applications. The recently released 
 TOSCA\footnote{http://docs.oasis-open.org/tosca/TOSCA/v1.0/os/TOSCA-v1.0-os.html} 
@@ -81,9 +81,9 @@ reproducibility degree of the experiment, it requires the workflow to be
 rewritten. In this work, however, our goal is to describe the workflow to 
 obtain an equivalent execution environment depending on the available 
 providers.
-}
 
-\rev{
+
+
 Several tools have been developed to enact the supporting environment.
 For instance, Cloudify\footnote{http://getcloudify.org/} (a tool based on the
 TOSCA standard) allows to define the configuration of a given application 
@@ -97,14 +97,14 @@ architecture, other tools can be easily incorporated.
 % making the target application cloud-independent. 
 %In this work we explore different tools, such as PRECIP and Vagrant, for enacting the supporting environment. Further studied should study other well-known solutions. Based on the aforementioned TOSCA standard, 
 %These technologies and standards are compatible with our approach, and they could be integrated into our system as new enactment and specification solutions.
-}
+
 
 
 A recent and relevant contribution to the state of the art of workflow preservation was developed within the context of the TIMBUS project~\cite{Mayer2014Ontologies}. The project  aimed to preserve and ensure the availability of business processes and their computational infrastructure, aligned with the enterprise risk and the business continuity management. They also proposed a semantic approach for describing the execution environment of a process.  However, even though TIMBUS has studied the applicability of their approach to the eScience domain, their approach is mainly focused on business processes.
 
 Semantics have also been proposed in the area of biomedical research 
 as a way for achieving reproducibility of published experiments. 
-\rev{
+
 For instance, in~\cite{MaloneSWO2014} authors propose a taxonomy for 
 classifying software artifacts in the context of biological computations in 
 the same way that gene products or phenotypes are classified. To build the
@@ -133,9 +133,9 @@ concept of software components, they are more related to data
 transformations rather than to executable deployment and computations.
 The ontologies proposed in this work are not strictly focused on data 
 descriptions and analysis.
-}
 
-\rev{
+
+
 A plethora of models have also been proposed to describe Cloud 
 environments~\cite{Youseff2008}. Many initiatives have been undertaken to 
 define Cloud Computing interfaces, such as the Open Cloud Computing 
@@ -152,7 +152,7 @@ to the IaaS layer, we do not aim to model the Cloud providers themselves neither
 the quality of services provided by them. We acknowledge that those considerations 
 are relevant for the scheduling problem, however they are out of the scope of 
 this work.
-}
+
 
 
 

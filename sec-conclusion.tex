@@ -21,7 +21,7 @@ Semantic annotations of the computational environment, combined with the
 ISA and the scripting functionality provided by PRECIP and Vagrant, is a 
 powerful approach for achieving reproducibility of computational environments 
 in future experiments, and at the same time addresses the challenges of high 
-storage demand of VM images. \rev{In this work, we have demonstrated that
+storage demand of VM images. In this work, we have demonstrated that
 an equivalent computational environment (that fulfills the requirements of a
 workflow) can be obtained from simple base VM images, which are already 
 available in most Cloud platforms. Consequently, there is no need to create 
@@ -29,27 +29,27 @@ and store a new VM image for each workflow. Therefore, this approach
 significantly diminishes the costs and efforts in maintaining a VM image that 
 may have limited usage. We acknowledge that this approach may be limited 
 to the online (publicly) availability of the software, however most of the scientific
-tools developed nowadays are hosted as an open-source project.}
+tools developed nowadays are hosted as an open-source project.
 
 % how by using a generic VM image, only containing the operating system and its default associated tools, we have been able to dynamically generate three different virtual machines, each of them fulfilling the requirements of a workflow. These images are public and were already available and supported by the different providers we have worked with. Thus, we have saved several gigabytes by not generating an image for each workflow.}
 %\note{Not sure how to quantify the amount of GB we save. We could ask Mats for the size of the WM Images at FG, but not sure how to calculate the size of the AWS and Vagrant VMs}
 
 %\rev{This kind of solution requires the workflow management system and the scientific applications related to the workflow to be publicly available. We argue that this necessary condition holds in most cases, being the majority of software solutions developed in science open and public}. 
 
-\rev{To attain reproducibility, the proposed model requires that information about
+To attain reproducibility, the proposed model requires that information about
 the software components involved on the workflow execution should be available
 and as explicit as possible. In Pegasus, the transformation catalog provides 
 all necessary information. Similar catalogs (or files) are also available in other
-workflow systems. }
+workflow systems. 
 %\rev{For achieving the reproducibility of the workflow execution environment, as we have done in this work, access to the resources describing the workflow is required. The information about the software components involved on the execution must be available and as explicit as possible. In the case of the experiments of this work, the Pegasus Transformation Catalog file provided this information, which is also available in other workflow systems using similar files.}
-\rev{Also, knowledge about semantic technologies is required for generating 
+Also, knowledge about semantic technologies is required for generating 
 some of the annotations for describing the underlying infrastructure. Currently,
 the description of the WMS and the computational resources are manually 
 generated, whereas the remaining annotations are performed by tools of the 
 WICUS system. Future work include the development of tools to fully (or 
 partially) automate this process. The annotation process may be assisted 
 by experts, in the same way librarians aid book authors and publishers to 
-conserve their contributions.}
+conserve their contributions.
 %Nevertheless, as those annotations are reused, we argue that this effort is reasonable.
 
 The results of this work also show how components, such as the workflow 
@@ -59,21 +59,21 @@ can be easily reused, even during the development process of the workflow.
 Many workflows are built upon previous workflows, especially within the 
 context of a scientific domain, and hence having such type of library would 
 be helpful. We plan to study how and when those libraries can be built, 
-analyzing their degree of reuse. \rev{As introduced in this work, our 
+analyzing their degree of reuse. As introduced in this work, our 
 descriptions of the environment, generated using the WICUS ontology 
 network, is compliant with the Linked Data principles. This would allow its 
 future publication and integration with other information sources, which fit 
 the idea of a distributed and structured library of descriptions that could be 
-publicly available worldwide.}
+publicly available worldwide.
 
-\rev{We are currently studying the applicability of our approach to other 
+We are currently studying the applicability of our approach to other 
 workflow applications (from different scientific areas) and systems. Although
 the Cloud systems included in this work cover a representative spectrum of 
 Cloud providers, we are also considering other Cloud scenarios and 
 emerging container-based solutions. Also, we plan to extend the scope of 
 our approach to enable reproducibility of more complex and larger execution 
 infrastructures, such as multi-node clusters and topology-specific network 
-platforms.}
+platforms.
 % New cloud management systems and enactment files will be also explored in the future, aiming to evaluate their performance and suitability according to the goals of our work.}
 % We will study how our approach can reproduce those characteristics.
 

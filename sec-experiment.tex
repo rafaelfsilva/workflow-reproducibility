@@ -2,12 +2,12 @@
 \label{sec:experiment}
 
 In this section, we instantiate the semantic models introduced in 
-Section~\ref{sec:reproducibility} (Figure~\ref{fig:wicusrels}) \rev{for real }
+Section~\ref{sec:reproducibility} (Figure~\ref{fig:wicusrels}) for real
 scientific workflow applications. This process is an extension of the one 
 introduced in~\cite{SantanaPerez-REPPAR-2014}, in which we evaluate 
 the improvements on our approach to the Montage~\cite{Montage} workflow.
-\rev{In addition, we extend this evaluation to the Epigenomics\footnote{http://epigenome.usc.edu} 
-and SoyKB~\cite{soybean, Joshi01012014} workflows}. We study and 
+In addition, we extend this evaluation to the Epigenomics\footnote{http://epigenome.usc.edu} 
+and SoyKB~\cite{soybean, Joshi01012014} workflows. We study and 
 document these workflows and their execution environments, which include 
 the application software components and the workflow management system.
 
@@ -17,9 +17,9 @@ using PRECIP, and a local execution environment by using Vagrant.
 FutureGrid is an academic Cloud testbed facility that includes a number 
 of computational resources at distributed locations. Amazon Web Services 
 EC2 is a public infrastructure provider, and the \emph{de facto} standard 
-for IaaS Cloud platforms. \rev{Since most of Cloud platforms are based on
+for IaaS Cloud platforms. Since most of Cloud platforms are based on
 OpenStack\footnote{https://www.openstack.org}, our system can be used
-by most of them}.
+by most of them.
 
 
 \subsection{Scientific Workflows}
@@ -114,9 +114,9 @@ represents the top level workflow, and 2) a set of individuals representing its
 sub-workflows, one for each transformation. We then generate the necessary 
 requirements, one for the top level workflow, which specifies the WMS requirements,
 and one for each sub-workflow, which defines the software components required 
-by each transformation. \rev{The data generated using this process follows the 
+by each transformation. The data generated using this process follows the 
 Linked Data~\cite{heath2011linked} principles. It uses HTTP URIs exposed 
-in accordance with the RDF standards.}
+in accordance with the RDF standards.
 
 
 Figure~\ref{fig:annotations} shows a simplified overview of the annotations generated 
@@ -221,12 +221,12 @@ execution is performed locally, we generated a single VM appliance that meets th
 requirements of all workflows. 
 
 The description of the appliances is then included in the Scientific Virtual Appliances 
-catalog (SVA, Figure~\ref{fig:wicusflow}). \rev{According to the SVA model, an 
+catalog (SVA, Figure~\ref{fig:wicusflow}). According to the SVA model, an 
 SVA is supported by one or more Image Appliances, which represent the set of VMs
 belonging to a single infrastructure provider that are able to enact the characteristics
 (software and hardware) specified for the SVA. Thus, we created five Image Appliances 
 that are grouped into a single Scientific Virtual Appliance (\texttt{CentOS 6 SVA}), 
-which is defined by the CentOS 6 software stack}.
+which is defined by the CentOS 6 software stack.
 %Thus, we defined  an Image Appliance that groups 
 %all image appliances into the \texttt{CentOS 6 SVA}.  will have five different Image Appliances 
 %grouped into one single Scientific Virtual Appliance, defined by the CentOS 6 software stack}.
@@ -281,7 +281,7 @@ clock speed.
 
 %\paragraph{\textbf{Execution Script}}
 
-In all cases, \rev{after executing the ISA over the described annotations for the three workflows},
+In all cases, after executing the ISA over the described annotations for the three workflows,
 we were able to map the abstract plan either into a PRECIP or 
 a Vagrant script (depending on the specified provider). Each generated script 
 is composed of the following main sections:
@@ -314,7 +314,7 @@ under the user account created in the third section.
 
 
 % subsection
-\rev{\subsection{Results and Discussion}}
+\subsection{Results and Discussion}
 
 We executed the resultant scripts for the three workflows over their corresponding 
 platforms. That is, a total of 9 different executions, as each workflow is executed on  
@@ -341,7 +341,7 @@ were equivalent in terms of their size (e.g., number of lines) and content.
 %\note{not sure whether this should be here or in section 6, as it is part of the discussion}
 
 
-\rev{
+
 Experimental results show that scientific experiments in form of computational 
 workflows can be reproduced based on semantic annotations using a proper 
 vocabulary. The set of tools introduced in this work enables the generation 
@@ -353,10 +353,10 @@ Figure \ref{fig:wicusflow}) are manually generated. Although these files require
 some effort to elaborate, they are created once and reused for all workflows
 of a workflow management system. Identifying components and dependencies
 of a  WMS usually requires specialized knowledge, however this information
-is not often explicitly described}.
+is not often explicitly described.
 
 %These files are reused for the three experiments exposed in this section, and would be also used for new Pegasus workflows. 
-\rev{
+
 When reproducing workflows from different WMS, a new set of annotations 
 would be required, whereas the \emph{SVA Catalog} could be reused. This 
 catalog is extended as new computational resources are added to the system.
@@ -366,13 +366,13 @@ repositories or hosted online by different institutions. Other software applicat
 such as the ones designed for the workflow, have been hosted in a public 
 repository for this work. We decided to upload them to GitHub\footnote{https://github.com} 
 to ensure that they could be remotely retrieved.
-}
+
 
 All the original and generated scripts are available as part of the experimental material 
 included in the RO associated with this work. This RO also contains pointers to the software and resources 
 used in the experimental evaluation.
 
-\rev{The reproducibility of a computational environment presupposes that at 
+The reproducibility of a computational environment presupposes that at 
 least some differences may appear when compared to the former counterpart. 
 In this work, we assume that these differences occur when using virtualization 
 technologies and dynamic deployment of software components. Therefore, we 
@@ -381,7 +381,7 @@ original one, but exposes the required characteristics for executing the workflo
 This approach allows scientists to understand how the underlying infrastructure 
 is defined, and to evaluate the impact of different configurations on the 
 experiment, as the configuration parameters of the environment are explicitly 
-defined in the semantic annotations.}
+defined in the semantic annotations.
 
 
 %\begin{listing}[!htb]

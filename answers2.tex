@@ -1,0 +1,107 @@
+%&pdflatex
+\documentclass{letter}
+\usepackage{graphicx}
+\usepackage{color}
+\date{Nov XX, 2015}
+
+\newenvironment{review}%          environment name
+{\textbf{Reviewer comment:}\begin{quote}}% begin code
+{\end{quote}}%  
+
+\newcommand{\todo}[1]{%                                                                                                                            
+      \color{red}\textbf{[TODO]} #1\color{black}}
+
+\newcommand{\answer}[1]{%                                                                                                                            
+      \textbf{Answer:} #1}
+
+\usepackage{hyperref}
+
+\newcommand{\revised}[1]{\emph{#1}\color{black}}
+\newcommand{\rev}[1]{\color{blue} #1\color{black}}
+
+\begin{document}
+
+\begin{letter}{}
+
+\opening{Dear Editor and Reviewers,}
+
+We would like to thank you for your thorough review and the useful
+comments and suggestions formulated about our paper 
+``Reproducibility of Execution Environments in Computational Science Using Semantics and Clouds'' 
+submitted to Future Generation Computer Systems.
+
+The remainder of this letter contains our answers to your reviews. All the suggested changes to the manuscript have been marked in blue, in order to ease their tracking.
+
+We thank you again for your valuable review, and we remain available for any further information you may need.
+
+\vspace{0.5cm}
+
+Sincerely yours,
+
+\vspace{1cm}
+
+Idafen Santana-Perez, Rafael Ferreira da Silva, Mats Rynge, Ewa Deelman, Mar\'ia~S.~P\'erez-Hern\'andez, Oscar Corcho
+
+\newpage
+
+
+%
+% Reviewer 1
+%
+\textbf{Reviewer 1}
+
+% -----------------------------------------------
+\begin{review}
+Some very minor comments :
+\begin{itemize}
+        \item section 2.2 : ``between the di  erent elements that compose the Stack" $\rightarrow$ ``different''.
+        \item section 5 : ``Galaxy [...] introduced a web-service based system" $\rightarrow$ ``a web-based system''. The term web-service may refer to REST or SOAP web services. It is confusing since computing tools involved in Galaxy workflows are generally integrated as standalone binaries in a Galaxy server.
+        \item section 5 : ``different areas of software information Many'' $\rightarrow$ missing ``.''.
+        \item section 6 : ``are hosted as an open-source project'' $\rightarrow$ ``are hosted as open-source projects''.
+        \end{itemize}
+\end{review}
+
+\answer{...}
+
+%\revised{}
+
+
+
+
+
+
+
+\newpage
+
+%
+% Reviewer 2
+%
+\textbf{Reviewer 2}
+
+
+\begin{review}
+Some solutions are working on efficient ways of attaching disk data volumes over the internet for IaaS applications. This could reduce the limitations of large data sources instead of using large VMIs for that. I see the point in the review answers but I cannot find it in the new text.
+\end{review}
+
+\answer{...}
+
+\begin{review}
+The use of single-VM configuration is the target, but it is a bit misleading in the text. Does it mean that all the workflows are executed in a single VM? In this case I would not agree that it fits most of the cases in research.
+\end{review}
+
+\answer{...}
+
+\begin{review}
+The sentence "However, Galaxy workflows are mostly dependent of external services, even when running in a local execution environment" needs clarification. Galaxy runs locally and everything can be embedded on a set of VMs (see Galaxy on the cloud). I could argue that Galaxy is totally discipline-bound, but I cannot understand why does it depend on external services in a different way that the system described in the article.
+\end{review}
+
+\answer{...}
+
+\revised{}
+
+
+% -----------------------------------------------
+
+
+\end{letter}
+\end{document}

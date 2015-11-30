@@ -2,7 +2,7 @@
 \documentclass{letter}
 \usepackage{graphicx}
 \usepackage{color}
-\date{Nov 25, 2015}
+\date{Nov 30, 2015}
 
 \newenvironment{review}%          environment name
 {\textbf{Reviewer comment:}\begin{quote}}% begin code
@@ -25,7 +25,7 @@
 
 \opening{Dear Editor and Reviewers,}
 
-We would like to thank you for this opportunity to submit a revised version of our paper. We have followed the reviewer’s instructions, and improved our manuscript entitled ``Reproducibility of Execution Environments in Computational Science Using Semantics and Clouds'' , to fulfill the requests made for it. 
+We would like to thank you for this opportunity to submit a revised version of our paper. We have followed the reviewer's instructions, and improved our manuscript entitled ``Reproducibility of Execution Environments in Computational Science Using Semantics and Clouds'', to fulfill the requests made for it. 
 
 The remainder of this letter contains our answers to your reviews. All the suggested changes to the manuscript have been marked in blue, in order to ease their tracking.
 
@@ -58,7 +58,7 @@ Some very minor comments :
         \end{itemize}
 \end{review}
 
-\answer{We have fixed these typos and others. We have also clarified the statements regarding the description of the Galaxy WMS on section 5.}
+\answer{We have fixed these typos and a few others. We have also clarified the statements regarding the description of the Galaxy WMS on section 5.}
 
 %\revised{}
 
@@ -80,19 +80,19 @@ Some very minor comments :
 Some solutions are working on efficient ways of attaching disk data volumes over the internet for IaaS applications. This could reduce the limitations of large data sources instead of using large VMIs for that. I see the point in the review answers but I cannot find it in the new text.
 \end{review}
 
-\answer{In section 6, we have included a paragraph in order to clarify our point with regards data aspects of the reproducibility process. We have stated that even when in this work we have not included them, we aim to explore how our approach would complement data-related approaches, using information regarding data aspects to improve the  accuracy of the overall reproducibility process.}
+\answer{In Section 6, we have included a paragraph in order to clarify our point with regards to data aspects of the reproducibility process. We have stated that even when in this work we have not included them, we aim to explore how our approach would complement data-related approaches, using information regarding data aspects to improve the  accuracy of the overall reproducibility process.}
 
 \begin{review}
 The use of single-VM configuration is the target, but it is a bit misleading in the text. Does it mean that all the workflows are executed in a single VM? In this case I would not agree that it fits most of the cases in research.
 \end{review}
 
-\answer{We have reviewed the manuscript, in particular sections 1, 2 and 6, clarifying that even when in this work we have only reproduced workflows that were originally configured to run on a single node infrastructure, our approach is able to support multi-node configurations.}
+\answer{We have reviewed the manuscript, in particular Sections 1, 2, and 6, clarifying that even when in this work we have only reproduced workflows that were originally configured to run on a single node infrastructure, our approach is able to support multi-node configurations.}
 
 \begin{review}
 The sentence ``However, Galaxy workflows are mostly dependent of external services, even when running in a local execution environment'' needs clarification. Galaxy runs locally and everything can be embedded on a set of VMs (see Galaxy on the cloud). I could argue that Galaxy is totally discipline-bound, but I cannot understand why does it depend on external services in a different way that the system described in the article.
 \end{review}
 
-\answer{We acknowledge that the description of the Galaxy WMS were not fully precise. We have improved its description, correcting those statements that were not correct.}
+\answer{We acknowledge that the description of the Galaxy WMS were not fully precise. We have improved its description, correcting those statements.}
 
 \revised{}
 

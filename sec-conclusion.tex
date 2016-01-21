@@ -33,26 +33,20 @@ to the online (publicly) availability of the software, however most of the scien
 tools developed nowadays are hosted as open-source projects.
 
 
-\rev{In this work, we have focused on the execution aspects
+In this work, we have focused on the execution aspects
 of a workflow, which do not consider the experimental data as part of the 
 reproducibility process. Including it during the description of the
 workflow, and using it as a decision criteria when generating an 
 infrastructure specification would lead to a more effective process. We 
 then aim to study how network capabilities or extra data volumes can be 
 included as part of the specification process, reducing the data-related issues 
-of an experiment from its infrastructure point of view.}
-
-% how by using a generic VM image, only containing the operating system and its default associated tools, we have been able to dynamically generate three different virtual machines, each of them fulfilling the requirements of a workflow. These images are public and were already available and supported by the different providers we have worked with. Thus, we have saved several gigabytes by not generating an image for each workflow.}
-%\note{Not sure how to quantify the amount of GB we save. We could ask Mats for the size of the WM Images at FG, but not sure how to calculate the size of the AWS and Vagrant VMs}
-
-%\rev{This kind of solution requires the workflow management system and the scientific applications related to the workflow to be publicly available. We argue that this necessary condition holds in most cases, being the majority of software solutions developed in science open and public}. 
+of an experiment from its infrastructure point of view.
 
 To attain reproducibility, the proposed model requires that information about
 the software components involved on the workflow execution should be available
 and as explicit as possible. In Pegasus, the transformation catalog provides 
 all necessary information. Similar catalogs (or files) are also available in other
 workflow systems. 
-%\rev{For achieving the reproducibility of the workflow execution environment, as we have done in this work, access to the resources describing the workflow is required. The information about the software components involved on the execution must be available and as explicit as possible. In the case of the experiments of this work, the Pegasus Transformation Catalog file provided this information, which is also available in other workflow systems using similar files.}
 Also, knowledge about semantic technologies is required for generating 
 some of the annotations for describing the underlying infrastructure. Currently,
 the description of the WMS and the computational resources are manually 
@@ -61,7 +55,6 @@ WICUS system. Future work include the development of tools to fully (or
 partially) automate this process. The annotation process may be assisted 
 by experts, in the same way librarians aid book authors and publishers to 
 conserve their contributions.
-%Nevertheless, as those annotations are reused, we argue that this effort is reasonable.
 
 The results of this work also show how components, such as the workflow 
 system, can be annotated once and then reused among workflows. We 
@@ -83,14 +76,12 @@ the Cloud systems included in this work cover a representative spectrum of
 Cloud providers, we are also considering other Cloud scenarios and 
 emerging container-based solutions. 
 
-\rev{Currently, our approach is able to represent multi-node infrastructures,
+Currently, our approach is able to represent multi-node infrastructures,
 even though in this work we have only analyzed and reproduced workflows that
-were configured to use a single node environment}. We then plan to extend 
+were configured to use a single node environment. We then plan to extend 
 the scope of our approach to enable reproducibility of 
 more complex and larger execution infrastructures, such as large clusters and topology-specific 
 network platforms. 
-% New cloud management systems and enactment files will be also explored in the future, aiming to evaluate their performance and suitability according to the goals of our work.}
-% We will study how our approach can reproduce those characteristics.
 
 We will also work on increasing  the degree of automation of the semantic annotation process to describe both the workflow application and the workflow management system. As introduced in this work, WICUS is an ongoing effort, thus we also plan to extend the ontology network to include new concepts and relations such as software variants, incompatibilities, and user policies for resource consumption.
 

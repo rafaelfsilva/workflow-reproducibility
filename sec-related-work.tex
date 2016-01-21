@@ -41,13 +41,7 @@ approach as the one proposed in this work is used, since it abstracts
 the description of the infrastructure from the concrete elements that 
 are involved in the original experiment.
 
-
-%These approaches differ from ours as we do not try to capture the real elements of the infrastructure (copy the files and libraries) but rather we try to describe them and obtain an available counterpart that can be tuned to expose the same features. We agree with ReproZip authors that packaging the physical infrastructure components limits the scope of applicability, as the packages require most of the target machine to be the same. We also argue that the knowledge and understanding of the infrastructure, as well as the dynamism of this solution would be higher using an approach like the one exposed on our work, as we abstract the description of the infrastructure from the concrete elements that are involved in the former experiment.
-
-%\feedback{@Maria: add more references to previous work on life science reproducibility}
-%\note{Idafen: there are several references to this in the introduction. Should we repeat them here?}
-
-\rev{Galaxy~\cite{goecks2010galaxy} is a web-based WMS that aims to bring data 
+Galaxy~\cite{goecks2010galaxy} is a web-based WMS that aims to bring data 
 analysis capabilities to non-expert users in the biological sciences domain, hiding the 
 implementation  details of the underlying tools for workflow developers. These 
 workflows can be deployed on a Galaxy server locally or on the Cloud, through 
@@ -55,18 +49,9 @@ the Galaxy  CloudMan component. The main goals of the Galaxy framework
 are accessibility to biological computational  capabilities and reproducibility of the
 analysis result by tracking the information  related to the full process. 
 Even when this approach has proved to be successful in many cases,
-it does not consider infrastructure aspects.} 
-
-
-
-% Even when this approach has proved to be successful in several cases, we argue that it does not cover local development of workflows, which is a common case in computational science.  
-
-%\todo{state that most galaxy wfs are developed usually using external services rather than local, and thus it does not fit into our REPRODUCIBILITY approach}
-
+it does not consider infrastructure aspects.
 
 Software components cannot be preserved just by maintaining their binary executable code, but by guaranteeing the performance of their features. In~\cite{Matthews}, the concept of adequacy is introduced to measure how a software component behaves relative to a certain set of features. Our work is based on this same concept, where we build a conceptual model to semantically annotate the relevant properties of each software component. Then, we use scripting to reconstruct an equivalent computational environment using these annotations.
-
-
 
 Some efforts have been undertaken to define syntaxes for describing the 
 execution environment of scientific applications. The recently released 
@@ -82,8 +67,6 @@ rewritten. In this work, however, our goal is to describe the workflow to
 obtain an equivalent execution environment depending on the available 
 providers.
 
-
-
 Several tools have been developed to enact the supporting environment.
 For instance, Cloudify\footnote{http://getcloudify.org/} (a tool based on the
 TOSCA standard) allows to define the configuration of a given application 
@@ -94,11 +77,6 @@ deploying, and configuring VMs in several providers, such as OpenNebula~\cite{op
 Microsoft Azure\footnote{http://azure.microsoft.com}, and OpenStack. In
 this work, we explore PRECIP and Vagrant, but thanks to WICUS decoupled
 architecture, other tools can be easily incorporated.
-% making the target application cloud-independent. 
-%In this work we explore different tools, such as PRECIP and Vagrant, for enacting the supporting environment. Further studied should study other well-known solutions. Based on the aforementioned TOSCA standard, 
-%These technologies and standards are compatible with our approach, and they could be integrated into our system as new enactment and specification solutions.
-
-
 
 A recent and relevant contribution to the state of the art of workflow preservation was developed within the context of the TIMBUS project~\cite{Mayer2014Ontologies}. The project  aimed to preserve and ensure the availability of business processes and their computational infrastructure, aligned with the enterprise risk and the business continuity management. They also proposed a semantic approach for describing the execution environment of a process.  However, even though TIMBUS has studied the applicability of their approach to the eScience domain, their approach is mainly focused on business processes.
 
